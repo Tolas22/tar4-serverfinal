@@ -1,13 +1,13 @@
-Final tar queries
+use bgroup59_test1
 create table category (
-category_id int primary key,
+category_id int primary key identity(1,1),
 category_name varchar(120),
 )
 go
 
 
 create table productN (
-product_id int primary Key,
+product_id int primary Key identity(1,1),
 category_id int ,
 title varchar(120),
 img_url varchar(120),
@@ -22,7 +22,7 @@ go
 
 
 create table sales (
-sale_id int primary key,
+sale_id int primary key identity(1,1),
 product_id int ,
 total_price float,
 amount int,
@@ -36,7 +36,7 @@ go
 
 
 create table customers (
-cust_id int primary key,
+cust_id int primary key identity(1,1),
 customer varchar(120),
 pass varchar(40),
 cust_type bit,
@@ -46,4 +46,10 @@ go
 
 alter table sales
 add foreign key (cust_id) references [dbo].[customers](cust_id)
+go
+
+insert [dbo].[customers] ([customer],[pass],[cust_type]) values ('admin', 'admin', 1)
+insert [dbo].[customers] ([customer],[pass],[cust_type]) values	('customer1', 'customer1', 0)
+insert [dbo].[customers] ([customer],[pass],[cust_type]) values('customer2', 'customer2', 0)
+insert [dbo].[customers] ([customer],[pass],[cust_type]) values('customer3', 'customer3', 0)
 go
