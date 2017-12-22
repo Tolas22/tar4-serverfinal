@@ -1,0 +1,49 @@
+Final tar queries
+create table category (
+category_id int primary key,
+category_name varchar(120),
+)
+go
+
+
+create table productN (
+product_id int primary Key,
+category_id int ,
+title varchar(120),
+img_url varchar(120),
+price float,
+inventory int,
+active bit,
+
+
+FOREIGN KEY (category_id) references [dbo].[category](category_id)
+)
+go
+
+
+create table sales (
+sale_id int primary key,
+product_id int ,
+total_price float,
+amount int,
+p_method bit,
+cust_id int,
+
+
+FOREIGN KEY (product_id) references [dbo].[productN](product_id)
+)
+go
+
+
+create table customers (
+cust_id int primary key,
+customer varchar(120),
+pass varchar(40),
+cust_type bit,
+
+)
+go
+
+alter table sales
+add foreign key (cust_id) references [dbo].[customers](cust_id)
+go
