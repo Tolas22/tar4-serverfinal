@@ -18,7 +18,7 @@ public partial class addCategory : System.Web.UI.Page
     {
         foreach (GridViewRow item in catGRD.Rows)
         {
-            if (cnameTB.Text == item.ToString())
+            if (cnameTB.Text == item.Cells[0].Text)
             {
                 args.IsValid = false;
                 return;
@@ -28,10 +28,13 @@ public partial class addCategory : System.Web.UI.Page
 
     protected void addctgBTN_Click(object sender, EventArgs e)
     {
-
-        Category cat = new Category();
-        cat.CategoryName = cnameTB.Text;
-        dbs.insert(cat);
+        if (catexistVLD.IsValid)
+        {
+            Category cat = new Category();
+            cat.CategoryName = cnameTB.Text;
+            dbs.insert(cat);
+        }
+       
     }
 
 }

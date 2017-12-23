@@ -14,7 +14,7 @@
      </p>
      <p>
          <asp:Button ID="addctgBTN" runat="server" Text="Add" OnClick="addctgBTN_Click" />
-         <asp:CustomValidator ID="catexistVLD" runat="server" ControlToValidate="cnameTB" ErrorMessage="Category already exists" OnServerValidate="catexistVLD_ServerValidate"></asp:CustomValidator>
+         <asp:CustomValidator ID="catexistVLD" runat="server" ControlToValidate="cnameTB" ForeColor="Maroon" ErrorMessage="Category already exists" OnServerValidate="catexistVLD_ServerValidate"></asp:CustomValidator>
      </p>
      <p>
          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" DeleteCommand="DELETE FROM [category] WHERE [category_id] = @original_category_id AND (([category_name] = @original_category_name) OR ([category_name] IS NULL AND @original_category_name IS NULL))" InsertCommand="INSERT INTO [category] ([category_name]) VALUES (@category_name)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [category]" UpdateCommand="UPDATE [category] SET [category_name] = @category_name WHERE [category_id] = @original_category_id AND (([category_name] = @original_category_name) OR ([category_name] IS NULL AND @original_category_name IS NULL))">
