@@ -8,7 +8,7 @@ using System.Web;
 /// </summary>
 public class Category
 {
-    int categoryID;
+ 
     string categoryName;
     public Category()
     {
@@ -17,18 +17,6 @@ public class Category
         //
     }
 
-    public int CategoryID
-    {
-        get
-        {
-            return categoryID;
-        }
-
-        set
-        {
-            categoryID = value;
-        }
-    }
 
     public string CategoryName
     {
