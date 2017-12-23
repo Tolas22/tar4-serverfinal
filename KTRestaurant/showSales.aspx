@@ -1,14 +1,16 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPageAdmin.master" CodeFile="showSales.aspx.cs" Inherits="showSales" %>
+
+ <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+ </asp:Content>
+
+
+ <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderAdmin" Runat="Server">
 
 
 
-<<<<<<< HEAD
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
+
+
     
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:bgroup59_test1ConnectionString %>" DeleteCommand="DELETE FROM [sales] WHERE [sale_id] = @original_sale_id AND (([product_id] = @original_product_id) OR ([product_id] IS NULL AND @original_product_id IS NULL)) AND (([total_price] = @original_total_price) OR ([total_price] IS NULL AND @original_total_price IS NULL)) AND (([amount] = @original_amount) OR ([amount] IS NULL AND @original_amount IS NULL)) AND (([p_method] = @original_p_method) OR ([p_method] IS NULL AND @original_p_method IS NULL)) AND (([cust_id] = @original_cust_id) OR ([cust_id] IS NULL AND @original_cust_id IS NULL))" InsertCommand="INSERT INTO [sales] ([product_id], [total_price], [amount], [p_method], [cust_id]) VALUES (@product_id, @total_price, @amount, @p_method, @cust_id)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [sales]" UpdateCommand="UPDATE [sales] SET [product_id] = @product_id, [total_price] = @total_price, [amount] = @amount, [p_method] = @p_method, [cust_id] = @cust_id WHERE [sale_id] = @original_sale_id AND (([product_id] = @original_product_id) OR ([product_id] IS NULL AND @original_product_id IS NULL)) AND (([total_price] = @original_total_price) OR ([total_price] IS NULL AND @original_total_price IS NULL)) AND (([amount] = @original_amount) OR ([amount] IS NULL AND @original_amount IS NULL)) AND (([p_method] = @original_p_method) OR ([p_method] IS NULL AND @original_p_method IS NULL)) AND (([cust_id] = @original_cust_id) OR ([cust_id] IS NULL AND @original_cust_id IS NULL))">
             <DeleteParameters>
@@ -51,10 +53,5 @@
                 <asp:BoundField DataField="cust_id" HeaderText="cust_id" SortExpression="cust_id" />
             </Columns>
         </asp:GridView>
-    
-    </div>
-    </form>
-</body>
-</html>
-=======
->>>>>>> cf430bc5e12fed89f82a5c9fcafece2ad1d96af1
+ </asp:Content>
+
