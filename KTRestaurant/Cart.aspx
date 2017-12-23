@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/myMasterPage.master" CodeFile="Cart.aspx.cs" Inherits="Cart" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPagecustomer.master" CodeFile="Cart.aspx.cs" Inherits="Cart" %>
   <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
       <link href="StyleSheet2.css" rel="stylesheet" />
       <link href="StyleSheet.css" rel="stylesheet" />
@@ -12,7 +12,7 @@
         <asp:Label ID="priceLBL" runat="server" Text="Label"></asp:Label>
         </div>
        <div style="text-align:center;">
-        <asp:Button ID="confirmbtn" runat="server" class="button bottun4" Text="אישור ומעבר לתשלום" OnClick="confirmbtn_Click" />
+        <%--<asp:Button ID="confirmbtn" runat="server" class="button bottun4" Text="אישור ומעבר לתשלום" OnClick="confirmbtn_Click" />--%>
     </div>
 
          </asp:Content>
