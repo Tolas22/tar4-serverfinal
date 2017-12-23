@@ -93,7 +93,11 @@ min-height: 80px;
 .active-link {
     background-color:#f3f3f3;
 }
-    
+
+img {
+height:inherit;
+}  
+  
 /*==============================================
     DASHBOARD STYLES    
     =============================================*/
