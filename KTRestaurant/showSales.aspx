@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="showSales.aspx.cs" Inherits="showSales" %>
 
-<!DOCTYPE html>
 
+
+<<<<<<< HEAD
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -56,3 +56,5 @@
     </form>
 </body>
 </html>
+=======
+>>>>>>> cf430bc5e12fed89f82a5c9fcafece2ad1d96af1

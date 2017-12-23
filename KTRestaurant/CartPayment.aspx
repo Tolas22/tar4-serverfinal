@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/myMasterPage.master"CodeFile="CartPayment.aspx.cs" Inherits="CartPayment" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPagecustomer.master"CodeFile="CartPayment.aspx.cs" Inherits="CartPayment" %>
 
   <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
       <link href="StyleSheet2.css" rel="stylesheet" />

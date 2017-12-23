@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MyMasterPage.master" CodeFile="ShowProducts.aspx.cs" Inherits="ShowProducts" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPagecustomer.master" CodeFile="ShowProducts.aspx.cs" Inherits="ShowProducts" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
            <link href="StyleSheet2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
      
      <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder>
      
-      <asp:Button ID="Button1" class="button bottun4"  runat="server" Text="Create List" OnClick="Button1_Click" />
+      <%--<asp:Button ID="Button1" class="button bottun4"  runat="server" Text="Create List" OnClick="Button1_Click" />--%>
         <asp:Label ID="Label1"  runat="server" Text=""></asp:Label>
     
      <br /><br /><br />
