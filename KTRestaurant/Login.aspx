@@ -78,14 +78,14 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
   <div class="login">
 	<h1>Login</h1>
-    <form method="post">
+    <form method="post" runat="server">
     	<input type="text" id="usernameTB" runat="server" name="u" placeholder="Username" required="required" />
         <input type="password" id="passTB" runat="server" name="p" placeholder="Password" required="required" />
         <asp:Button id="loginBTN" runat="server" Text="Let me in!" class="btn btn-primary btn-block btn-large" OnClick="loginBTN_Click"></asp:Button>
 
     </form>
 </div>
-  
+
   
 
     <script  src="js/index.js"></script>

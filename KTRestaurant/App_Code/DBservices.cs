@@ -233,7 +233,7 @@ public class DBservices
         try
         {
 
-            con = connect("carsConnectionString"); // create a connection to the database using the connection String defined in the web config file
+            con = connect("productNConnectionString"); // create a connection to the database using the connection String defined in the web config file
         }
 
         catch (Exception ex) { 
@@ -273,7 +273,7 @@ public class DBservices
     public DataTable readproductNDataBase()
     {
 
-        SqlConnection con = connect("carsConnectionString"); // open the connection to the database/
+        SqlConnection con = connect("productNConnectionString"); // open the connection to the database/
 
         String selectStr = "SELECT " +Name+ " FROM " + Table; // create the select that will be used by the adapter to select data from the DB
 
@@ -299,7 +299,7 @@ public class DBservices
 
         try
         {
-            con = connect("moviesDBConnectionString"); // create the connection
+            con = connect("productNConnectionString"); // create the connection
         }
         catch (Exception ex)
         {

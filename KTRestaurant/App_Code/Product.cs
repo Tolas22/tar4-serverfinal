@@ -8,97 +8,97 @@ using System.Web;
 /// \\\-	categoryId המכיל את מספר הקטגוריה (int)
 
 /// </summary>
-//public class Product
-//{
-//    private int categoryId;
-//    private string title;
-//    private string imagePath;
-//    private double price;
-//    private int inventory;
-//    public Product()
-//    {
-            
-//    }
-//    public int CategoryId
-//    {
-//        get
-//        {
-//            return categoryId;
-//        }
+public class Product
+{
+    private int categoryId;
+    private string title;
+    private string imagePath;
+    private double price;
+    private int inventory;
+    public Product()
+    {
 
-//        set
-//        {
-//            categoryId = value;
-//        }
-//    }
+    }
+    public int CategoryId
+    {
+        get
+        {
+            return categoryId;
+        }
 
-//    public string Title
-//    {
-//        get
-//        {
-//            return title;
-//        }
+        set
+        {
+            categoryId = value;
+        }
+    }
 
-//        set
-//        {
-//            title = value;
-//        }
-//    }
+    public string Title
+    {
+        get
+        {
+            return title;
+        }
 
-//    public string ImagePath
-//    {
-//        get
-//        {
-//            return imagePath;
-//        }
+        set
+        {
+            title = value;
+        }
+    }
 
-//        set
-//        {
-//            imagePath = value;
-//        }
-//    }
+    public string ImagePath
+    {
+        get
+        {
+            return imagePath;
+        }
 
-//    public double Price
-//    {
-//        get
-//        {
-//            return price;
-//        }
+        set
+        {
+            imagePath = value;
+        }
+    }
 
-//        set
-//        {
-//            price = value;
-//        }
-//    }
+    public double Price
+    {
+        get
+        {
+            return price;
+        }
 
-//    public int Inventory
-//    {
-//        get
-//        {
-//            return inventory;
-//        }
+        set
+        {
+            price = value;
+        }
+    }
 
-//        set
-//        {
-//            inventory = value;
-//        }
-//    }
+    public int Inventory
+    {
+        get
+        {
+            return inventory;
+        }
 
-//    public Product(int categoryId, string title, string imagePath, double price, int Inventory)
-//    {
-//        CategoryId = categoryId;
-//        Title = title;
-//        ImagePath = imagePath;
-//        Price = price;
-//        Inventory = inventory;
-//    }
+        set
+        {
+            inventory = value;
+        }
+    }
 
-//    public int insert()
-//    {
-//        DBServices dbs = new DBServices();
-//        int numAffected = dbs.insert(this);
-//        return numAffected;
+    public Product(int categoryId, string title, string imagePath, double price, int Inventory)
+    {
+        CategoryId = categoryId;
+        Title = title;
+        ImagePath = imagePath;
+        Price = price;
+        Inventory = inventory;
+    }
 
-//    }
+    public int insert()
+    {
+        DBservices dbs = new DBservices();
+        int numAffected = 0; /*dbs.insert(this);*/
+        return numAffected;
 
-//}
+    }
+
+}
