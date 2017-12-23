@@ -50,20 +50,19 @@
 
 
                     <li class="active-link">
-                        <a href="index.html" ><i class="fa fa-desktop "></i>Inventory Management <span class="badge">Included</span></a>
-                    </li>
-                   
-
-                    <li>
-                        <a href="ui.html"><i class="fa fa-table "></i>Sales  <span class="badge">Included</span></a>
-                    </li>
-                    <li>
-                        <a href="blank.html"><i class="fa fa-edit "></i>Add Product  <span class="badge">Included</span></a>
+                        <a href="inventoryManagement.aspx" ><i class="fa fa-desktop "></i>Inventory Management <span class="badge">Included</span></a>
                     </li>
 
-
                     <li>
-                        <a href="#addCategory"><i class="fa fa-qrcode "></i>Add Category</a>
+                        <a href="showSales.aspx"><i class="fa fa-table "></i>Sales  <span class="badge">Included</span></a>
+                    </li>
+                    <li>
+                        <a href="addProduct.aspx"><i class="fa fa-edit "></i>Add Product  <span class="badge">Included</span></a>
+                    </li>
+
+                  
+                    <li>
+                        <a href="addCategory.aspx"><i class="fa fa-qrcode "></i>Add Category</a>
                     </li>
                     
                     
