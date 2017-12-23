@@ -63,7 +63,7 @@
 
 
                     <li>
-                        <a href="#"><i class="fa fa-qrcode "></i>Add Category</a>
+                        <a href="#addCategory"><i class="fa fa-qrcode "></i>Add Category</a>
                     </li>
                     
                     
