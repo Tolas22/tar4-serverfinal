@@ -291,56 +291,7 @@ public class DBservices
     //--------------------------------------------------------------------
     // insert a movie
     //--------------------------------------------------------------------
-    public int delete(string prefix)
-    {
-
-        SqlConnection con;
-        SqlCommand cmd;
-
-        try
-        {
-            con = connect("productNConnectionString"); // create the connection
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-        }
-
-        String cStr = BuildDeleteCommand(prefix);      // helper method to build the insert string
-
-        cmd = CreateCommand(cStr, con);             // create the command
-
-        try
-        {
-            int numEffected = cmd.ExecuteNonQuery(); // execute the command
-            return numEffected;
-        }
-        catch (Exception ex)
-        {
-            return 0;
-            // write to log
-            throw (ex);
-        }
-
-        finally
-        {
-            if (con != null)
-            {
-                // close the db connection
-                con.Close();
-            }
-        }
-
-    }
-
-    private string BuildDeleteCommand(string prefix) { 
-    
-    
-        string cmdStr = "DELETE FROM Movies WHERE actor LIKE '" + prefix + "%'";
-        return cmdStr;
 
 
-    }
 
 }

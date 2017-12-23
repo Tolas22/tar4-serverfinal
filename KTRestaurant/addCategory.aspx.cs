@@ -8,6 +8,8 @@ using System.Web.UI.WebControls;
 public partial class addCategory : System.Web.UI.Page
 {
     DBservices dbs = new DBservices();
+    Category cat = new Category();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -30,11 +32,12 @@ public partial class addCategory : System.Web.UI.Page
     {
         if (catexistVLD.IsValid)
         {
-            Category cat = new Category();
             cat.CategoryName = cnameTB.Text;
             dbs.insert(cat);
         }
        
     }
 
+
+   
 }

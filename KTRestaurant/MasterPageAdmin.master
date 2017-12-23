@@ -50,14 +50,14 @@
 
 
                     <li class="active-link">
-                        <a href="inventoryManagement.aspx" ><i class="fa fa-desktop "></i>Inventory Management <span class="badge">Included</span></a>
+                        <a href="inventoryManagement.aspx" ><i class="fa fa-desktop "></i>Inventory Management </a>
                     </li>
 
                     <li>
-                        <a href="showSales.aspx"><i class="fa fa-table "></i>Sales  <span class="badge">Included</span></a>
+                        <a href="showSales.aspx"><i class="fa fa-table "></i>Sales </a>
                     </li>
                     <li>
-                        <a href="addProduct.aspx"><i class="fa fa-edit "></i>Add Product  <span class="badge">Included</span></a>
+                        <a href="addProduct.aspx"><i class="fa fa-edit "></i>Add Product  </a>
                     </li>
 
                   
