@@ -273,7 +273,7 @@ public class DBservices
     public DataTable readproductNDataBase()
     {
 
-        SqlConnection con = connect("productNConnectionString"); // open the connection to the database/
+        SqlConnection con = connect("productNDBConnectionString"); // open the connection to the database/
 
         String selectStr = "SELECT " +Name+ " FROM " + Table; // create the select that will be used by the adapter to select data from the DB
 

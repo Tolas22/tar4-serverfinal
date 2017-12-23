@@ -37,10 +37,8 @@ public partial class Login : System.Web.UI.Page
                     Response.Redirect("ShowProducts.aspx");
                 }
             }
-            else
-            {
-                Response.Write("Wrong UserName or Password");
-            }
-        }   
+      
+        }
+        wpLBL.Text = "Wrong username or password";
     }
 }
