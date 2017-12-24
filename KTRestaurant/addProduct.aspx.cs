@@ -8,8 +8,14 @@ using System.Web.UI.WebControls;
 public partial class addProduct : System.Web.UI.Page
 {
     DBservices dbs = new DBservices();
+        Product p = new Product();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (IsPostBack)
+        {
+            DDlCat.Text = DDlCat.SelectedValue;
+
+        }
         DDlCat.DataBind();
         DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
     }
@@ -18,22 +24,22 @@ public partial class addProduct : System.Web.UI.Page
 
     protected void addBTN_Click(object sender, EventArgs e)
     {
-        Product p = new Product();
         int categoryId = Convert.ToInt32(DDlCat.SelectedValue);
+        p.CategoryId = categoryId;
         string title = ProductTB.Text;
-        string imagePath = FileUpload1.FileName;
+        string imagePath = "/images/" + FileUpload1.FileName ;
         double price = Convert.ToDouble(PriceTB.Text);
         int inventory = Convert.ToInt32(inventoryTB.Text);
-        bool active;
+         string active;
         if (ActiveRBL.SelectedValue=="yes")
         {
-            active = true;
+            active = "True" ;
         }
         else
         {
-            active = false;
+            active = "False";
         }
-        p.CategoryId = categoryId;
+       
         p.Title = title;
         p.ImagePath = imagePath;
         p.Price = price;
@@ -108,5 +114,11 @@ public partial class addProduct : System.Web.UI.Page
         // file to the specified directory.
         FileUpload1.SaveAs(savePath);
 
+
+    }
+
+    protected void DDlCat_SelectedIndexChanged(object sender, EventArgs e)
+    {
+     
     }
 }

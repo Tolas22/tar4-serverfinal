@@ -15,7 +15,7 @@ public class Product
     private string imagePath;
     private double price;
     private int inventory;
-    private bool active;
+    private string active;
     public Product()
     {
 
@@ -85,7 +85,7 @@ public class Product
         }
     }
 
-    public bool Active
+    public string Active
     {
         get
         {

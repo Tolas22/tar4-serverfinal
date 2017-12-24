@@ -45,14 +45,14 @@
             <td>
                 <asp:Label ID="LblPrice" runat="server" Text="Product Price"></asp:Label></td>
             <td>
-                <asp:TextBox ID="PriceTB" runat="server"></asp:TextBox></td>
+                <asp:TextBox ID="PriceTB" required="required" runat="server"></asp:TextBox></td>
         </tr>
 
         <tr>
           <td>
                 <asp:Label ID="Lblin" runat="server" Text="Product Inventory"></asp:Label></td>
             <td>
-                <asp:TextBox ID="inventoryTB" runat="server"></asp:TextBox></td>
+                <asp:TextBox ID="inventoryTB" required="required" runat="server"></asp:TextBox></td>
         </tr>
 
         <tr>
