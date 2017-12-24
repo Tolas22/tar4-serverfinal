@@ -13,7 +13,10 @@ public partial class inventoryManagement : System.Web.UI.Page
     }
     protected void editFun(object sender,GridViewUpdatedEventArgs e)
     {
-    
+        DBservices dbs = new DBservices();
+        Product p = new Product();
+        p = (Product)sender;
+        dbs.update(p);
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
