@@ -16,16 +16,18 @@
         <tr>
             <td><asp:Label ID="lblcat" runat="server" Text="Category Name"></asp:Label></td>
             <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id" AutoPostBack="True" >
-                <asp:ListItem Value="-1">Choose Category Name</asp:ListItem>
   
             </asp:DropDownList></td>
+            <td>     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="Must choose category" InitialValue="0" ForeColor="Red"  ControlToValidate="DDlCat"></asp:RequiredFieldValidator>
+</td>
+
         </tr>
       
      
        <tr>
             <td>
                 <asp:Label ID="LblProduct" runat="server" Text="Product Name"></asp:Label></td>
-            <td> <asp:TextBox ID="ProductTB" runat="server"></asp:TextBox></td>
+            <td> <asp:TextBox ID="ProductTB" required="required" ErrorMessage="Must Enter Product Name" runat="server" ></asp:TextBox></td>
         </tr> 
 
         <tr>
@@ -34,6 +36,9 @@
                 <asp:Label ID="lblpic" runat="server" Text="Upload Image"></asp:Label> </td>
             <td>
                 <asp:FileUpload ID="FileUpload1" runat="server" /> </td>
+            <td>
+                <asp:Label ID="UploadStatusLabel" runat="server" ></asp:Label>
+            </td>
         </tr>
 
         <tr>
@@ -54,16 +59,18 @@
          <td>   <asp:Label ID="blActive" runat="server" Text="Active?"></asp:Label></td>
            <td>
                <asp:RadioButtonList ID="ActiveRBL" runat="server">
-                   <asp:ListItem>yes</asp:ListItem>
+                   <asp:ListItem >yes</asp:ListItem>
                    <asp:ListItem>no</asp:ListItem>
                </asp:RadioButtonList> </td>
         </tr>
     </table>
-     <asp:Button ID="addBTN" runat="server" Text="ADD PRODUCT" />
+     <asp:Button ID="addBTN" runat="server" Text="ADD PRODUCT" OnClick="addBTN_Click" />
 
 
      <br />
      <br />
+     <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1">
+     </asp:GridView>
      <br />
 
 
