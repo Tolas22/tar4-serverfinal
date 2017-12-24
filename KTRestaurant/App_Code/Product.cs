@@ -15,6 +15,7 @@ public class Product
     private string imagePath;
     private double price;
     private int inventory;
+    private bool active;
     public Product()
     {
 
@@ -84,14 +85,20 @@ public class Product
         }
     }
 
-    public Product(int categoryId, string title, string imagePath, double price, int Inventory)
+    public bool Active
     {
-        CategoryId = categoryId;
-        Title = title;
-        ImagePath = imagePath;
-        Price = price;
-        Inventory = inventory;
+        get
+        {
+            return active;
+        }
+
+        set
+        {
+            active = value;
+        }
     }
+
+
 
     public int insert()
     {

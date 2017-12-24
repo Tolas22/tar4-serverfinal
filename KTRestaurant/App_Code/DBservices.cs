@@ -196,7 +196,7 @@ public class DBservices
         StringBuilder sb = new StringBuilder();
         // use a string builder to create the dynamic string
         sb.AppendFormat("Values('{0}', '{1}' ,{2}, {3}, {4}, {5})", pdt.CategoryId, pdt.Title, pdt.ImagePath, pdt.Price, pdt.Inventory, pdt.Active.ToString());
-        String prefix = "INSERT INTO Cars " + "(category_id, title, img_url, price, inventory, active) ";
+        String prefix = "INSERT INTO productN " + "(category_id, title, img_url, price, inventory, active) ";
         command = prefix + sb.ToString();
 
         return command;
