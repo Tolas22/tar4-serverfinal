@@ -11,7 +11,7 @@
 
 
 
-     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
+     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]" OldValuesParameterFormatString="original_{0}"></asp:SqlDataSource>
     <table>
         <tr>
             <td><asp:Label ID="lblcat" runat="server" Text="Category Name"></asp:Label></td>
@@ -68,8 +68,17 @@
 
 
      <br />
+     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [productN]"></asp:SqlDataSource>
      <br />
-     <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1">
+     <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id">
+         <Columns>
+             <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" />
+             <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" />
+             <asp:BoundField DataField="img_url" HeaderText="img_url" SortExpression="img_url" />
+             <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" />
+             <asp:BoundField DataField="inventory" HeaderText="inventory" SortExpression="inventory" />
+             <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
+         </Columns>
      </asp:GridView>
      <br />
 
