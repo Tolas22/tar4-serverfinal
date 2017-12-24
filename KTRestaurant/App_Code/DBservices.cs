@@ -124,54 +124,54 @@ public class DBservices
     }
 
     //--------------------------------------------------------------------
-    // insert a movie
+    // insert a Product
     //--------------------------------------------------------------------
-    //public int insert(movie mov)
-    //{
+    public int insert(Product pdt)
+    {
 
-    //    SqlConnection con;
-    //    SqlCommand cmd;
+        SqlConnection con;
+        SqlCommand cmd;
 
-    //    try
-    //    {
-    //        con = connect("moviesDBConnectionString"); // create the connection
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // write to log
-    //        throw (ex);
-    //    }
+        try
+        {
+            con = connect("productNDBConnectionString"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
 
-    //    String cStr = BuildInsertCommand(mov);      // helper method to build the insert string
+        String cStr = BuildInsertCommand(pdt);      // helper method to build the insert string
 
-    //    cmd = CreateCommand(cStr, con);             // create the command
+        cmd = CreateCommand(cStr, con);             // create the command
 
-    //    try
-    //    {
-    //        int numEffected = cmd.ExecuteNonQuery(); // execute the command
-    //        return numEffected;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        return 0;
-    //        // write to log
-    //        throw (ex);
-    //    }
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            return 0;
+            // write to log
+            throw (ex);
+        }
 
-    //    finally
-    //    {
-    //        if (con != null)
-    //        {
-    //            // close the db connection
-    //            con.Close();
-    //        }
-    //    }
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
 
-    //}
+    }
 
 
     //--------------------------------------------------------------------
-    // Build the Insert a movie command String
+    // Build the Insert a category command String
     //--------------------------------------------------------------------
     private String BuildInsertCommand(Category cat)
     {
@@ -189,18 +189,18 @@ public class DBservices
     //--------------------------------------------------------------------
     // Build the Insert command String
     //--------------------------------------------------------------------
-    //private String BuildInsertCommand(Car car)
-    //{
-    //    String command;
+    private String BuildInsertCommand(Product pdt)
+    {
+        String command;
 
-    //    StringBuilder sb = new StringBuilder();
-    //    // use a string builder to create the dynamic string
-    //    sb.AppendFormat("Values('{0}', '{1}' ,{2}, {3})", car.Model, car.Manufacturer, car.Year.ToString(), car.Price.ToString());
-    //    String prefix = "INSERT INTO Cars " + "(model, manufacturer, year, price) ";
-    //    command = prefix + sb.ToString();
+        StringBuilder sb = new StringBuilder();
+        // use a string builder to create the dynamic string
+        sb.AppendFormat("Values('{0}', '{1}' ,{2}, {3}, {4}, {5})", pdt.CategoryId, pdt.Title, pdt.ImagePath, pdt.Price, pdt.Inventory, pdt.Active.ToString());
+        String prefix = "INSERT INTO Cars " + "(category_id, title, img_url, price, inventory, active) ";
+        command = prefix + sb.ToString();
 
-    //    return command;
-    //}
+        return command;
+    }
     //---------------------------------------------------------------------------------
     // Create the SqlCommand
     //---------------------------------------------------------------------------------
