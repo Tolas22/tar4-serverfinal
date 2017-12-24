@@ -34,8 +34,10 @@ public partial class addCategory : System.Web.UI.Page
         {
             cat.CategoryName = cnameTB.Text;
             dbs.insert(cat);
+            
         }
-       
+        catGRD.DataBind();
+        cnameTB.Text = "";
     }
 
 
