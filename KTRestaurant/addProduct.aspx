@@ -15,7 +15,7 @@
     <table>
         <tr>
             <td><asp:Label ID="lblcat" runat="server" Text="Category Name"></asp:Label></td>
-            <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_name" AutoPostBack="True" >
+            <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id" AutoPostBack="True" >
                 <asp:ListItem Value="-1">Choose Category Name</asp:ListItem>
   
             </asp:DropDownList></td>
