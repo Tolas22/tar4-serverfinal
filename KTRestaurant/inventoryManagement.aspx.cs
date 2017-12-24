@@ -11,4 +11,8 @@ public partial class inventoryManagement : System.Web.UI.Page
     {
 
     }
+    protected void editFun(object sender,GridViewUpdatedEventArgs e)
+    {
+    
+    }
 }

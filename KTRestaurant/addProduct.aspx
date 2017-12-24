@@ -105,6 +105,7 @@
      <br />
      <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id">
          <Columns>
+             
              <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
              <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" InsertVisible="False" ReadOnly="True" />
              <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" />
