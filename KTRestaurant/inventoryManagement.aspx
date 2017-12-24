@@ -9,7 +9,7 @@
      
      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [AddProduct]">
      </asp:SqlDataSource>
-     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True"  AutoGenerateColumns="false" DataSourceID="SqlDataSource1">
          <Columns>
              <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" />
              <asp:BoundField DataField="category_name" HeaderText="category_name" SortExpression="category_name" />
