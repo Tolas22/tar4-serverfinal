@@ -291,7 +291,67 @@ public class DBservices
     //--------------------------------------------------------------------
     // insert a movie
     //--------------------------------------------------------------------
+    //--------------------------------------------------------------------
+    // insert a Product
+    //--------------------------------------------------------------------
+    public int update(Product pdt)
+    {
 
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("productNDBConnectionString"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        String cStr = BuildUpdateCommand(pdt);      // helper method to build the insert string
+
+        cmd = CreateCommand(cStr, con);             // create the command
+
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            return 0;
+            // write to log
+            throw (ex);
+        }
+
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+
+
+    //--------------------------------------------------------------------
+    // Build the Insert a category command String
+    //--------------------------------------------------------------------
+    private String BuildUpdateCommand(Product pdt)
+    {
+        String command;
+
+        StringBuilder sb = new StringBuilder();
+        // use a string builder to create the dynamic string
+        String prefix = "UPDATE product SET inventory = " +pdt.Inventory+ ", active = "+ pdt.Active +" Where title = " + pdt.Title ;
+        command = prefix;
+
+        return command;
+    }
 
 
 }
