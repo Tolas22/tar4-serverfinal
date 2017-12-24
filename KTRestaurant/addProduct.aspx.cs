@@ -16,7 +16,7 @@ public partial class addProduct : System.Web.UI.Page
             DDlCat.Text = DDlCat.SelectedValue;
 
         }
-        DDlCat.DataBind();
+        //DDlCat.DataBind();
         DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
     }
 
