@@ -344,7 +344,7 @@ public class DBservices
     private String BuildUpdateCommand(Product pdt)
     {
         String command;
-
+        
         StringBuilder sb = new StringBuilder();
         // use a string builder to create the dynamic string
         String prefix = "UPDATE product SET inventory = " +pdt.Inventory+ ", active = "+ pdt.Active +" Where title = " + pdt.Title ;

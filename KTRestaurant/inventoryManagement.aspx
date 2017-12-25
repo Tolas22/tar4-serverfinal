@@ -7,9 +7,9 @@
 
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderAdmin" Runat="Server">
      
-     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [AddProduct]">
+     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [AddProduct]" UpdateCommand="editFun">
      </asp:SqlDataSource>
-     <asp:GridView ID="GridView1"  runat="server" AutoGenerateEditButton="true" OnRowUpdated="editFun" AllowPaging="True" AllowSorting="True"  AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+     <asp:GridView ID="GridView1"  runat="server" AutoGenerateEditButton="True" AllowPaging="True" AllowSorting="True"  AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
            <Columns>
    
                <asp:CommandField ShowSelectButton="True" />
@@ -18,8 +18,37 @@
                <asp:BoundField DataField="category_name" HeaderText="category_name" SortExpression="category_name" />
              <asp:BoundField DataField="img_url" HeaderText="img_url" SortExpression="img_url" />
              <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" />
-             <asp:BoundField DataField="inventory" HeaderText="inventory" SortExpression="inventory" />
-             <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
+               <asp:TemplateField HeaderText="inventory" SortExpression="inventory">
+                   <EditItemTemplate>
+                       <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="false" >
+                           <asp:ListItem>0</asp:ListItem>
+                           <asp:ListItem>1</asp:ListItem>
+                           <asp:ListItem>2</asp:ListItem>
+                           <asp:ListItem>3</asp:ListItem>
+                           <asp:ListItem>4</asp:ListItem>
+                           <asp:ListItem>5</asp:ListItem>
+                           <asp:ListItem>6</asp:ListItem>
+                           <asp:ListItem>7</asp:ListItem>
+                           <asp:ListItem>8</asp:ListItem>
+                           <asp:ListItem>9</asp:ListItem>
+                           <asp:ListItem>10</asp:ListItem>
+                       </asp:DropDownList>
+                   </EditItemTemplate>
+                   <ItemTemplate>
+                       <asp:Label ID="Label1" runat="server" Text='<%# Bind("inventory") %>'></asp:Label>
+                   </ItemTemplate>
+               </asp:TemplateField>
+               <asp:TemplateField HeaderText="active" SortExpression="active">
+                   <EditItemTemplate>
+                       <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="false">
+                           <asp:ListItem Value="True">Active</asp:ListItem>
+                           <asp:ListItem Value="False">Disabled</asp:ListItem>
+                       </asp:RadioButtonList>
+                   </EditItemTemplate>
+                   <ItemTemplate>
+                       <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("active") %>' Enabled="false" />
+                   </ItemTemplate>
+               </asp:TemplateField>
          </Columns>
      </asp:GridView>
      
