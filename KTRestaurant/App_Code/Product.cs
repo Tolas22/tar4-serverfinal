@@ -18,7 +18,7 @@ public class Product
     private string active;
     public Product()
     {
-
+       
     }
     public int CategoryId
     {
