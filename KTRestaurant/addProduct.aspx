@@ -1,21 +1,19 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPageAdmin.master" CodeFile="addProduct.aspx.cs" Inherits="addProduct" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
+     
  </asp:Content>
 
 
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderAdmin" Runat="Server">
 
 
-
-
-
      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]" OldValuesParameterFormatString="original_{0}"></asp:SqlDataSource>
     <table>
         <tr>
             <td><asp:Label ID="lblcat" runat="server" Text="Category Name"></asp:Label></td>
-            <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id"  >
+            <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id" AutoPostBack="True" >
+                <asp:ListItem Selected="True" Value="0">Choose category</asp:ListItem>
   
             </asp:DropDownList></td>
             <td>     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="Must choose category" InitialValue="0" ForeColor="Red"  ControlToValidate="DDlCat"></asp:RequiredFieldValidator>
@@ -39,6 +37,14 @@
             <td>
                 <asp:Label ID="UploadStatusLabel" runat="server" ></asp:Label>
             </td>
+    <td><asp:RequiredFieldValidator 
+             ID="RequiredFieldValidator"
+             runat="server"
+             ControlToValidate="FileUpload1"
+             ErrorMessage="Choose a file!"
+        forecolor="Red"
+             >
+        </asp:RequiredFieldValidator>    </td>
         </tr>
 
         <tr>
@@ -62,6 +68,9 @@
                    <asp:ListItem >yes</asp:ListItem>
                    <asp:ListItem>no</asp:ListItem>
                </asp:RadioButtonList> </td>
+            <td> <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+            ControlToValidate="ActiveRBL" ErrorMessage="Must choose one" ForeColor="Red">
+        </asp:RequiredFieldValidator></td>
         </tr>
     </table>
      <asp:Button ID="addBTN" runat="server" Text="ADD PRODUCT" OnClick="addBTN_Click" />

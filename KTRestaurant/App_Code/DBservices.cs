@@ -8,7 +8,7 @@ using System.Data;
 using System.Text;
 
 /// <summary>
-/// DBServices is a class created by me to provides some DataBase Services
+/// DBServices is a class created by me to provides some DataBase Servicesf
 /// </summary>
 public class DBservices
 {
@@ -279,11 +279,11 @@ public class DBservices
 
         SqlDataAdapter da = new SqlDataAdapter(selectStr, con); // create the data adapter
 
-        DataSet ds = new DataSet(NameDS); // create a DataSet and give it a name (not mandatory) as defualt it will be the same name as the DB
+    //    DataSet ds = new DataSet(NameDS); // create a DataSet and give it a name (not mandatory) as defualt it will be the same name as the DB
 
-        da.Fill(ds);       // Fill the datatable (in the dataset), using the Select command
-
-        dt = ds.Tables[0]; // point to the cars table , which is the only table in this case
+        //da.Fill(ds);       // Fill the datatable (in the dataset), using the Select command
+        da.Fill(dt);
+      //  dt = ds.Tables[0]; // point to the cars table , which is the only table in this case
         return dt;
     }
 

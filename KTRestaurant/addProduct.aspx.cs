@@ -13,15 +13,16 @@ public partial class addProduct : System.Web.UI.Page
     {
         
         DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
-      //  DDlCat.DataBind();
+        DDlCat.DataBind();
     }
 
 
 
     protected void addBTN_Click(object sender, EventArgs e)
     {
+        
         int categoryId = Convert.ToInt32(DDlCat.SelectedValue);
-        //if (IsPostBack)
+        //if ( IsPostBack)
         //{
         //    DDlCat.Text = DDlCat.SelectedValue;
 

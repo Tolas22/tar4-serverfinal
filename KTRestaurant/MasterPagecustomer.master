@@ -22,8 +22,8 @@
 <body>
     <form id="form1" runat="server">
                   
-    <div id="wrapper">
-         <div class="navbar navbar-inverse navbar-fixed-top">
+        <div id="wrapper">
+            <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="adjust-nav">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -34,7 +34,8 @@
                     <a class="navbar-brand" href="#">
                         <img src="assets/img/ktlogo.png" />
                     </a>
-                    
+                  
+                
                 </div>
               
                 <span class="logout-spn" >
@@ -45,7 +46,7 @@
         </div>
         <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
+            <div class="sidebar-collapse" style="float:left">
                 <ul class="nav" id="main-menu">
                  
 
@@ -79,7 +80,7 @@
                   <hr />
                
                 <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolderAdmin" runat="server">
+        <asp:ContentPlaceHolder id="ContentPlaceHoldercustomer" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>
