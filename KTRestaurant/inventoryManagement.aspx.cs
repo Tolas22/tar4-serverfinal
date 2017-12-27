@@ -12,17 +12,18 @@ public partial class inventoryManagement : System.Web.UI.Page
         string active; int inventory;
     protected void Page_Load(object sender, EventArgs e)
     {
-        BoundField bf = new BoundField();
-
-        foreach (var item in GridView1.Rows)
-        {
-
-            if (bf.DataField == "category_id")
-            {
-
-                bf.DataField = "category_name";
-            }
-        }
+        //foreach (GridViewRow row in GridView1.Rows)
+        //{
+        //    RadioButtonList rbl = (RadioButtonList)row.FindControl("RadioButtonList1");
+        //    rbl.SelectedValue = SqlDataSource1.
+        //    DropDownList ddl = (DropDownList)row.FindControl("DropDownList1");
+        //    if (rbl != null)
+        //    {
+        //        p.Active = rbl.SelectedValue.ToString();
+        //        p.Inventory = Convert.ToInt32(ddl.SelectedValue);
+        //        return;
+        //    }
+        //}
     }
     protected void editFun(object sender, GridViewUpdatedEventArgs e)
     {

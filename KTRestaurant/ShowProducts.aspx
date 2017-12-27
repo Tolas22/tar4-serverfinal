@@ -85,6 +85,8 @@
     </div>
 </asp:Panel>
         
+         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
+        
      </div>
      
 <%--     <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder>--%>
@@ -100,16 +102,7 @@
 		<div class="sort">
 			<div class="collection-sort">
 				<label>Filter by:</label>
-				<select>
-		      <option value="/">All Jackets</option>
-		      <option value="/">2016</option>
-		      <option value="/">jacket</option>
-		      <option value="/">Jackets</option>
-		      <option value="/">layers</option>
-		      <option value="/">Obermeyer</option>
-		      <option value="/">Roxy</option>
-		      <option value="/">womens</option>
-		   	</select>
+                <asp:DropDownList ID="fcategoryDDL" runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
 			</div>
 			
 			
@@ -119,7 +112,8 @@
 	<section class="products" >
              <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder>
 
-		<div class="product-card">
+
+		<%--<div class="product-card">
 			<div class="product-image">
 				<img src="https://cdn.shopify.com/s/files/1/0938/8938/products/10231100205_1_1315x1800_300_CMYK_1024x1024.jpeg?v=1445623369">
 			</div>
@@ -218,6 +212,6 @@
 				<h6>$99.99</h6>
 			</div>
 		</div>
-		
+		--%>
 	</section>
 </asp:Content>

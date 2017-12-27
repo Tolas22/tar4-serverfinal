@@ -23,47 +23,50 @@ public partial class ShowProducts : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!this.IsPostBack)
+        if (!IsPostBack)
         {
             ModalPopupExtender1.Show();
         }
 
-        if (!this.IsPostBack)
+        if (!IsPostBack)
         {
+            dbs.Name = "*";
+            dbs.Table = "productN";
             //Populating a DataTable from database.
             DataTable dt = dbs.readproductNDataBase() ;
 
             //Building an HTML string.
             StringBuilder html = new StringBuilder();
 
-            //Table start.
-            html.Append("<table border = '1'>");
-
-            //Building the Header row.
-            html.Append("<tr>");
-            foreach (DataColumn column in dt.Columns)
-            {
-                html.Append("<th>");
-                html.Append(column.ColumnName);
-                html.Append("</th>");
-            }
-            html.Append("</tr>");
-
-            //Building the Data rows.
             foreach (DataRow row in dt.Rows)
             {
-                html.Append("<tr>");
-                foreach (DataColumn column in dt.Columns)
-                {
-                    html.Append("<td>");
-                    html.Append(row[column.ColumnName]);
-                    html.Append("</td>");
-                }
-                html.Append("</tr>");
+            //Table start.
+            html.Append("<div class='product-card'>");
+
+            //Building the Header row.
+            html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
+                html.Append("<div class='product-info'>");
+                    html.Append("<h5>Product Name: " + row["title"] + "</h5>");
+                html.Append("</div>");
+
             }
+            html.Append("</div>");
+
+            //Building the Data rows.
+            //foreach (DataRow row in dt.Rows)
+            //{
+            //    html.Append("<tr>");
+            //    foreach (DataColumn column in dt.Columns)
+            //    {
+            //        html.Append("<td>");
+            //        html.Append(row[column.ColumnName]);
+            //        html.Append("</td>");
+            //    }
+            //    html.Append("</tr>");
+            //}
 
             //Table end.
-            html.Append("</table>");
+            //html.Append("</table>");
 
             //Append the HTML string to Placeholder.
             productsPH.Controls.Add(new Literal { Text = html.ToString() });
@@ -280,6 +283,18 @@ public partial class ShowProducts : System.Web.UI.Page
     ////}
 
     ////    }
+    public static int GetColumnIndexByName(DataTable table, string name)
+    {
+        foreach (DataColumn col in table.Columns)
+        {
+            if (col.ColumnName.ToLower().Trim() == name.ToLower().Trim())
+            {
+                return table.Columns.IndexOf(col);
+            }
+        }
+
+        return -1; // in case there in no such field
+    }
 
 }
 
