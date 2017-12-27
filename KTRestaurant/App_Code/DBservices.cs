@@ -287,6 +287,22 @@ public class DBservices
         return dt;
     }
 
+    public DataTable readCategoryDataBase()
+    {
+
+        SqlConnection con = connect("productNDBConnectionString"); // open the connection to the database/
+
+        String selectStr = "SELECT " + Name + " FROM " + Table; // create the select that will be used by the adapter to select data from the DB
+
+        SqlDataAdapter da = new SqlDataAdapter(selectStr, con); // create the data adapter
+
+        DataSet ds = new DataSet(); // create a DataSet and give it a name (not mandatory) as defualt it will be the same name as the DB
+
+        da.Fill(ds);       // Fill the datatable (in the dataset), using the Select command
+                           //  da.Fill(dt);
+        dt = ds.Tables[1]; // point to the cars table , which is the only table in this case
+        return dt;
+    }
 
     //--------------------------------------------------------------------
     // insert a movie

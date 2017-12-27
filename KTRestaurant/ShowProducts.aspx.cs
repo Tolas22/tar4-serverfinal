@@ -40,17 +40,25 @@ public partial class ShowProducts : System.Web.UI.Page
 
             foreach (DataRow row in dt.Rows)
             {
+                if (row["active"].ToString() == "True")
+                {
+
             //Table start.
             html.Append("<div class='product-card'>");
 
             //Building the Header row.
             html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
-                html.Append("<div class='product-info'>");
-                    html.Append("<h5>Product Name: " + row["title"] + "</h5>");
-                html.Append("</div>");
+             html.Append("<div class='product-info'>");
+             html.Append("<h5>Product Name: " + row["title"] + "</h5>");
+                html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
+                html.Append("<h5>Product Price: " + row["price"] + "</h5>");
+                html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
 
-            }
+                html.Append("</div>");
             html.Append("</div>");
+
+                }
+            }
 
             //Building the Data rows.
             //foreach (DataRow row in dt.Rows)
@@ -283,17 +291,22 @@ public partial class ShowProducts : System.Web.UI.Page
     ////}
 
     ////    }
-    public static int GetColumnIndexByName(DataTable table, string name)
+public string getCatName(int id)
     {
-        foreach (DataColumn col in table.Columns)
+        dbs.Name = "*";
+        dbs.Table = "category";
+        //Populating a DataTable from database.
+        DataTable dt = dbs.readproductNDataBase();
+
+     
+        foreach (DataRow row in dt.Rows)
         {
-            if (col.ColumnName.ToLower().Trim() == name.ToLower().Trim())
+            if (id == (Convert.ToInt32(row["category_id"])))
             {
-                return table.Columns.IndexOf(col);
+                return row["category_name"].ToString();
             }
         }
-
-        return -1; // in case there in no such field
+            return null;
     }
 
 }
