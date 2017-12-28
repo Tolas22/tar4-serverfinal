@@ -289,6 +289,7 @@ public partial class ShowProducts : System.Web.UI.Page
     {
         dbs.Name = "*";
         dbs.Table = "productN";
+        int realprice=0;
 
         DataTable dt = dbs.readproductNDataBase();
         //Populating a DataTable from database.
@@ -309,6 +310,7 @@ public partial class ShowProducts : System.Web.UI.Page
                 {
                     if (row["title"].ToString()=="Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                     {
+                        realprice = Convert.ToInt32(row["price"]);
                         Product p1 = new Product(Convert.ToInt32(row["category_id"]),row["title"].ToString(), row["img_url"].ToString(), Convert.ToDouble( row["price"]));
                        row["price"]= p1.getDiscount(row["title"].ToString(), 50);
                         ChoosenDiscount = Convert.ToDouble(row["price"]);
@@ -369,16 +371,22 @@ public partial class ShowProducts : System.Web.UI.Page
         {
             if (row["active"].ToString() == "True")
             {
-
-                //Table start.
                 html.Append("<div class='product-card'>");
 
                 //Building the Header row.
-                html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
                 html.Append("<div class='product-info'>");
+                html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
                 html.Append("<h5>Product Name: " + row["title"] + "</h5>");
                 html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
-                html.Append("<h5>Product Price: " + row["price"] + "</h5>");
+                if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
+                {
+                    row["price"] = ChoosenDiscount; 
+                html.Append("<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice+" </h5>" + row["price"] + "</h5>");}
+                else
+                {
+                    html.Append("<h5>Product Price:" + row["price"] + "</h5>");
+
+                }
                 html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
                 html.Append(" <input type='checkbox' ID='" + row["product_id"] + "' runat='server' ");
                 if (Convert.ToInt32(row["inventory"]) == 0)

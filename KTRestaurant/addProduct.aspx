@@ -13,7 +13,7 @@
         <tr>
             <td><asp:Label ID="lblcat" runat="server" Text="Category Name"></asp:Label></td>
             <td><asp:DropDownList ID="DDlCat"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id" AutoPostBack="True" >
-                <asp:ListItem Selected="True" Value="0">Choose category</asp:ListItem>
+                <%--<asp:ListItem Selected="True" Value="0">Choose category</asp:ListItem>--%>
   
             </asp:DropDownList></td>
             <td>     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="Must choose category" InitialValue="0" ForeColor="Red"  ControlToValidate="DDlCat"></asp:RequiredFieldValidator>

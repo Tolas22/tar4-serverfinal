@@ -13,8 +13,13 @@ public partial class addProduct : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         
-        DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
-        DDlCat.DataBind();
+        if (IsPostBack)
+        {
+            DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
+            DDlCat.Text = DDlCat.SelectedValue;
+            DDlCat.DataBind();
+
+        }
     }
 
 
@@ -23,11 +28,6 @@ public partial class addProduct : System.Web.UI.Page
     {
         
         int categoryId = Convert.ToInt32(DDlCat.SelectedValue);
-        //if ( IsPostBack)
-        //{
-        //    DDlCat.Text = DDlCat.SelectedValue;
-
-        //}
         p.CategoryId = categoryId;
         string title = ProductTB.Text;
         string imagePath = "/images/" + FileUpload1.FileName ;
