@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -122,5 +123,34 @@ public partial class addProduct : System.Web.UI.Page
     protected void DDlCat_SelectedIndexChanged(object sender, EventArgs e)
     {
      
+    }
+
+    public string getCatName(int id)
+    {
+        dbs.Name = "*";
+        dbs.Table = "category";
+        //Populating a DataTable from database.
+        DataTable dt = dbs.readproductNDataBase();
+
+
+        foreach (DataRow row in dt.Rows)
+        {
+            if (id == (Convert.ToInt32(row["category_id"])))
+            {
+                return row["category_name"].ToString();
+            }
+        }
+        return null;
+    }
+
+
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            int cat_id = Convert.ToInt32(e.Row.Cells[1].Text);
+            e.Row.Cells[2].Text = getCatName(cat_id);
+        }
     }
 }
