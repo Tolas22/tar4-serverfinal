@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,17 @@ public class Product
     {
        
     }
+
+    public Product(int categoryId, string title, string imagePath, double price)
+    {
+        CategoryId = categoryId;
+        Title = title;
+        ImagePath = imagePath;
+       Price = price;
+        //Inventory = inventory;
+        //Active = active;
+    }
+
     public int CategoryId
     {
         get
@@ -72,6 +84,7 @@ public class Product
         }
     }
 
+
     public int Inventory
     {
         get
@@ -107,5 +120,36 @@ public class Product
         return numAffected;
 
     }
+    public Double getDiscount(string productname, int dis)
+    {
+        DBservices dbs = new DBservices();
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        DataTable dt = dbs.readproductNDataBase();
+        Product dp = new Product();
+       // productId += 1;
+        foreach (DataRow row in dt.Rows)
+        {
+
+            if (productname == row["title"].ToString())
+            {
+                if (dis == 20)
+                {
+
+                    Price *= 0.8;
+                    dp.price = Price;
+
+                }
+                else
+                {
+                    Price *= 0.5;
+                    dp.price = Price;
+                }
+            }
+        }
+
+        return dp.price;
+    }
+
 
 }

@@ -22,78 +22,22 @@ public partial class ShowProducts : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+     
         if (!IsPostBack)
         {
             ModalPopupExtender1.Show();
-        }
 
-        if (!IsPostBack)
-        {
-            dbs.Name = "*";
-            dbs.Table = "productN";
-            DataTable dt = dbs.readproductNDataBase();
-            //Populating a DataTable from database.
-
-            //Building an HTML string.
-            StringBuilder html = new StringBuilder();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                if (row["active"].ToString() == "True")
-                {
-
-            //Table start.
-            html.Append("<div class='product-card'>");
-
-            //Building the Header row.
-            html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
-             html.Append("<div class='product-info'>");
-             html.Append("<h5>Product Name: " + row["title"] + "</h5>");
-                html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
-                html.Append("<h5>Product Price: " + row["price"] + "</h5>");
-                html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
-                    //cb = new CheckBox();
-                    //cb.ID = row["product_id"].ToString();
-                    //cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged); //cb_CheckedChanged;
-        
-                html.Append("</div>");
-                    html.Append(" <input type='checkbox' ID='" + row["product_id"] + "' runat='server' ");
-                if (Convert.ToInt32(row["inventory"]) == 0)
-                {
-                        html.Append("Enabled='false'");
-                }
-                    html.Append("OnCheckedChanged='cb_CheckedChanged'/>");
-                }
-            html.Append("</div>");
-            }
-
-            //Building the Data rows.
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    html.Append("<tr>");
-            //    foreach (DataColumn column in dt.Columns)
-            //    {
-            //        html.Append("<td>");
-            //        html.Append(row[column.ColumnName]);
-            //        html.Append("</td>");
-            //    }
-            //    html.Append("</tr>");
-            //}
-
-            //Table end.
-            //html.Append("</table>");
-
-            //Append the HTML string to Placeholder.
-            productsPH.Controls.Add(new Literal { Text = html.ToString() });
+            CreateProductList();
         }
 
         #region startdiscoountrange
-        if (Request.Cookies["firstVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
-        {
+        //if (Request.Cookies["firstVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
+        //{
 
-            discountlbl.Text = "This is your first visit to our site,you can get this product 50% just now!!!!!";
+        //    discountlbl.Text = "This is your first visit to our site,you can get this product 50% just now!!!!!";
 
-            Response.Cookies["firstVisitDate"].Value = DateTime.Now.ToString();
+        //    Response.Cookies["firstVisitDate"].Value = DateTime.Now.ToString();
             // foreach (var item in dt.Rows)
 
             //{
@@ -126,12 +70,12 @@ public partial class ShowProducts : System.Web.UI.Page
             //    j++;
 
             //}
-            Response.Cookies["firstVisitDate"].Expires = DateTime.Now.AddSeconds(100);
-        }
-        else
-        {
-            discountlbl.Text = "Your first visit was on " + Request.Cookies["firstVisitDate"].Value + "</br> you can get just now 20% off on this product!!!";
-            //foreach (var item in dp.getProducts())
+        //    Response.Cookies["firstVisitDate"].Expires = DateTime.Now.AddSeconds(100);
+        //}
+        //else
+        //{
+        //    discountlbl.Text = "Your first visit was on " + Request.Cookies["firstVisitDate"].Value + "</br> you can get just now 20% off on this product!!!";
+        //    //foreach (var item in dp.getProducts())
             //{
             //    if (j == 5)
             //    {
@@ -157,7 +101,7 @@ public partial class ShowProducts : System.Web.UI.Page
             //        discountPH.Controls.Add(myDiv2);
             //    }
             //    j++;
-            }
+           // }
 
         //}
         #endregion
@@ -341,6 +285,118 @@ public partial class ShowProducts : System.Web.UI.Page
     ////}
 
     ////    }
+    public void CreateProductList()
+    {
+        dbs.Name = "*";
+        dbs.Table = "productN";
+
+        DataTable dt = dbs.readproductNDataBase();
+        //Populating a DataTable from database.
+
+        //Building an HTML string.
+        StringBuilder html = new StringBuilder();
+        #region startdiscoountrange
+        if (Request.Cookies["firstVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
+    {
+
+        discountlbl.Text = "This is your first visit to our site,you can get this product 50% just now!!!!!";
+        Response.Cookies["firstVisitDate"].Value = DateTime.Now.ToString();
+
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["active"].ToString() == "True")
+                {
+                    if (row["title"].ToString()=="Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
+                    {
+                        Product p1 = new Product(Convert.ToInt32(row["category_id"]),row["title"].ToString(), row["img_url"].ToString(), Convert.ToDouble( row["price"]));
+                       row["price"]= p1.getDiscount(row["title"].ToString(), 50);
+                        ChoosenDiscount = Convert.ToDouble(row["price"]);
+
+                    html.Append("<div class='product-card'>");
+                    //Building the Header row.
+                    html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
+                    html.Append("<div class='product-info'>");
+                    html.Append("<h5>Product Name: " + row["title"] + "</h5>");
+                    html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
+                    html.Append("<h5>Product Price: " + row["price"] + "</h5>");
+                    html.Append("</div>");
+                    html.Append("</div>");
+                   discountPH.Controls.Add(new Literal { Text = html.ToString() });
+                   
+                }
+            }
+
+                    }
+
+        Response.Cookies["firstVisitDate"].Expires = DateTime.Now.AddSeconds(20);
+            
+        }
+    else
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["active"].ToString() == "True")
+                {
+                    if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
+                    {
+                        Product p1 = new Product(Convert.ToInt32(row["category_id"]), row["title"].ToString(), row["img_url"].ToString(), Convert.ToDouble(row["price"]));
+                        row["price"] = p1.getDiscount(row["title"].ToString(), 20);
+                        ChoosenDiscount = Convert.ToDouble(row["price"]);
+
+                        html.Append("<div class='product-card'>");
+                        //Building the Header row.
+                        html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
+                        html.Append("<div class='product-info'>");
+                        html.Append("<h5>Product Name: " + row["title"] + "</h5>");
+                        html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
+                        html.Append("<h5>Product Price: " + row["price"] + "</h5>");
+                        html.Append("</div>");
+                        html.Append("</div>");
+                        discountPH.Controls.Add(new Literal { Text = html.ToString() });
+
+                    }
+                }
+
+            }
+            discountlbl.Text = "Your first visit was on " + Request.Cookies["firstVisitDate"].Value + "</br> you can get just now 20% off on this product!!!";
+
+    }
+
+        #endregion
+        html.Clear();
+        foreach (DataRow row in dt.Rows)
+        {
+            if (row["active"].ToString() == "True")
+            {
+
+                //Table start.
+                html.Append("<div class='product-card'>");
+
+                //Building the Header row.
+                html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
+                html.Append("<div class='product-info'>");
+                html.Append("<h5>Product Name: " + row["title"] + "</h5>");
+                html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
+                html.Append("<h5>Product Price: " + row["price"] + "</h5>");
+                html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
+                html.Append(" <input type='checkbox' ID='" + row["product_id"] + "' runat='server' ");
+                if (Convert.ToInt32(row["inventory"]) == 0)
+                {
+                    html.Append("Enabled='false'");
+                }
+                html.Append("OnCheckedChanged='cb_CheckedChanged'/>");
+            }
+            html.Append("</div>");
+            html.Append("</div>");
+        }
+
+  
+
+        //Append the HTML string to Placeholder.
+        productsPH.Controls.Add(new Literal { Text = html.ToString() });
+        
+    }
     public string getCatName(int id)
     {
         dbs.Name = "*";
