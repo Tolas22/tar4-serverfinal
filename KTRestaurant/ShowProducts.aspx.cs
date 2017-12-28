@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
 public partial class ShowProducts : System.Web.UI.Page
 {
     DBservices dbs = new DBservices();
-
     CheckBox cb;
         Product p = new Product();
         Category c = new Category();
@@ -32,8 +31,8 @@ public partial class ShowProducts : System.Web.UI.Page
         {
             dbs.Name = "*";
             dbs.Table = "productN";
+            DataTable dt = dbs.readproductNDataBase();
             //Populating a DataTable from database.
-            DataTable dt = dbs.readproductNDataBase() ;
 
             //Building an HTML string.
             StringBuilder html = new StringBuilder();
@@ -53,11 +52,19 @@ public partial class ShowProducts : System.Web.UI.Page
                 html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
                 html.Append("<h5>Product Price: " + row["price"] + "</h5>");
                 html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
-
+                    //cb = new CheckBox();
+                    //cb.ID = row["product_id"].ToString();
+                    //cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged); //cb_CheckedChanged;
+        
                 html.Append("</div>");
-            html.Append("</div>");
-
+                    html.Append(" <input type='checkbox' ID='" + row["product_id"] + "' runat='server' ");
+                if (Convert.ToInt32(row["inventory"]) == 0)
+                {
+                        html.Append("Enabled='false'");
                 }
+                    html.Append("OnCheckedChanged='cb_CheckedChanged'/>");
+                }
+            html.Append("</div>");
             }
 
             //Building the Data rows.
@@ -202,6 +209,49 @@ public partial class ShowProducts : System.Web.UI.Page
 
 
         }
+
+    private void cb_CheckedChanged(object sender, EventArgs e)
+    {
+
+        CheckBox Cbox = ((CheckBox)sender);
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        DataTable dt = dbs.readproductNDataBase();
+        int cbid = Convert.ToInt32(Cbox.ID);
+
+        if (Cbox.Checked)
+        {
+            foreach (DataRow item in dt.Rows)
+            {
+                if (Convert.ToInt32( item["product_id"]) == 6)
+                {
+                    item["price"] = ChoosenDiscount;
+
+                }
+
+                if (cbid == Convert.ToInt32(item["product_id"]))
+                {
+                    p.CategoryId = Convert.ToInt32(item["category_id"]);
+                    p.Title = item["title"].ToString();
+                    p.ImagePath = item["img_url"].ToString();
+                    p.Inventory = Convert.ToInt32(item["inventory"]);
+                    newList.Add(p);
+                }
+            }
+        }
+        else
+        {
+            // remove item from list
+            //foreach (var item in newList)
+            //{
+            //    if (cbid == item.)
+            //    {
+            //        newList.Remove(item);
+            //    }
+            //}
+            
+        }
+    }
     #endregion
 
 
@@ -291,7 +341,7 @@ public partial class ShowProducts : System.Web.UI.Page
     ////}
 
     ////    }
-public string getCatName(int id)
+    public string getCatName(int id)
     {
         dbs.Name = "*";
         dbs.Table = "category";
@@ -309,5 +359,11 @@ public string getCatName(int id)
             return null;
     }
 
+
+    protected void addCartBTN_Click(object sender, EventArgs e)
+    {
+        Session["MyCart"] = newList;
+        Response.Redirect("Cart.aspx");
+    }
 }
 
