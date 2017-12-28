@@ -4,7 +4,7 @@
       <link href="StyleSheet.css" rel="stylesheet" />
        </asp:Content>
 
-   <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+   <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldercustomer" Runat="Server">
                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
        <asp:Label ID="Label2" runat="server" Text="Welcome"></asp:Label>
     <div>
