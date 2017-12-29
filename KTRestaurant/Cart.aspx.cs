@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,6 +11,7 @@ public partial class Cart : System.Web.UI.Page
 {
     List<Product> newList;
     List<Product> FinalList;
+    DropDownList DDL;
     //    double totalPrice ;
     //    CheckBox cb;
 
@@ -62,7 +64,17 @@ public partial class Cart : System.Web.UI.Page
                 l1.Text =
                 "</br> Product Name: " + item.Title.ToString() +
                 "</br> Product Price: " + item.Price.ToString() +
-                "</br> Product Invetory: " + item.Inventory.ToString();
+                "</br> Product Amount: " ;
+                DDL = new DropDownList();
+                for (int j = 0; j < item.Inventory; j++)
+                {
+                    ListItem li = new ListItem(j.ToString(),j.ToString());
+                    DDL.Items.Add(li);
+                    DDL.DataBind();
+                }
+                DDL.ID = item.ProductId;
+                DDL.SelectedValue = "1";
+                DDL.SelectedIndexChanged += new EventHandler(this.ddl_IndexChange);
                 //cb = new CheckBox();
                 //cb.Checked = true;
                 //cb.AutoPostBack = true;
@@ -161,5 +173,24 @@ public partial class Cart : System.Web.UI.Page
 
     }
 
+    private void ddl_IndexChange(object sender, EventArgs e)
+    {
+        DBservices dbs = new DBservices();
+        DropDownList ddl = (DropDownList)sender;
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        DataTable dt = dbs.readproductNDataBase();
+        foreach (DataRow row in dt.Rows)
+        {
+        if (ddl.ID ==  row["product_id"].ToString())
+        {
+                if (Convert.ToInt32(ddl.SelectedValue) > Convert.ToInt32(row["inventory"]))
+                {
+
+                }
+        }
+
+        }
+    }
 }   
     
