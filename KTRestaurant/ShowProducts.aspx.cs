@@ -28,7 +28,7 @@ public partial class ShowProducts : System.Web.UI.Page
         }
     }
 
-    private void cb_CheckedChanged(object sender, EventArgs e)
+     void cb_CheckedChanged(object sender, EventArgs e)
     {
         CheckBox Cbox = ((CheckBox)sender);
         dbs.Name = "*";
@@ -148,12 +148,12 @@ public partial class ShowProducts : System.Web.UI.Page
 
         #endregion
         html.Clear();
-        HtmlGenericControl productDiv = new HtmlGenericControl("div");
-        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
-        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
         #region showproduct
         foreach (DataRow row in dt.Rows)
         {
+        HtmlGenericControl productDiv = new HtmlGenericControl("div");
+        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
             if (row["active"].ToString() == "True")
             {
                 productDiv.Attributes["class"] = "product-card";
@@ -162,13 +162,10 @@ public partial class ShowProducts : System.Web.UI.Page
                 //Building the Header row.
                 
                 infoDiv.Attributes["class"] = "product-info";
-                html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
                 imgDiv.Attributes["class"] = "product-image";
-                Image img = new Image();
-                img.ImageUrl = row["img_url"].ToString();
-                imgDiv.Controls.Add(img);
-                infoDiv.Controls.Add(imgDiv);
-                infoDiv.InnerHtml = "<h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) +"</h5>";
+                Image img = new Image(); 
+                img.ImageUrl= row["img_url"].ToString().Substring(1);
+                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) +"</h5>";
                 
                 if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                 {
@@ -182,29 +179,25 @@ public partial class ShowProducts : System.Web.UI.Page
 
                 }
                 infoDiv.InnerHtml += "<h5>Product Inventory: " + row["inventory"] + "</h5>";
-                //html.Append("<asp:CheckBox ID='" + row["product_id"] + "' runat='server' AutoPostBack='true' OnCheckedCanged='cb_CheckedChanged()'");
-                ////html.Append(" <input type='checkbox' AutoPostBack='true' runat='server' onchange='cb_CheckedChanged()' ID='" + row["product_id"] + "' ");
-                //if (Convert.ToInt32(row["inventory"]) == 0)
-                //{
-                //    html.Append("Enabled='false'");
-                //}
-                //html.Append("></asp:CheckBox>");
+
                 cb = new CheckBox();
                 cb.ID = row["product_id"].ToString();
-                cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged);//cb_CheckedChanged;
+                //cb.AutoPostBack = true;
+                cb.CheckedChanged += new EventHandler(cb_CheckedChanged);//cb_CheckedChanged;
                 if (Convert.ToInt32(row["inventory"]) == 0)
                 {
                     cb.Enabled = false;
                 }
+                infoDiv.Controls.Add(cb);
             }
 
             productDiv.Controls.Add(infoDiv);
+        productsPH.Controls.Add(productDiv);
         }
 
   
 
         //Append the HTML string to Placeholder.
-        productsPH.Controls.Add(productDiv);
       //  productsPH.Controls.AddAt()
         #endregion
 
