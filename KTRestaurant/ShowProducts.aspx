@@ -81,7 +81,7 @@
         <asp:Label ID="discountlbl" runat="server" Text="Label"></asp:Label>
           <asp:PlaceHolder ID="discountPH" runat="server"></asp:PlaceHolder>
         <br />
-        <asp:Button ID="btnHide" runat="server" Text="Hide Modal Popup" />
+        <asp:Button ID="btnHide"  runat="server" Text="Hide Modal Popup" />
     </div>
 </asp:Panel>
         
@@ -102,9 +102,9 @@
 		<div class="sort">
 			<div class="collection-sort">
 				<label>Filter by:</label>
-                <asp:DropDownList ID="fcategoryDDL" runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
+                <asp:DropDownList ID="fcategoryDDL"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
+                
 			</div>
-			
 			
 		</div>
 	</nav>
