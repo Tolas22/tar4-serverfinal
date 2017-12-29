@@ -24,8 +24,9 @@ public partial class ShowProducts : System.Web.UI.Page
         if (!IsPostBack)
         {
             ModalPopupExtender1.Show();
-            CreateProductList();
+            CreateProductDiscount();
         }
+        CreateProductList();
     }
 
      void cb_CheckedChanged(object sender, EventArgs e)
@@ -40,7 +41,7 @@ public partial class ShowProducts : System.Web.UI.Page
         {
             foreach (DataRow item in dt.Rows)
             {
-                if ((item["product_name"]).ToString() == "Sea Bass")
+                if ((item["title"]).ToString() == "Sea Bass")
                 {
                     item["price"] = ChoosenDiscount;
                 }
@@ -68,7 +69,7 @@ public partial class ShowProducts : System.Web.UI.Page
         }
     }
 
-    public void CreateProductList()
+    public void CreateProductDiscount()
     {
         dbs.Name = "*";
         dbs.Table = "productN";
@@ -148,30 +149,38 @@ public partial class ShowProducts : System.Web.UI.Page
 
         #endregion
         html.Clear();
+        
+    }
+    public void CreateProductList() {
         #region showproduct
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        int realprice = 0;
+        //Populating a DataTable from database.
+        DataTable dt = dbs.readproductNDataBase();
         foreach (DataRow row in dt.Rows)
         {
-        HtmlGenericControl productDiv = new HtmlGenericControl("div");
-        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
-        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
+            HtmlGenericControl productDiv = new HtmlGenericControl("div");
+            HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+            HtmlGenericControl imgDiv = new HtmlGenericControl("div");
             if (row["active"].ToString() == "True")
             {
                 productDiv.Attributes["class"] = "product-card";
-              
+
 
                 //Building the Header row.
-                
+
                 infoDiv.Attributes["class"] = "product-info";
                 imgDiv.Attributes["class"] = "product-image";
-                Image img = new Image(); 
-                img.ImageUrl= row["img_url"].ToString().Substring(1);
-                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) +"</h5>";
-                
+                Image img = new Image();
+                img.ImageUrl = row["img_url"].ToString().Substring(1);
+                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>";
+
                 if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                 {
                     row["price"] = ChoosenDiscount;
-            
-                    infoDiv.InnerHtml += "<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice+" </h5>" + row["price"] + "</h5>";
+
+                    infoDiv.InnerHtml += "<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice + " </h5>" + row["price"] + "</h5>";
                 }
                 else
                 {
@@ -192,13 +201,13 @@ public partial class ShowProducts : System.Web.UI.Page
             }
 
             productDiv.Controls.Add(infoDiv);
-        productsPH.Controls.Add(productDiv);
+            productsPH.Controls.Add(productDiv);
         }
 
-  
+
 
         //Append the HTML string to Placeholder.
-      //  productsPH.Controls.AddAt()
+        //  productsPH.Controls.AddAt()
         #endregion
 
     }
