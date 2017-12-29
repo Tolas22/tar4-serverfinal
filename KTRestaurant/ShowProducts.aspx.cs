@@ -148,29 +148,40 @@ public partial class ShowProducts : System.Web.UI.Page
 
         #endregion
         html.Clear();
-        HtmlGenericControl myDiv2 = new HtmlGenericControl("div");
+        HtmlGenericControl productDiv = new HtmlGenericControl("div");
+        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
         #region showproduct
         foreach (DataRow row in dt.Rows)
         {
             if (row["active"].ToString() == "True")
             {
-                html.Append("<div class='product-card'>");
+                productDiv.Attributes["class"] = "product-card";
+              
 
                 //Building the Header row.
-                html.Append("<div class='product-info'>");
+                
+                infoDiv.Attributes["class"] = "product-info";
                 html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
-                html.Append("<h5>Product Name: " + row["title"] + "</h5>");
-                html.Append("<h5>Product Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>");
+                imgDiv.Attributes["class"] = "product-image";
+                Image img = new Image();
+                img.ImageUrl = row["img_url"].ToString();
+                imgDiv.Controls.Add(img);
+                infoDiv.Controls.Add(imgDiv);
+                infoDiv.InnerHtml = "<h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) +"</h5>";
+                
                 if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                 {
-                    row["price"] = ChoosenDiscount; 
-                html.Append("<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice+" </h5>" + row["price"] + "</h5>");}
+                    row["price"] = ChoosenDiscount;
+            
+                    infoDiv.InnerHtml += "<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice+" </h5>" + row["price"] + "</h5>";
+                }
                 else
                 {
-                    html.Append("<h5>Product Price:" + row["price"] + "</h5>");
+                    infoDiv.InnerHtml += "<h5>Product Price:" + row["price"] + "</h5>";
 
                 }
-                html.Append("<h5>Product Inventory: " + row["inventory"] + "</h5>");
+                infoDiv.InnerHtml += "<h5>Product Inventory: " + row["inventory"] + "</h5>";
                 //html.Append("<asp:CheckBox ID='" + row["product_id"] + "' runat='server' AutoPostBack='true' OnCheckedCanged='cb_CheckedChanged()'");
                 ////html.Append(" <input type='checkbox' AutoPostBack='true' runat='server' onchange='cb_CheckedChanged()' ID='" + row["product_id"] + "' ");
                 //if (Convert.ToInt32(row["inventory"]) == 0)
@@ -186,14 +197,14 @@ public partial class ShowProducts : System.Web.UI.Page
                     cb.Enabled = false;
                 }
             }
-            html.Append("</div>");
-            html.Append("</div>");
+
+            productDiv.Controls.Add(infoDiv);
         }
 
   
 
         //Append the HTML string to Placeholder.
-        productsPH.Controls.Add(new Literal { Text = html.ToString() });
+        productsPH.Controls.Add(productDiv);
       //  productsPH.Controls.AddAt()
         #endregion
 
