@@ -9,12 +9,12 @@
      <h2>Add Category</h2>
      <p>
          <asp:Label ID="cnameLBL" runat="server" Text="Category name:"></asp:Label>
-         <asp:TextBox ID="cnameTB" runat="server" ></asp:TextBox>
+         <asp:TextBox ID="cnameTB" runat="server"  AutoPostBack="true"></asp:TextBox>
+         <asp:CustomValidator ID="catexistVLD" runat="server"  ControlToValidate="cnameTB" ForeColor="Maroon" ErrorMessage="Category already exists" OnServerValidate="catexistVLD_ServerValidate"></asp:CustomValidator>
          <asp:RequiredFieldValidator ID="cnameVLD" runat="server" ControlToValidate="cnameTB" ErrorMessage="Must Enter Category Name" ></asp:RequiredFieldValidator>
      </p>
      <p>
          <asp:Button ID="addctgBTN" runat="server" Text="Add" OnClick="addctgBTN_Click" />
-         <asp:CustomValidator ID="catexistVLD" runat="server" ControlToValidate="cnameTB" ForeColor="Maroon" ErrorMessage="Category already exists" OnServerValidate="catexistVLD_ServerValidate"></asp:CustomValidator>
      </p>
    
      <p>
