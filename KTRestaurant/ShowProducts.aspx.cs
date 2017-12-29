@@ -10,7 +10,8 @@ using System.Web.UI.WebControls;
 
 public partial class ShowProducts : System.Web.UI.Page
 {
-        DBservices dbs = new DBservices();
+    int realprice = 0;
+    DBservices dbs = new DBservices();
         CheckBox cb;
         Product p = new Product();
         Category c = new Category();
@@ -26,6 +27,7 @@ public partial class ShowProducts : System.Web.UI.Page
             ModalPopupExtender1.Show();
             CreateProductDiscount();
         }
+
         CreateProductList();
     }
 
@@ -73,7 +75,6 @@ public partial class ShowProducts : System.Web.UI.Page
     {
         dbs.Name = "*";
         dbs.Table = "productN";
-        int realprice=0;
         //Populating a DataTable from database.
         DataTable dt = dbs.readproductNDataBase();
         //Building an HTML string.
@@ -124,6 +125,7 @@ public partial class ShowProducts : System.Web.UI.Page
                 {
                     if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                     {
+                        realprice = Convert.ToInt32(row["price"]);
                         Product p1 = new Product(Convert.ToInt32(row["category_id"]), row["title"].ToString(), row["img_url"].ToString(), Convert.ToDouble(row["price"]));
                         row["price"] = p1.getDiscount(row["title"].ToString(), 20);
                         ChoosenDiscount = Convert.ToDouble(row["price"]);
@@ -155,7 +157,7 @@ public partial class ShowProducts : System.Web.UI.Page
         #region showproduct
         dbs.Name = "*";
         dbs.Table = "productN";
-        int realprice = 0;
+       // int realprice = 0;
         //Populating a DataTable from database.
         DataTable dt = dbs.readproductNDataBase();
         foreach (DataRow row in dt.Rows)
