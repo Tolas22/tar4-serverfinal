@@ -116,10 +116,10 @@
      </asp:SqlDataSource>
      <br />
      <div data-role="grid">
-     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" >
          <Columns>
              
-             <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
+             <asp:CommandField ShowEditButton="True" ShowDeleteButton="True"  CausesValidation="False" />
              
              <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" InsertVisible="False" ReadOnly="True" />
              <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" ReadOnly="True" />
