@@ -72,7 +72,7 @@ public partial class Cart : System.Web.UI.Page
                     DDL.Items.Add(li);
                     DDL.DataBind();
                 }
-                DDL.ID = item.ProductId;
+                DDL.ID = item.ProductId.ToString();
                 DDL.SelectedValue = "1";
                 DDL.SelectedIndexChanged += new EventHandler(this.ddl_IndexChange);
                 //cb = new CheckBox();

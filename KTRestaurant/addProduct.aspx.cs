@@ -153,4 +153,6 @@ public partial class addProduct : System.Web.UI.Page
             e.Row.Cells[2].Text = getCatName(cat_id);
         }
     }
+
+   
 }
