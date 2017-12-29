@@ -11,6 +11,7 @@ using System.Web;
 /// </summary>
 public class Product
 {
+    private int productId;
     private int categoryId;
     private string title;
     private string imagePath;
@@ -111,7 +112,18 @@ public class Product
         }
     }
 
+    public int ProductId
+    {
+        get
+        {
+            return productId;
+        }
 
+        set
+        {
+            productId = value;
+        }
+    }
 
     public int insert()
     {
