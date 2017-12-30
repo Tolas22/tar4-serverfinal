@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -12,6 +13,8 @@ public partial class Cart : System.Web.UI.Page
     List<Product> newList;
     List<Product> FinalList;
     DropDownList DDL;
+    DBservices dbs = new DBservices();
+
     //    double totalPrice ;
     //    CheckBox cb;
 
@@ -45,133 +48,159 @@ public partial class Cart : System.Web.UI.Page
         //    Label1.Text = "Your Previous Visit was on: " + Request.Cookies["firstCartVisitDate"].Value;
         //}
 
-        int i = 0;
-        newList = (List<Product>)(Session["MyCart"]);
-        //ProductList p = new ProductList();
 
+        //ProductList p = new ProductList();
+     
         if (Session["MyCart"] != null)
         {
+        newList = (List<Product>)(Session["MyCart"]);
 
             foreach (var item in newList)
             {
+        HtmlGenericControl productDiv = new HtmlGenericControl("div");
+        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
+                productDiv.Attributes["class"] = "product-card";
 
-                HtmlGenericControl myDiv = new HtmlGenericControl("div");
-                myDiv.ID = "myDiv" + i;
-                myDiv.Attributes["class"] = "myClass";
+             //Building the Header row.
+
+                infoDiv.Attributes["class"] = "product-info";
+                imgDiv.Attributes["class"] = "product-image";
                 Image img = new Image();
-                img.ImageUrl = item.ImagePath;
-                Label l1 = new Label();
-                l1.Text =
-                "</br> Product Name: " + item.Title.ToString() +
-                "</br> Product Price: " + item.Price.ToString() +
-                "</br> Product Amount: " ;
+                img.ImageUrl = item.ImagePath.ToString().Substring(1);
+                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + item.Title + "</h5><h5>Category: " + getCatName(Convert.ToInt32(item.CategoryId)) + "</h5>";
+                infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
+
                 DDL = new DropDownList();
-                for (int j = 0; j < item.Inventory; j++)
+
+                for (int j = 0; j <= item.Inventory; j++)
                 {
-                    ListItem li = new ListItem(j.ToString(),j.ToString());
+                    ListItem li = new ListItem(j.ToString(), j.ToString());
                     DDL.Items.Add(li);
                     DDL.DataBind();
                 }
                 DDL.ID = item.ProductId.ToString();
                 DDL.SelectedValue = "1";
                 DDL.SelectedIndexChanged += new EventHandler(this.ddl_IndexChange);
-                //cb = new CheckBox();
-                //cb.Checked = true;
-                //cb.AutoPostBack = true;
-                //cb.ID = item.Id.ToString();
-                //cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged); //cb_CheckedChanged;
-                //if (item.Inventory == 0)
-                //{
-                //    cb.Enabled = false;
-                //}
-
-                myDiv.Controls.Add(img);
-                myDiv.Controls.Add(l1);
-                //myDiv.Controls.Add(cb);
-                cartPH.Controls.Add(myDiv);
-                i++;
-
-
+                infoDiv.Controls.Add(DDL);
+                productDiv.Controls.Add(infoDiv);
+               cartPH.Controls.Add(productDiv);
             }
-
-
-            //foreach (var item in newList)
-            //{
-            //    totalPrice += item.Price;
-            //}
-            //priceLBL.Text = "</br></br></br>Total Price:" + totalPrice+ "</br></br></br>";
-
 
         }
 
-        //}
-        //void cb_CheckedChanged(object sender, EventArgs e)
-        //    {
-        //    Label2.Text = "השינוי נשמר";
-        //    return;
-        //            CheckBox Cbox = ((CheckBox)sender);
-        //            int cbid = Convert.ToInt32(Cbox.ID);
 
-        //    if (!Cbox.Checked)
-        //    {
-        //        for (int i = newList.Count - 1; i >= 0; i--)
-        //        {
-        //            if (cbid == newList[i].Id)
-        //            {
-        //                newList.RemoveAt(i);
-        //                totalPrice -= newList[i].Price;
-        //                priceLBL.Text = "Total Price:" + totalPrice;
-        //            }
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        foreach (var item in newList)
-        //        {
-        //            if (cbid == item.Id)
-        //            {
-        //                newList.Add(item);
-        //               totalPrice += item.Price;
-        //               priceLBL.Text = "Total Price:" + totalPrice;
-
-        //            }
-        //        }
-        //    }
-
-        //           // FinalList = newList;
-
-
-        //}
-
-
-        //private List<Product> getCheckedCBid(List<Product> newList)
+        //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
+        //cb = new CheckBox();
+        //cb.Checked = true;
+        //cb.AutoPostBack = true;
+        //cb.ID = item.Id.ToString();
+        //cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged); //cb_CheckedChanged;
+        //if (item.Inventory == 0)
         //{
-        //    List<Product> idList = new List<Product>();
-        //    foreach (var item in newList)
-        //    {
-        //        CheckBox cb = (CheckBox)cartPH.FindControl(item.Id.ToString());
-        //        if (cb != null)
-        //        {
-        //            if (cb.Checked == true)
-        //                idList.Add(item);
-        //        }
-        //    }
-
-        //    return idList;
+        //    cb.Enabled = false;
         //}
 
 
 
 
-        //protected void confirmbtn_Click(object sender, EventArgs e)
+
+
+
+
+        //foreach (var item in newList)
         //{
-        //    Page_PreRender(sender, e);
-        //     Session["MyCartpayment"] = totalPrice;
-        //    Response.Redirect("CartPayment.aspx");
+        //    totalPrice += item.Price;
         //}
+        //priceLBL.Text = "</br></br></br>Total Price:" + totalPrice+ "</br></br></br>";
+
 
     }
+    public string getCatName(int id)
+    {
+        dbs.Name = "*";
+        dbs.Table = "category";
+        //Populating a DataTable from database.
+        DataTable dt = dbs.readproductNDataBase();
+
+
+        foreach (DataRow row in dt.Rows)
+        {
+            if (id == (Convert.ToInt32(row["category_id"])))
+            {
+                return row["category_name"].ToString();
+            }
+        }
+        return null;
+    }
+    //}
+    //void cb_CheckedChanged(object sender, EventArgs e)
+    //    {
+    //    Label2.Text = "השינוי נשמר";
+    //    return;
+    //            CheckBox Cbox = ((CheckBox)sender);
+    //            int cbid = Convert.ToInt32(Cbox.ID);
+
+    //    if (!Cbox.Checked)
+    //    {
+    //        for (int i = newList.Count - 1; i >= 0; i--)
+    //        {
+    //            if (cbid == newList[i].Id)
+    //            {
+    //                newList.RemoveAt(i);
+    //                totalPrice -= newList[i].Price;
+    //                priceLBL.Text = "Total Price:" + totalPrice;
+    //            }
+    //        }
+
+    //    }
+    //    else
+    //    {
+    //        foreach (var item in newList)
+    //        {
+    //            if (cbid == item.Id)
+    //            {
+    //                newList.Add(item);
+    //               totalPrice += item.Price;
+    //               priceLBL.Text = "Total Price:" + totalPrice;
+
+    //            }
+    //        }
+    //    }
+
+    //           // FinalList = newList;
+
+
+    //}
+
+
+    //private List<Product> getCheckedCBid(List<Product> newList)
+    //{
+    //    List<Product> idList = new List<Product>();
+    //    foreach (var item in newList)
+    //    {
+    //        CheckBox cb = (CheckBox)cartPH.FindControl(item.Id.ToString());
+    //        if (cb != null)
+    //        {
+    //            if (cb.Checked == true)
+    //                idList.Add(item);
+    //        }
+    //    }
+
+    //    return idList;
+    //}
+
+
+
+
+    //protected void confirmbtn_Click(object sender, EventArgs e)
+    //{
+    //    Page_PreRender(sender, e);
+    //     Session["MyCartpayment"] = totalPrice;
+    //    Response.Redirect("CartPayment.aspx");
+    //}
+
+
 
     private void ddl_IndexChange(object sender, EventArgs e)
     {
@@ -192,5 +221,5 @@ public partial class Cart : System.Web.UI.Page
 
         }
     }
-}   
+   }
     
