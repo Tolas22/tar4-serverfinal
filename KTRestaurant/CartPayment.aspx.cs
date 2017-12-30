@@ -13,7 +13,7 @@ public partial class CartPayment : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-            total =  (double)(Session["MyCartpayment"]);
+        total =  (double)(Session["MyCartpayment"]);
         Label1.Text = "</br>סכום לתשלום: " + total;
 
     }
