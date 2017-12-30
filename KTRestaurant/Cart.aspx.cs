@@ -111,9 +111,9 @@ public partial class Cart : System.Web.UI.Page
 
         foreach (var item in newList)
         {
-            totalPrice += item.Price;
+            totalprice += item.Price;
         }
-        priceLBL.Text = "</br></br></br>Total Price:" + totalPrice + "</br></br></br>";
+        priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
 
 
     }
