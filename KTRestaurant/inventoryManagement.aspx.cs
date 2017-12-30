@@ -78,8 +78,13 @@ public partial class inventoryManagement : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int cat_id = Convert.ToInt32(e.Row.Cells[1].Text);
-            e.Row.Cells[2].Text = getCatName(cat_id);
+   
+                int catIndex = GetColumnIndexByName(GridView1, "Category Name");
+                int catidIndex = GetColumnIndexByName(GridView1, "category_id");
+                string check = e.Row.Cells[catidIndex].Text;
+                int cat_id = Convert.ToInt32(e.Row.Cells[catidIndex].Text);
+                e.Row.Cells[catIndex].Text = getCatName(cat_id);
+            
         }
     }
 }
