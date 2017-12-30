@@ -15,7 +15,7 @@ public partial class Cart : System.Web.UI.Page
     DropDownList DDL;
     DBservices dbs = new DBservices();
 
-    double totalprice;
+    double totalprice = 0;
     //    CheckBox cb;
 
 
