@@ -24,7 +24,7 @@ public partial class addCategory : System.Web.UI.Page
 
         foreach (GridViewRow item in catGRD.Rows)
         {
-            if (cnameTB.Text == item.Cells[0].Text)
+            if (cnameTB.Text == item.Cells[1].Text)
             {
                 args.IsValid = false;
                 Response.Write("new one please");
