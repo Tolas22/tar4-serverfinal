@@ -14,8 +14,8 @@ public partial class Cart : System.Web.UI.Page
     List<Product> FinalList;
     DropDownList DDL;
     DBservices dbs = new DBservices();
-
     double totalprice = 0;
+    double itemTtlP = 0;
     //    CheckBox cb;
 
 
@@ -90,7 +90,12 @@ public partial class Cart : System.Web.UI.Page
 
         }
 
-
+        foreach (var item in newList)
+        {
+            itemTtlP = item.Price * DDL.SelectedValue;
+            totalprice += ;
+        }
+        priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
         //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
         //cb = new CheckBox();
         //cb.Checked = true;
@@ -101,20 +106,6 @@ public partial class Cart : System.Web.UI.Page
         //{
         //    cb.Enabled = false;
         //}
-
-
-
-
-
-
-
-
-        foreach (var item in newList)
-        {
-            totalPrice += item.Price;
-        }
-        priceLBL.Text = "</br></br></br>Total Price:" + totalPrice + "</br></br></br>";
-
 
     }
     public string getCatName(int id)
@@ -219,6 +210,7 @@ public partial class Cart : System.Web.UI.Page
                     Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
                     return;
                 }
+
                 totalprice += Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"]);
         }
 
