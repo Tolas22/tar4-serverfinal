@@ -30,6 +30,7 @@
        <asp:Label ID="Label2" runat="server" Text="Welcome"></asp:Label>
     <div>
         <asp:PlaceHolder ID="cartPH" runat="server"></asp:PlaceHolder>
+        <asp:PlaceHolder ID="cartPH1" runat="server"></asp:PlaceHolder>
         <asp:Label ID="priceLBL" runat="server" Text="Label"></asp:Label>
         </div>
        <div style="text-align:center;">

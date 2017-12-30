@@ -49,27 +49,26 @@ public partial class Cart : System.Web.UI.Page
         //}
 
 
-        newList = (List<Product>)(Session["MyCart"]);
         //ProductList p = new ProductList();
-        StringBuilder html = new StringBuilder();
-        HtmlGenericControl productDiv = new HtmlGenericControl("div");
-        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
-        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
+     
         if (Session["MyCart"] != null)
         {
+        newList = (List<Product>)(Session["MyCart"]);
 
             foreach (var item in newList)
             {
+        HtmlGenericControl productDiv = new HtmlGenericControl("div");
+        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
                 productDiv.Attributes["class"] = "product-card";
 
-
-                //Building the Header row.
+             //Building the Header row.
 
                 infoDiv.Attributes["class"] = "product-info";
                 imgDiv.Attributes["class"] = "product-image";
                 Image img = new Image();
                 img.ImageUrl = item.ImagePath.ToString().Substring(1);
-                infoDiv.InnerHtml += "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + item.Title + "</h5><h5>Category: " + getCatName(Convert.ToInt32(item.CategoryId)) + "</h5>";
+                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + item.Title + "</h5><h5>Category: " + getCatName(Convert.ToInt32(item.CategoryId)) + "</h5>";
                 infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
 
                 DDL = new DropDownList();
@@ -84,11 +83,11 @@ public partial class Cart : System.Web.UI.Page
                 DDL.SelectedValue = "1";
                 DDL.SelectedIndexChanged += new EventHandler(this.ddl_IndexChange);
                 infoDiv.Controls.Add(DDL);
+                productDiv.Controls.Add(infoDiv);
+               cartPH.Controls.Add(productDiv);
             }
-        }
 
-                cartPH.Controls.Add(infoDiv);
-                cartPH.Controls.Add(productDiv);
+        }
 
 
         //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >

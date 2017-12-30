@@ -37,38 +37,34 @@ public partial class ShowProducts : System.Web.UI.Page
         dbs.Name = "*";
         dbs.Table = "productN";
         DataTable dt = dbs.readproductNDataBase();
-        int cbid = Convert.ToInt32(Cbox.ID); 
+        int cbid = Convert.ToInt32(Cbox.ID);
+        Product LP = new Product();
 
         if (Cbox.Checked)
         {
             foreach (DataRow item in dt.Rows)
             {
-                if ((item["title"]).ToString() == "Sea Bass")
-                {
-                    item["price"] = ChoosenDiscount;
-                }
                 if (cbid == Convert.ToInt32(item["product_id"]))
                 {
-                    p.ProductId = Convert.ToInt32(item["product_id"]);
-                    p.CategoryId = Convert.ToInt32(item["category_id"]);
-                    p.Title = item["title"].ToString();
-                    p.ImagePath = item["img_url"].ToString();
-                    p.Inventory = Convert.ToInt32(item["inventory"]);
-                    newList.Add(p);
-                }
-            }
-        }
-        else
-        {
-            // remove item from list
-            foreach (DataRow item in dt.Rows)
-            {
-                if (cbid == p.ProductId)
+                    LP.ProductId = Convert.ToInt32(item["product_id"]);
+                    LP.CategoryId = Convert.ToInt32(item["category_id"]);
+                    LP.Title = item["title"].ToString();
+                    LP.ImagePath = item["img_url"].ToString();
+                if ((item["title"]).ToString() == "Sea Bass")
                 {
-                    newList.Remove(p);
+                    LP.Price = ChoosenDiscount;
+                }
+                    else
+                    {
+
+                        LP.Price = Convert.ToInt32(item["price"].ToString());
+                    }
+                    LP.Inventory = Convert.ToInt32(item["inventory"]);
+                    newList.Add(LP);
                 }
             }
         }
+
     }
 
     public void CreateProductDiscount()
