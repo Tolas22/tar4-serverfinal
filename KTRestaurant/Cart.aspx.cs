@@ -15,7 +15,7 @@ public partial class Cart : System.Web.UI.Page
     DropDownList DDL;
     DBservices dbs = new DBservices();
 
-    //    double totalPrice ;
+    double totalprice;
     //    CheckBox cb;
 
 
@@ -81,11 +81,12 @@ public partial class Cart : System.Web.UI.Page
                 }
                 DDL.ID = item.ProductId.ToString();
                 DDL.SelectedValue = "1";
-                DDL.SelectedIndexChanged += new EventHandler(this.ddl_IndexChange);
+                DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
                 infoDiv.Controls.Add(DDL);
                 productDiv.Controls.Add(infoDiv);
                cartPH.Controls.Add(productDiv);
             }
+          
 
         }
 
@@ -108,11 +109,11 @@ public partial class Cart : System.Web.UI.Page
 
 
 
-        //foreach (var item in newList)
-        //{
-        //    totalPrice += item.Price;
-        //}
-        //priceLBL.Text = "</br></br></br>Total Price:" + totalPrice+ "</br></br></br>";
+        foreach (var item in newList)
+        {
+            totalPrice += item.Price;
+        }
+        priceLBL.Text = "</br></br></br>Total Price:" + totalPrice + "</br></br></br>";
 
 
     }
@@ -215,11 +216,20 @@ public partial class Cart : System.Web.UI.Page
         {
                 if (Convert.ToInt32(ddl.SelectedValue) > Convert.ToInt32(row["inventory"]))
                 {
-
+                    Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
+                    return;
                 }
+                totalprice += Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"]);
         }
 
         }
     }
-   }
+
+    protected void payBTN_Click(object sender, EventArgs e)
+    {
+
+
+        Session["MyCartpayment"] = totalprice;
+    }
+}
     
