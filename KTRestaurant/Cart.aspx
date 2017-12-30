@@ -2,7 +2,28 @@
   <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
       <link href="StyleSheet2.css" rel="stylesheet" />
       <link href="StyleSheet.css" rel="stylesheet" />
+      <style>
+        .form-control {
+    display: block;
+    width: 70px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+      </style>
        </asp:Content>
+
 
    <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldercustomer" Runat="Server">
                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
@@ -12,7 +33,5 @@
         <asp:Label ID="priceLBL" runat="server" Text="Label"></asp:Label>
         </div>
        <div style="text-align:center;">
-        <%--<asp:Button ID="confirmbtn" runat="server" class="button bottun4" Text="אישור ומעבר לתשלום" OnClick="confirmbtn_Click" />--%>
     </div>
-
-         </asp:Content>
+        </asp:Content>

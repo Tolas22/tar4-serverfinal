@@ -175,7 +175,7 @@ public partial class ShowProducts : System.Web.UI.Page
                 infoDiv.Attributes["class"] = "product-info";
                 imgDiv.Attributes["class"] = "product-image";
                 Image img = new Image();
-                img.ImageUrl = row["img_url"].ToString().Substring(1);
+                img.ImageUrl = row["img_url"].ToString().Substring(0);
                 infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>";
 
                 if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
