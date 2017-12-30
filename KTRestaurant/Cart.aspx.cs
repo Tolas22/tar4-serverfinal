@@ -90,6 +90,7 @@ public partial class Cart : System.Web.UI.Page
 
         }
 
+<<<<<<< HEAD
         foreach (var item in newList)
         {
             itemTtlP = item.Price * DDL.SelectedValue;
@@ -97,6 +98,9 @@ public partial class Cart : System.Web.UI.Page
         }
         priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
         //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
+=======
+
+>>>>>>> 60da362dfca5c8c45e27d7c25f220698c80d8530
         //cb = new CheckBox();
         //cb.Checked = true;
         //cb.AutoPostBack = true;
@@ -107,6 +111,18 @@ public partial class Cart : System.Web.UI.Page
         //    cb.Enabled = false;
         //}
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+>>>>>>> 60da362dfca5c8c45e27d7c25f220698c80d8530
     }
     public string getCatName(int id)
     {
