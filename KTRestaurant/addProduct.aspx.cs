@@ -12,18 +12,12 @@ public partial class addProduct : System.Web.UI.Page
         Product p = new Product();
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        if (IsPostBack)
-        {
-            DDlCat.Items.Insert(0,new ListItem( "Choose Category Name","0"));
-            DDlCat.Text = DDlCat.SelectedValue;
-            DDlCat.DataBind();
+    
+        DDlCat.DataBind();
+        DDlCat.Items.Insert(0, new ListItem("Choose Category Name", "0"));
 
-        }
     }
-
-
-
+ 
     protected void addBTN_Click(object sender, EventArgs e)
     {
         
@@ -120,10 +114,7 @@ public partial class addProduct : System.Web.UI.Page
 
     }
 
-    protected void DDlCat_SelectedIndexChanged(object sender, EventArgs e)
-    {
-     
-    }
+
 
     public string getCatName(int id)
     {
