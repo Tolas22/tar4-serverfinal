@@ -22,19 +22,15 @@ public partial class Cart : System.Web.UI.Page
     //    CheckBox cb;
 
 
-    //protected void Page_PreRender(object sender, EventArgs e)
-    //{ // PreRender is called when it still "sees" the previous controls
+    protected void Page_PreRender(object sender, EventArgs e)
+    { // PreRender is called when it still "sees" the previous controls
 
-    //    List<Product> idList = getCheckedCBid(newList); // get the id's of the checked checkboxes
-    //    foreach (var item in idList)
-    //    {
-    //        totalPrice += item.Price;
-    //    }
-    //    priceLBL.Text = "</br></br></br>Total Price:" + totalPrice + "</br></br></br>";
+
+        priceLBL.Text = "Total Price: " + CalculateTotalPrice().ToString();
 
 
 
-    //}
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         //if (Request.Cookies["firstCartVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
@@ -59,7 +55,10 @@ public partial class Cart : System.Web.UI.Page
         newList = (List<Product>)(Session["MyCart"]);
 
             CreateCart();
+            if (!IsPostBack)
+            {
            priceLBL.Text = "Total Price: " + CalculateTotalPrice().ToString();
+            }
           
 
         }
@@ -272,6 +271,7 @@ public partial class Cart : System.Web.UI.Page
 
 
             }
+      
     }
 
     protected void payBTN_Click(object sender, EventArgs e)
