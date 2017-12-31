@@ -25,7 +25,7 @@
         <asp:CustomValidator id="CustomValidator1" runat="server" ForeColor="Red" AutoPostBack="true"  EnableViewState="False"  ViewStateMode="Disabled" ErrorMessage="please click a day"  OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
        <br />
       Credit   <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" OnCheckedChanged="ChBCredit_CheckedChanged" />
-      Phone   <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
+      Cash   <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
    
      <asp:PlaceHolder ID="PH" runat="server"></asp:PlaceHolder>
   <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"

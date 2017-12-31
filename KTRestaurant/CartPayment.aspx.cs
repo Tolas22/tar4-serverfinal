@@ -7,14 +7,14 @@ using System.Web.UI.WebControls;
 
 public partial class CartPayment : System.Web.UI.Page
 {
-    double total;
+    string total;
     CustomValidator Cvalidator = new CustomValidator();
     TextBox TB2 = new TextBox();
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        total =  (double)(Session["MyCartpayment"]);
-        Label1.Text = "</br>סכום לתשלום: " + total;
+        total =  (string)(Session["totalPrice"]);
+        Label1.Text =  total;
 
     }
 

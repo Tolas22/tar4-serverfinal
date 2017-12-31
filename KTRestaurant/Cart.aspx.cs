@@ -10,27 +10,28 @@ using System.Web.UI.WebControls;
 
 public partial class Cart : System.Web.UI.Page
 {
+    List<Sales> SalesList=new List<Sales>();
     List<Product> newList;
     List<Product> FinalList;
     DropDownList DDL;
+    List<DropDownList> DDLList = new List<DropDownList>();
     DBservices dbs = new DBservices();
     double totalprice = 0;
     double itemTtlP = 0;
     Label ipriceLBL;
-    List<Label> lblList = new List<Label>();
+    List<Label> lblList;
     int QNT = 0;
     //    CheckBox cb;
 
 
-    protected void Page_PreRender(object sender, EventArgs e)
-    { // PreRender is called when it still "sees" the previous controls
-
-
-        priceLBL.Text = "Total Price: " + CalculateTotalPrice().ToString();
+    //protected void Page_PreRender(object sender, EventArgs e)
+    //{ // PreRender is called when it still "sees" the previous controls
 
 
 
-    }
+
+
+    //}
     protected void Page_Load(object sender, EventArgs e)
     {
         //if (Request.Cookies["firstCartVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
@@ -57,7 +58,7 @@ public partial class Cart : System.Web.UI.Page
             CreateCart();
             if (!IsPostBack)
             {
-           priceLBL.Text = "Total Price: " + CalculateTotalPrice().ToString();
+           priceLBL.Text = "Total Price: " + CalculateTotalPrice();
             }
           
 
@@ -100,18 +101,23 @@ public partial class Cart : System.Web.UI.Page
 
     }
 
-    private int CalculateTotalPrice()
+    private string CalculateTotalPrice()
     {
         int updateTotal = 0;
+        
         foreach (Label item in lblList)
         {
             updateTotal += Convert.ToInt32(item.Text);
         }
-        return updateTotal;
+        return updateTotal.ToString();
     }
 
     void CreateCart()
     {
+        lblList = new List<Label>();
+    
+
+        
         foreach (var item in newList)
         {
             HtmlGenericControl productDiv = new HtmlGenericControl("div");
@@ -129,6 +135,7 @@ public partial class Cart : System.Web.UI.Page
             infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
 
             DDL = new DropDownList();
+            
             DDL.ID = item.Title;
 
             DDL.AutoPostBack = true;
@@ -145,9 +152,25 @@ public partial class Cart : System.Web.UI.Page
             {
                 DDL.SelectedValue = "1";
                 ipriceLBL.Text = item.Price.ToString();
+                lblList.Add(ipriceLBL);
+                Session["MyCartpayment"] = lblList;
             }
-            lblList.Add(ipriceLBL);
+            else
+            {
+                lblList = (List<Label>)(Session["MyCartpayment"]);
+
+                foreach (Label lbl in lblList)
+                {
+                    if (ipriceLBL.ID == lbl.ID)
+                    {
+                        ipriceLBL.Text = lbl.Text;
+                       
+                    }
+
+                }
+            }
             DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
+            DDLList.Add(DDL);
             infoDiv.Controls.Add(DDL);
             infoDiv.Controls.Add(ipriceLBL);
             productDiv.Controls.Add(infoDiv);
@@ -172,72 +195,7 @@ public partial class Cart : System.Web.UI.Page
         }
         return null;
     }
-    //}
-    //void cb_CheckedChanged(object sender, EventArgs e)
-    //    {
-    //    Label2.Text = "השינוי נשמר";
-    //    return;
-    //            CheckBox Cbox = ((CheckBox)sender);
-    //            int cbid = Convert.ToInt32(Cbox.ID);
-
-    //    if (!Cbox.Checked)
-    //    {
-    //        for (int i = newList.Count - 1; i >= 0; i--)
-    //        {
-    //            if (cbid == newList[i].Id)
-    //            {
-    //                newList.RemoveAt(i);
-    //                totalPrice -= newList[i].Price;
-    //                priceLBL.Text = "Total Price:" + totalPrice;
-    //            }
-    //        }
-
-    //    }
-    //    else
-    //    {
-    //        foreach (var item in newList)
-    //        {
-    //            if (cbid == item.Id)
-    //            {
-    //                newList.Add(item);
-    //               totalPrice += item.Price;
-    //               priceLBL.Text = "Total Price:" + totalPrice;
-
-    //            }
-    //        }
-    //    }
-
-    //           // FinalList = newList;
-
-
-    //}
-
-
-    //private List<Product> getCheckedCBid(List<Product> newList)
-    //{
-    //    List<Product> idList = new List<Product>();
-    //    foreach (var item in newList)
-    //    {
-    //        CheckBox cb = (CheckBox)cartPH.FindControl(item.Id.ToString());
-    //        if (cb != null)
-    //        {
-    //            if (cb.Checked == true)
-    //                idList.Add(item);
-    //        }
-    //    }
-
-    //    return idList;
-    //}
-
-
-
-
-    //protected void confirmbtn_Click(object sender, EventArgs e)
-    //{
-    //    Page_PreRender(sender, e);
-    //     Session["MyCartpayment"] = totalPrice;
-    //    Response.Redirect("CartPayment.aspx");
-    //}
+   
 
 
 
@@ -257,16 +215,14 @@ public partial class Cart : System.Web.UI.Page
                     Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
                     return;
                 }
+                lblList = (List<Label>)(Session["MyCartpayment"]);
                 foreach (Label label in lblList)
                 {
                     if (label.ID == row["product_id"].ToString())
                     {
                         label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"])).ToString();
                     }
-                    else
-                    {
-                        label.Text = label.Text;
-                    }
+      
                 }
 
         }
@@ -275,14 +231,38 @@ public partial class Cart : System.Web.UI.Page
 
 
             }
-      
+        Session["MyCartpayment"] = lblList;
+        priceLBL.Text = "Total Price: " + CalculateTotalPrice();
+
     }
 
     protected void payBTN_Click(object sender, EventArgs e)
     {
-
-
-        Session["MyCartpayment"] = totalprice;
+        foreach (var item in newList)
+        {
+            Sales sale = new Sales();
+            sale.Productid = item.ProductId;
+            foreach (Label lbl in lblList)
+            {
+                if (sale.Productid == Convert.ToInt32(lbl.ID))
+                {
+                    sale.Totalprice = Convert.ToInt32(lbl.Text);
+                }
+            }
+            foreach (DropDownList ddl in DDLList)
+            {
+                if (item.Title == ddl.ID)
+                {
+                    sale.Amount = Convert.ToInt32(ddl.SelectedValue);
+                }
+            }
+            SalesList.Add(sale);
+        }
+        
+      
+        Session["MyCartpayment"] = SalesList;
+        Session["totalPrice"] = priceLBL.Text;
+        Response.Redirect("CartPayment.aspx");
     }
 }
     
