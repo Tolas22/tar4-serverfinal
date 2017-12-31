@@ -17,7 +17,7 @@ public partial class Cart : System.Web.UI.Page
     double totalprice = 0;
     double itemTtlP = 0;
     Label ipriceLBL;
-    List<Label> lblList;
+    List<Label> lblList = new List<Label>();
     int QNT = 0;
     //    CheckBox cb;
 
@@ -58,47 +58,8 @@ public partial class Cart : System.Web.UI.Page
         {
         newList = (List<Product>)(Session["MyCart"]);
 
-            foreach (var item in newList)
-            {
-        HtmlGenericControl productDiv = new HtmlGenericControl("div");
-        HtmlGenericControl infoDiv = new HtmlGenericControl("div");
-        HtmlGenericControl imgDiv = new HtmlGenericControl("div");
-                productDiv.Attributes["class"] = "product-card";
-
-             //Building the Header row.
-
-                infoDiv.Attributes["class"] = "product-info";
-                imgDiv.Attributes["class"] = "product-image";
-                Image img = new Image();
-                img.ImageUrl = item.ImagePath.ToString().Substring(1);
-                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + item.Title + "</h5><h5>Category: " + getCatName(Convert.ToInt32(item.CategoryId)) + "</h5>";
-                infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
-
-                DDL = new DropDownList();
-                DDL.ID = item.Title;
-        
-                DDL.AutoPostBack = true;
-                ipriceLBL = new Label();
-                ipriceLBL.ID = item.ProductId.ToString();
-
-                if (!IsPostBack)
-                {
-                for (int j = 0; j <= item.Inventory; j++)
-                {
-                    ListItem li = new ListItem(j.ToString(), j.ToString());
-                    DDL.Items.Add(li);
-                    DDL.DataBind();
-                }
-                DDL.SelectedValue = "1";
-                ipriceLBL.Text = item.Price.ToString();
-                }
-                lblList.Add(ipriceLBL); 
-                DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
-                infoDiv.Controls.Add(DDL);
-                infoDiv.Controls.Add(ipriceLBL);
-                productDiv.Controls.Add(infoDiv);
-               cartPH.Controls.Add(productDiv);
-            }
+            CreateCart();
+           priceLBL.Text = "Total Price: " + CalculateTotalPrice().ToString();
           
 
         }
@@ -109,7 +70,7 @@ public partial class Cart : System.Web.UI.Page
         //    itemTtlP = item.Price * DDL.SelectedValue;
         //    totalprice += ;
         //}
-        priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
+
         //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
 
         //cb = new CheckBox();
@@ -137,6 +98,62 @@ public partial class Cart : System.Web.UI.Page
         //priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
 
 
+
+    }
+
+    private int CalculateTotalPrice()
+    {
+        int updateTotal = 0;
+        foreach (Label item in lblList)
+        {
+            updateTotal += Convert.ToInt32(item.Text);
+        }
+        return updateTotal;
+    }
+
+    void CreateCart()
+    {
+        foreach (var item in newList)
+        {
+            HtmlGenericControl productDiv = new HtmlGenericControl("div");
+            HtmlGenericControl infoDiv = new HtmlGenericControl("div");
+            HtmlGenericControl imgDiv = new HtmlGenericControl("div");
+            productDiv.Attributes["class"] = "product-card";
+
+            //Building the Header row.
+
+            infoDiv.Attributes["class"] = "product-info";
+            imgDiv.Attributes["class"] = "product-image";
+            Image img = new Image();
+            img.ImageUrl = item.ImagePath.ToString().Substring(1);
+            infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + item.Title + "</h5><h5>Category: " + getCatName(Convert.ToInt32(item.CategoryId)) + "</h5>";
+            infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
+
+            DDL = new DropDownList();
+            DDL.ID = item.Title;
+
+            DDL.AutoPostBack = true;
+                for (int j = 0; j <= item.Inventory; j++)
+                {
+                    ListItem li = new ListItem(j.ToString(), j.ToString());
+                    DDL.Items.Add(li);
+                    DDL.DataBind();
+                }
+            ipriceLBL = new Label();
+            ipriceLBL.ID = item.ProductId.ToString();
+
+            if (!IsPostBack)
+            {
+                DDL.SelectedValue = "1";
+                ipriceLBL.Text = item.Price.ToString();
+            }
+            lblList.Add(ipriceLBL);
+            DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
+            infoDiv.Controls.Add(DDL);
+            infoDiv.Controls.Add(ipriceLBL);
+            productDiv.Controls.Add(infoDiv);
+            cartPH.Controls.Add(productDiv);
+        }
 
     }
     public string getCatName(int id)
