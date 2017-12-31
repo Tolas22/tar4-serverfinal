@@ -263,6 +263,10 @@ public partial class Cart : System.Web.UI.Page
                     {
                         label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"])).ToString();
                     }
+                    else
+                    {
+                        label.Text = label.Text;
+                    }
                 }
 
         }
