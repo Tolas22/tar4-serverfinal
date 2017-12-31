@@ -16,6 +16,9 @@ public partial class Cart : System.Web.UI.Page
     DBservices dbs = new DBservices();
     double totalprice = 0;
     double itemTtlP = 0;
+    Label ipriceLBL;
+    List<Label> lblList;
+    int QNT = 0;
     //    CheckBox cb;
 
 
@@ -72,17 +75,27 @@ public partial class Cart : System.Web.UI.Page
                 infoDiv.InnerHtml += "<h5>Product Price:" + item.Price + "</h5>";
 
                 DDL = new DropDownList();
+                DDL.ID = item.Title;
+        
+                DDL.AutoPostBack = true;
+                ipriceLBL = new Label();
+                ipriceLBL.ID = item.ProductId.ToString();
 
+                if (!IsPostBack)
+                {
                 for (int j = 0; j <= item.Inventory; j++)
                 {
                     ListItem li = new ListItem(j.ToString(), j.ToString());
                     DDL.Items.Add(li);
                     DDL.DataBind();
                 }
-                DDL.ID = item.ProductId.ToString();
                 DDL.SelectedValue = "1";
+                ipriceLBL.Text = item.Price.ToString();
+                }
+                lblList.Add(ipriceLBL); 
                 DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
                 infoDiv.Controls.Add(DDL);
+                infoDiv.Controls.Add(ipriceLBL);
                 productDiv.Controls.Add(infoDiv);
                cartPH.Controls.Add(productDiv);
             }
@@ -90,17 +103,15 @@ public partial class Cart : System.Web.UI.Page
 
         }
 
-<<<<<<< HEAD
-        foreach (var item in newList)
-        {
-            itemTtlP = item.Price * DDL.SelectedValue;
-            totalprice += ;
-        }
+
+        //foreach (var item in newList)
+        //{
+        //    itemTtlP = item.Price * DDL.SelectedValue;
+        //    totalprice += ;
+        //}
         priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
         //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
-=======
 
->>>>>>> 60da362dfca5c8c45e27d7c25f220698c80d8530
         //cb = new CheckBox();
         //cb.Checked = true;
         //cb.AutoPostBack = true;
@@ -111,8 +122,6 @@ public partial class Cart : System.Web.UI.Page
         //    cb.Enabled = false;
         //}
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -121,8 +130,14 @@ public partial class Cart : System.Web.UI.Page
 
 
 
+        //foreach (var item in newList)
+        //{
+        //    totalprice += item.Price;
+        //}
+        //priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
 
->>>>>>> 60da362dfca5c8c45e27d7c25f220698c80d8530
+
+
     }
     public string getCatName(int id)
     {
@@ -219,18 +234,27 @@ public partial class Cart : System.Web.UI.Page
         DataTable dt = dbs.readproductNDataBase();
         foreach (DataRow row in dt.Rows)
         {
-        if (ddl.ID ==  row["product_id"].ToString())
+        if (ddl.ID ==  row["title"].ToString())
         {
                 if (Convert.ToInt32(ddl.SelectedValue) > Convert.ToInt32(row["inventory"]))
                 {
                     Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
                     return;
                 }
+                foreach (Label label in lblList)
+                {
+                    if (label.ID == row["product_id"].ToString())
+                    {
+                        label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"])).ToString();
+                    }
+                }
 
-                totalprice += Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"]);
         }
 
-        }
+
+
+
+            }
     }
 
     protected void payBTN_Click(object sender, EventArgs e)
