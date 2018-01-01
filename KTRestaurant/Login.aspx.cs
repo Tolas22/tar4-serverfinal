@@ -29,12 +29,15 @@ public partial class Login : System.Web.UI.Page
                 if ((bool)row["cust_type"] == true)
                 {
                     //admin page
+                    Session["adminLogin"] = row["cust_id"];
                     Response.Redirect("inventoryManagement.aspx");
                 }
                 else
                 {
                     //customer page
+                    Session["userLogin"] = row["cust_id"];
                     Response.Redirect("ShowProducts.aspx");
+
                 }
             }
       

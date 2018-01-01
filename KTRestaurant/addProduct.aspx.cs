@@ -12,7 +12,10 @@ public partial class addProduct : System.Web.UI.Page
         Product p = new Product();
     protected void Page_Load(object sender, EventArgs e)
     {
-    
+        if (Session["adminLogin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
         DDlCat.DataBind();
         DDlCat.Items.Insert(0, new ListItem("Choose Category Name", "0"));
 

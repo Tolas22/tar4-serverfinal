@@ -13,7 +13,10 @@ public partial class inventoryManagement : System.Web.UI.Page
         string active; int inventory;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Session["adminLogin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
     protected void editFun(object sender, GridViewUpdatedEventArgs e)
     {
