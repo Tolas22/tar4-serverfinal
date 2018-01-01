@@ -191,7 +191,7 @@ public partial class ShowProducts : System.Web.UI.Page
                 cb.ID = row["product_id"].ToString();
                 //cb.AutoPostBack = true;
                 cb.CheckedChanged += new EventHandler(cb_CheckedChanged);//cb_CheckedChanged;
-                if (Convert.ToInt32(row["inventory"]) == 0)
+                if (Convert.ToInt32(row["inventory"]) <= 0)
                 {
                     cb.Enabled = false;
                 }

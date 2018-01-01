@@ -12,7 +12,6 @@ public partial class CartPayment : System.Web.UI.Page
     CustomValidator Cvalidator = new CustomValidator();
     TextBox TB2 = new TextBox();
     List<Sales> saleslist;
-    Sales sale = new Sales();
     Product p ;
     DBservices dbs = new DBservices();
     protected void Page_Load(object sender, EventArgs e)
@@ -20,10 +19,7 @@ public partial class CartPayment : System.Web.UI.Page
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
-        UpdateInventory();
-
     }
-
     private void UpdateInventory()
     {
         dbs.Name = "*";
@@ -44,12 +40,38 @@ public partial class CartPayment : System.Web.UI.Page
             dbs.update(p);
         }
     }
+    private void InitializeComponent()
+    {
 
+
+        this.pay.Click += new System.EventHandler(this.pay_Click);
+
+
+        this.Load += new System.EventHandler(this.Page_Load);
+
+
+    }
     protected void pay_Click(object sender, EventArgs e)
     {
-       
-        Response.Write("<script>alert('קנייתך הושלמה');</script>");
+        string message = "קנייתך השולמה!";
 
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+        sb.Append("<script type = 'text/javascript'>");
+
+        sb.Append("window.onload=function(){");
+
+        sb.Append("alert('");
+
+        sb.Append(message);
+
+        sb.Append("')};");
+
+        sb.Append("</script>");
+
+        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+        //  Response.Write("<div>alert('קנייתך הושלמה');<div>");
+        UpdateInventory();
     }
     protected void CheckBoxRequired_ServerValidate(object sender, ServerValidateEventArgs e)
     {
@@ -164,7 +186,6 @@ public partial class CartPayment : System.Web.UI.Page
             PH.Controls.Clear();
         }
     }
-
     protected void TZvalidation(object sender, ServerValidateEventArgs args)
     {
 
@@ -239,25 +260,6 @@ public partial class CartPayment : System.Web.UI.Page
             PH.Controls.Clear();
         }
     }
-
-
-
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        if (Page.IsValid)
-        {
-            if (FileUpload1.HasFile)
-            {
-                SaveFile(FileUpload1.PostedFile);
-
-            }
-
-        }
-
-
-
-    }
-
     private void SaveFile(HttpPostedFile file)
     {
         // Specify the path to save the uploaded file to.

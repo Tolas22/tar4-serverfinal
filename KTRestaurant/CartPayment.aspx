@@ -10,8 +10,12 @@
               text-align: center;
           }
       </style>
-       <script src="JavaScript.js"> </script>
+
         <script>
+function myFunction()
+        {
+    alert("קנייתך הושלמה!");
+            }
 
   function CheckBoxRequired_ClientValidate(sender, e) {
         e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
@@ -43,11 +47,8 @@
       <tr>
           <td>
 Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" OnCheckedChanged="ChBCredit_CheckedChanged" />
-  
-   
           </td>
-          <td>Cash 
-        <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
+          <td>Cash <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
  <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"
     OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
     
@@ -67,7 +68,7 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
    </tr>
     <tr>
         <td></td>
-        <td> <asp:Button ID="pay" CssClass="btn" class="button bottun4" runat="server" Text="אישור לתשלום" OnClick="pay_Click" /></td>
+        <td> <asp:Button ID="pay" CssClass="btn" CausesValidation="False" onclick="pay_Click" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
     </tr>
     <tr>
         <td></td>
