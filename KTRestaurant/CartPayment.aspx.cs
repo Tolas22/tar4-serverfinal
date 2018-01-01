@@ -25,20 +25,40 @@ public partial class CartPayment : System.Web.UI.Page
         dbs.Name = "*";
         dbs.Table = "productN";
         int productInv = 0;
-        //Populating a DataTable from database.
-        DataTable dt = dbs.readproductNDataBase();
-        foreach (var sale in saleslist)
+        if (Session["userLogin"] != null )
         {
-            foreach (DataRow row in dt.Rows)
+
+            
+            //Populating a DataTable from database.
+            DataTable dt = dbs.readproductNDataBase();
+            foreach (var sale in saleslist)
             {
-                if (row["product_id"].ToString() == sale.Productid.ToString())
+                foreach (DataRow row in dt.Rows)
                 {
-                    productInv = Convert.ToInt32(row["inventory"]);
+                    if (row["product_id"].ToString() == sale.Productid.ToString())
+                    {
+                        productInv = Convert.ToInt32(row["inventory"]);
+                    }
+                p = new Product(sale.Productid, (productInv - sale.Amount));//אפשר גם לעשות בכפתור התשלום את הכל כבר 
+                sale.Cus_id = (int)Session["userLogin"];
+                if (CHbPhone.Checked == true)
+                {
+                    sale.P_method = "0";
                 }
+                else
+                {
+                    sale.P_method = "1";
+                }
+                sale.Totalprice = Convert.ToDouble( total);
+                Sales s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id);
+                
+                }
+                dbs.update(p);
             }
-            p = new Product(sale.Productid, (productInv - sale.Amount));//אפשר גם לעשות בכפתור התשלום את הכל כבר 
-            dbs.update(p);
+
         }
+
+       
     }
     private void InitializeComponent()
     {
@@ -75,20 +95,16 @@ public partial class CartPayment : System.Web.UI.Page
     }
     protected void CheckBoxRequired_ServerValidate(object sender, ServerValidateEventArgs e)
     {
-        e.IsValid = ChBCredit.Checked;
-    }
-    protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
-    {
+        if (ChBCredit.Checked || CHbPhone.Checked)
+        {
+            e.IsValid = true;
 
-        if (Calendar1.SelectedDate == null || Calendar1.SelectedDate == new DateTime(0001, 1, 1, 0, 0, 0))// not click any date
-            args.IsValid = false;
-
-        else
-            args.IsValid = true;
+        }
+        CheckBoxRequired.ErrorMessage = "must choose payment method";
     }
+
     protected void ChBCredit_CheckedChanged(object sender, EventArgs e)
     {
-        pay.Enabled = ChBCredit.Checked;
         CHbPhone.Checked = false;//only one can be checked
 
         if (ChBCredit.Checked == true)
@@ -242,18 +258,7 @@ public partial class CartPayment : System.Web.UI.Page
         {
 
 
-            Label LBL1 = new Label();
-            LBL1.Text = "Phone Number:";
-            PH.Controls.Add(LBL1);
-            TextBox TXB = new TextBox();
-            TXB.EnableViewState = false;
-            TXB.ID = "TXB";
-            validator2.ControlToValidate = "TXB";
-            validator2.ForeColor = System.Drawing.Color.Red;
-            validator2.Text = "Must Enter Phone Number";
-            PH.Controls.Add(validator2);
 
-            PH.Controls.Add(TXB);
         }
         else
         {
@@ -263,7 +268,8 @@ public partial class CartPayment : System.Web.UI.Page
     private void SaveFile(HttpPostedFile file)
     {
         // Specify the path to save the uploaded file to.
-        string savePath = "C:\\Users\\Kori\\Documents\\GitHub\\tar2Part2\\product-server\\images";
+        string savePath  = Server.MapPath(".") + "/images/";
+
 
         // Get the name of the file to upload.
         string fileName = FileUpload1.FileName;
@@ -306,6 +312,13 @@ public partial class CartPayment : System.Web.UI.Page
         // Call the SaveAs method to save the uploaded
         // file to the specified directory.
         FileUpload1.SaveAs(savePath);
+
+    }
+
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+
+            TextBox1.Text = Calendar1.SelectedDate.ToString();
 
     }
 }

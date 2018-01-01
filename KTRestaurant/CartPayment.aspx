@@ -39,9 +39,6 @@ function myFunction()
        </tr>
        <tr>
            <td> Shipping Date:</td>
-           <td><asp:Calendar ID="Calendar1" runat="server"   ></asp:Calendar>
-        <asp:CustomValidator id="CustomValidator1" runat="server" ForeColor="Red" AutoPostBack="true"  EnableViewState="False"  ViewStateMode="Disabled" ErrorMessage="please click a day"  OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
-      </td>
        </tr>
         
       <tr>
@@ -49,8 +46,12 @@ function myFunction()
 Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" OnCheckedChanged="ChBCredit_CheckedChanged" />
           </td>
           <td>Cash <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
+<<<<<<< HEAD
  <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"  OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
     
+=======
+
+>>>>>>> 6d6cb61a0ad0688dee88396e900c357aa976176d
           </td>
       </tr>
       <tr>
@@ -67,7 +68,6 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
    </tr>
     <tr>
         <td></td>
-        <td> <asp:Button ID="pay" CssClass="btn" CausesValidation="False" onclick="pay_Click" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
     </tr>
     <tr>
         <td></td>
