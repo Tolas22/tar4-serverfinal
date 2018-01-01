@@ -327,6 +327,63 @@ public class DBservices
 
         return command;
     }
+    //--------------------------------------------------------------------
+    // insert a Product
+    //--------------------------------------------------------------------
+    public int insertSale(Sales sale)
+    {
 
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect("productNDBConnectionString"); // create the connection
+        }
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+        }
+
+        String cStr = BuildInsertCommand(sale);      // helper method to build the insert string
+
+        cmd = CreateCommand(cStr, con);             // create the command
+
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            return 0;
+            // write to log
+            throw (ex);
+        }
+
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
+    private String BuildInsertCommand(Sales sale)
+    {
+        String command;
+
+        StringBuilder sb = new StringBuilder();
+        // use a string builder to create the dynamic string
+        sb.AppendFormat("Values('{0}', '{1}' ,'{2}', {3}, {4})", sale.Productid, sale.Totalprice, sale.Amount, sale.P_method, sale.Cus_id);
+        String prefix = "INSERT INTO productN " + "(product_id, total_price, amount, p_method, cust_id) ";
+        command = prefix + sb.ToString();
+
+        return command;
+    }
 
 }
+

@@ -243,7 +243,16 @@ public partial class Cart : System.Web.UI.Page
                 {
                     if (label.ID == row["product_id"].ToString())
                     {
+                        if (Convert.ToInt32(ddl.SelectedValue) >= 5)
+                        {
+                            label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"]) * 0.9).ToString();
+                            discountLBL.Text = "You got a discount of " + (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"]) * 0.1).ToString() + "on " + ddl.ID;
+                        }
+                        else
+                        {
                         label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"])).ToString();
+
+                        }
                     }
 
                 }

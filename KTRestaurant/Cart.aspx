@@ -32,6 +32,7 @@
         <asp:PlaceHolder ID="cartPH" runat="server"></asp:PlaceHolder>
         <asp:PlaceHolder ID="cartPH1" runat="server"></asp:PlaceHolder>
         <asp:Label ID="priceLBL" runat="server" Text=""></asp:Label>
+        <asp:Label ID="discountLBL" runat="server" Text=""></asp:Label>
         <asp:Button ID="payBTN" runat="server" Text="Go to Payment Page" OnClick="payBTN_Click" />
         </div>
        <div style="text-align:center;">

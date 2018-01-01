@@ -12,10 +12,6 @@
       </style>
 
         <script>
-function myFunction()
-        {
-    alert("קנייתך הושלמה!");
-            }
 
   function CheckBoxRequired_ClientValidate(sender, e) {
         e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
@@ -39,6 +35,10 @@ function myFunction()
        </tr>
        <tr>
            <td> Shipping Date:</td>
+           <td><asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"   ></asp:Calendar>
+               <asp:TextBox ID="TextBox1" VISIBLE="false" runat="server"></asp:TextBox>
+               <asp:RequiredFieldValidator ID="calendartxtVLD" runat="server" ErrorMessage="Please Choose a date" ControlToValidate="TextBox1" ></asp:RequiredFieldValidator>
+           </td>
        </tr>
         
       <tr>
@@ -46,12 +46,10 @@ function myFunction()
 Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" OnCheckedChanged="ChBCredit_CheckedChanged" />
           </td>
           <td>Cash <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
-<<<<<<< HEAD
+
  <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"  OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
     
-=======
 
->>>>>>> 6d6cb61a0ad0688dee88396e900c357aa976176d
           </td>
       </tr>
       <tr>
@@ -68,6 +66,7 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
    </tr>
     <tr>
         <td></td>
+        <td> <asp:Button ID="pay" CssClass="btn" OnClick="pay_Click" CausesValidation="false" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
     </tr>
     <tr>
         <td></td>

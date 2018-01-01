@@ -14,6 +14,7 @@ public partial class CartPayment : System.Web.UI.Page
     List<Sales> saleslist;
     Product p ;
     DBservices dbs = new DBservices();
+    Sales s;
     protected void Page_Load(object sender, EventArgs e)
     {
         total =  (string)(Session["totalPrice"]);
@@ -43,17 +44,18 @@ public partial class CartPayment : System.Web.UI.Page
                 sale.Cus_id = (int)Session["userLogin"];
                 if (CHbPhone.Checked == true)
                 {
-                    sale.P_method = "0";
+                    sale.P_method = "False";
                 }
                 else
                 {
-                    sale.P_method = "1";
+                    sale.P_method = "True";
                 }
                 sale.Totalprice = Convert.ToDouble( total);
-                Sales s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id);
+                s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id);
                 
                 }
                 dbs.update(p);
+                dbs.insertSale(s);
             }
 
         }
