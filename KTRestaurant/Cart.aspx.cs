@@ -26,12 +26,33 @@ public partial class Cart : System.Web.UI.Page
 
     //protected void Page_PreRender(object sender, EventArgs e)
     //{ // PreRender is called when it still "sees" the previous controls
+    //    if (IsPostBack)
+    //    {
 
+    //   //     lblList = (List<Label>)Session["MyCartpayment"];
+    //        foreach (var item in newList)
+    //        {
 
+    //            foreach (Label lbl in lblList)
+    //            {
+    //                if (item.ProductId == Convert.ToInt32(lbl.ID))
+    //                {
+    //                    foreach (DropDownList ddl in DDLList)
+    //                    {
+    //                        if (item.Title == ddl.ID)
+    //                        {
+    //                            lbl.Text = (Convert.ToInt32(lbl.Text) * Convert.ToInt32(ddl.SelectedValue)).ToString();
+    //                        }
+    //                    }
 
+    //                }
+    //            }
 
-
-    //}
+    //        }
+    //        //CreateCart();
+    //        Session["MyCartpayment"] = lblList;
+    //    }
+    //    }
     protected void Page_Load(object sender, EventArgs e)
     {
         //if (Request.Cookies["firstCartVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
@@ -54,7 +75,6 @@ public partial class Cart : System.Web.UI.Page
         if (Session["MyCart"] != null)
         {
         newList = (List<Product>)(Session["MyCart"]);
-
             CreateCart();
             if (!IsPostBack)
             {
@@ -115,9 +135,12 @@ public partial class Cart : System.Web.UI.Page
     void CreateCart()
     {
         lblList = new List<Label>();
-    
+        if (IsPostBack)
+        {
 
-        
+        }
+
+
         foreach (var item in newList)
         {
             HtmlGenericControl productDiv = new HtmlGenericControl("div");
@@ -152,27 +175,27 @@ public partial class Cart : System.Web.UI.Page
             {
                 DDL.SelectedValue = "1";
                 ipriceLBL.Text = item.Price.ToString();
-                lblList.Add(ipriceLBL);
+               lblList.Add(ipriceLBL);
                 Session["MyCartpayment"] = lblList;
             }
             else
             {
-                lblList = (List<Label>)(Session["MyCartpayment"]);
 
+                lblList = (List<Label>)(Session["MyCartpayment"]);
                 foreach (Label lbl in lblList)
                 {
                     if (ipriceLBL.ID == lbl.ID)
                     {
                         ipriceLBL.Text = lbl.Text;
-                       
                     }
-
                 }
+ 
             }
+         //   lblList.Add(ipriceLBL);
             DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
             DDLList.Add(DDL);
             infoDiv.Controls.Add(DDL);
-            infoDiv.Controls.Add(ipriceLBL);
+       //    infoDiv.Controls.Add(ipriceLBL);
             productDiv.Controls.Add(infoDiv);
             cartPH.Controls.Add(productDiv);
         }
@@ -222,10 +245,10 @@ public partial class Cart : System.Web.UI.Page
                     {
                         label.Text = (Convert.ToInt32(ddl.SelectedValue) * Convert.ToInt32(row["price"])).ToString();
                     }
-      
+
                 }
 
-        }
+            }
 
 
 

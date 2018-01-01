@@ -224,48 +224,7 @@ public class DBservices
     // Create the SqlCommand
     //---------------------------------------------------------------------------------
 
-    public List<double> getCarPrices()
-    {
-
-        SqlConnection con;
-        List<double> prices = new List<double>();
-
-        try
-        {
-
-            con = connect("productNConnectionString"); // create a connection to the database using the connection String defined in the web config file
-        }
-
-        catch (Exception ex) { 
-        // write to log
-            throw (ex);
-        
-        }
-
-        try
-        {
-            String selectSTR = "SELECT " + Name +"  FROM " + Table;
-
-            SqlCommand cmd = new SqlCommand(selectSTR, con);
-
-            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (dr.Read())
-            {// Read till the end of the data into a row
-                // read first field from the row into the list collection
-                prices.Add(Convert.ToDouble(dr["price"]));
-            }
-
-        }
-        catch (Exception ex)
-        {
-            // write to log
-            throw (ex);
-
-        }
-        return prices;
-    }
-
+   
 
     //--------------------------------------------------------------------
     // Read from the DB into a table
@@ -363,7 +322,7 @@ public class DBservices
         
         StringBuilder sb = new StringBuilder();
         // use a string builder to create the dynamic string
-        String prefix = "UPDATE product SET inventory = " +pdt.Inventory+ ", active = "+ pdt.Active +" Where title = " + pdt.Title ;
+        String prefix = "UPDATE product SET inventory = " +pdt.Inventory+ " Where product_id = " + pdt.ProductId ;
         command = prefix;
 
         return command;

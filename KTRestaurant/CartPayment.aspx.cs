@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,18 +11,45 @@ public partial class CartPayment : System.Web.UI.Page
     string total;
     CustomValidator Cvalidator = new CustomValidator();
     TextBox TB2 = new TextBox();
-
+    List<Sales> saleslist;
+    Sales sale = new Sales();
+    Product p ;
+    DBservices dbs = new DBservices();
     protected void Page_Load(object sender, EventArgs e)
     {
         total =  (string)(Session["totalPrice"]);
+        saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
+        UpdateInventory();
 
+    }
+
+    private void UpdateInventory()
+    {
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        int productInv = 0;
+        //Populating a DataTable from database.
+        DataTable dt = dbs.readproductNDataBase();
+        foreach (var sale in saleslist)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["product_id"].ToString() == sale.Productid.ToString())
+                {
+                    productInv = Convert.ToInt32(row["inventory"]);
+                }
+            }
+            p = new Product(sale.Productid, (productInv - sale.Amount));//אפשר גם לעשות בכפתור התשלום את הכל כבר 
+            dbs.update(p);
+        }
     }
 
     protected void pay_Click(object sender, EventArgs e)
     {
        
         Response.Write("<script>alert('קנייתך הושלמה');</script>");
+
     }
     protected void CheckBoxRequired_ServerValidate(object sender, ServerValidateEventArgs e)
     {

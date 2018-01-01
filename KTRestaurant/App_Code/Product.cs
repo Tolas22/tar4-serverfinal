@@ -22,6 +22,11 @@ public class Product
     {
        
     }
+    public Product(int productId,int inventory)
+    {
+        ProductId = productId;
+        Inventory = inventory;  
+    }
 
     public Product(int categoryId, string title, string imagePath, double price)
     {
