@@ -49,8 +49,7 @@ function myFunction()
 Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" OnCheckedChanged="ChBCredit_CheckedChanged" />
           </td>
           <td>Cash <asp:CheckBox ID="CHbPhone" runat="server" AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled"  OnCheckedChanged="CHbPhone_CheckedChanged" />
- <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"
-    OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
+ <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"  OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
     
           </td>
       </tr>
