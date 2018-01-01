@@ -322,7 +322,7 @@ public class DBservices
         
         StringBuilder sb = new StringBuilder();
         // use a string builder to create the dynamic string
-        String prefix = "UPDATE product SET inventory = " +pdt.Inventory+ " Where product_id = " + pdt.ProductId ;
+        String prefix = "UPDATE productN SET inventory = " +pdt.Inventory+ " Where product_id = " + pdt.ProductId ;
         command = prefix;
 
         return command;
