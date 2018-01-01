@@ -12,6 +12,8 @@ public partial class Login : System.Web.UI.Page
         DataTable dt = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "statusup", "SetDefaultPass('');", true);
+
         if (!IsPostBack)
 
         {

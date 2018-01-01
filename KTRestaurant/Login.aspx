@@ -4,7 +4,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
+<script type="text/javascript">
+       function SetDefaultPass(parameters) {
+           try {
+               document.getElementById('passTB').value = parameters;
+           } catch (e) {
+               alert(e);
+           }
+       }
+   </script>
     <title>Login</title>
   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
