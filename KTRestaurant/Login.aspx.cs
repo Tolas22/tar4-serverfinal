@@ -12,6 +12,20 @@ public partial class Login : System.Web.UI.Page
         DataTable dt = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+
+        {
+
+            if (Request.Cookies["userid"] != null)
+
+                usernameTB.Value = Request.Cookies["userid"].Value;
+
+            if (Request.Cookies["pwd"] != null)
+
+                passTB.Attributes.Add("value", Request.Cookies["pwd"].Value );
+            if (Request.Cookies["userid"] != null && Request.Cookies["pwd"] != null)
+                saveCB.Checked = true;
+        }
     }
 
 
@@ -30,12 +44,26 @@ public partial class Login : System.Web.UI.Page
                 {
                     //admin page
                     Session["adminLogin"] = row["cust_id"];
+                    if (saveCB.Checked)
+                    {
+                        Response.Cookies["userid"].Value = usernameTB.Value;
+                        Response.Cookies["pwd"].Value = passTB.Value;
+                        Response.Cookies["userid"].Expires = DateTime.Now.AddMinutes(1);
+                        Response.Cookies["pwd"].Expires = DateTime.Now.AddMinutes(1);
+                    }
                     Response.Redirect("inventoryManagement.aspx");
                 }
                 else
                 {
                     //customer page
                     Session["userLogin"] = row["cust_id"];
+                    if (saveCB.Checked)
+                    {
+                        Response.Cookies["userid"].Value = usernameTB.Value;
+                        Response.Cookies["pwd"].Value = passTB.Value;
+                        Response.Cookies["userid"].Expires = DateTime.Now.AddMinutes(1);
+                        Response.Cookies["pwd"].Expires = DateTime.Now.AddMinutes(1);
+                    }
                     Response.Redirect("ShowProducts.aspx");
 
                 }
@@ -44,4 +72,6 @@ public partial class Login : System.Web.UI.Page
         }
         wpLBL.Text = "Wrong username or password";
     }
+
+
 }

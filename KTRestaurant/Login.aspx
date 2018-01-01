@@ -23,6 +23,7 @@
 .btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] { filter: none; background-color: #4a77d4; }
 .btn-block { width: 100%; display:block; }
 
+
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
 html { width: 100%; height:100%; overflow:hidden; }
@@ -69,7 +70,7 @@ input {
 	transition: box-shadow .5s ease;
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
-
+#saveLBL {display:inline}
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -80,8 +81,11 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 	<h1>Login</h1>
     <form method="post" runat="server">
     	<input type="text" id="usernameTB" runat="server" name="u" placeholder="Username" required="required" />
-        <input type="password" id="passTB" runat="server" name="p" placeholder="Password" required="required" />
-        <asp:Button id="loginBTN" runat="server" Text="Let me in!" class="btn btn-primary btn-block btn-large" OnClick="loginBTN_Click"></asp:Button>
+        <input type="password" id="passTB" runat="server" name="p" placeholder="Password" required="required"/>
+        <br />
+    <asp:CheckBox ID="saveCB" runat="server"  /> <asp:Label ID="saveLBL" runat="server" Text="Remember Me?" ForeColor="White"></asp:Label>
+       
+         <asp:Button id="loginBTN" runat="server" Text="Let me in!" class="btn btn-primary btn-block btn-large" OnClick="loginBTN_Click"></asp:Button>
         <asp:Label ID="wpLBL" runat="server" Text="" ForeColor="Maroon"></asp:Label>
     </form>
 </div>
@@ -89,6 +93,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
   
 
     <script  src="js/index.js"></script>
+
+
+
+
 
 
 
