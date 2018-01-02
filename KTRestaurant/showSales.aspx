@@ -55,6 +55,7 @@
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="sale_id" HeaderText="sale_id" InsertVisible="False" ReadOnly="True" SortExpression="sale_id" />
                 <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" />
+                <asp:BoundField HeaderText="Product Name" />
                 <asp:BoundField DataField="total_price" HeaderText="total_price" SortExpression="total_price" />
                 <asp:BoundField DataField="amount" HeaderText="amount" SortExpression="amount" />
                 <asp:CheckBoxField DataField="p_method" HeaderText="p_method" SortExpression="p_method" />
