@@ -80,7 +80,7 @@ public partial class CartPayment : System.Web.UI.Page
     }
     protected void pay_Click(object sender, EventArgs e)
     {
-        
+       
         string message = "קנייתך השולמה!";
 
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
