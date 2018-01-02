@@ -15,13 +15,21 @@ public partial class CartPayment : System.Web.UI.Page
     Product p ;
     DBservices dbs = new DBservices();
     Sales s;
+
+    protected void Page_PreRender(object sender, EventArgs e)
+    { // PreRender is called when it still "sees" the previous controls
+        if (IsPostBack)
+        {
+            CheckBoxRequired.Validate();
+
+        }
+
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
-        
-            CheckBoxRequired.Validate();
 
         
         
@@ -107,8 +115,13 @@ public partial class CartPayment : System.Web.UI.Page
         {
             e.IsValid = true;
 
-        }else
+        }
+        else
+        {
+            e.IsValid = false;
         CheckBoxRequired.ErrorMessage = "must choose payment method";
+                
+        }
     }
 
     protected void ChBCredit_CheckedChanged(object sender, EventArgs e)
