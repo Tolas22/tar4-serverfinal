@@ -55,7 +55,7 @@ public partial class showSales : System.Web.UI.Page
     {
         string[] prodcat = new string[2];
         dbs.Name = "*";
-        dbs.Table = "product";
+        dbs.Table = "productN";
         //Populating a DataTable from database.
         DataTable dt = dbs.readproductNDataBase();
 
