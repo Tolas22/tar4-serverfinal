@@ -35,7 +35,7 @@ public partial class showSales : System.Web.UI.Page
             {
                 e.Row.Visible = false;
             }
-
+            
         }
   
     }
@@ -66,6 +66,7 @@ public partial class showSales : System.Web.UI.Page
             {
                 prodcat[0] = row["title"].ToString();
                 prodcat[1] = row["category_id"].ToString();
+                return prodcat;
             }
         }
         return null;

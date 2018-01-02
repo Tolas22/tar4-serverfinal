@@ -11,7 +11,7 @@
 		<div class="sort">
 			<div class="collection-sort">
 				<label>Filter by:</label>
-                <asp:DropDownList ID="fcategoryDDL"  runat="server" DataSourceID="SqlDataSource2" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
+                <asp:DropDownList ID="fcategoryDDL"  runat="server" DataSourceID="SqlDataSource2" AutoPostBack="true" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
                 
 			    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
                 
