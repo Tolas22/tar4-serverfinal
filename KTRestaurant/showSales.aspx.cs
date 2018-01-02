@@ -30,7 +30,7 @@ public partial class showSales : System.Web.UI.Page
         //    string check = e.Row.Cells[catidIndex].Text;
             int prod_id = Convert.ToInt32(e.Row.Cells[prodIndex].Text);
             string[] prodCat = getProductName(prod_id);
-            e.Row.Cells[prodNIndex].Text = prodCat[0];
+            e.Row.Cells[prodNIndex].Text = prodCat[0].ToString();
             if (fcategoryDDL.SelectedValue != "0" && fcategoryDDL.SelectedValue != prodCat[1])
             {
                 e.Row.Visible = false;
@@ -64,7 +64,7 @@ public partial class showSales : System.Web.UI.Page
         {
             if (id == (Convert.ToInt32(row["product_id"])))
             {
-                prodcat[0] = row["product_name"].ToString();
+                prodcat[0] = row["title"].ToString();
                 prodcat[1] = row["category_id"].ToString();
             }
         }
