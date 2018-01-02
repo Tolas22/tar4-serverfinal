@@ -65,7 +65,7 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
    
     <tr>
         <td></td>
-        <td> <asp:Button ID="pay" CssClass="btn" OnClick="pay_Click"  class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
+        <td> <asp:Button ID="pay" CssClass="btn"  OnClick="pay_Click" CausesValidation="false" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
     </tr>
     <tr>
         <td></td>

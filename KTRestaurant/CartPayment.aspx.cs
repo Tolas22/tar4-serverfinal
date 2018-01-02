@@ -15,24 +15,17 @@ public partial class CartPayment : System.Web.UI.Page
     Product p ;
     DBservices dbs = new DBservices();
     Sales s;
-
-    protected void Page_PreRender(object sender, EventArgs e)
-    { // PreRender is called when it still "sees" the previous controls
-        if (IsPostBack)
-        {
-            CheckBoxRequired.Validate();
-
-        }
-
-    }
     protected void Page_Load(object sender, EventArgs e)
     {
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
+        if (IsPostBack)
+        {
+            Page.Validate();
+        }
 
-        
-        
+
     }
     private void UpdateInventory()
     {
@@ -88,6 +81,9 @@ public partial class CartPayment : System.Web.UI.Page
     }
     protected void pay_Click(object sender, EventArgs e)
     {
+        if (Page.IsValid)
+        {
+
        
         string message = "קנייתך השולמה!";
 
@@ -108,6 +104,7 @@ public partial class CartPayment : System.Web.UI.Page
         ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
         //  Response.Write("<div>alert('קנייתך הושלמה');<div>");
         UpdateInventory();
+        }
     }
     protected void CheckBoxRequired_ServerValidate(object sender, ServerValidateEventArgs e)
     {
@@ -128,100 +125,100 @@ public partial class CartPayment : System.Web.UI.Page
     {
         CHbPhone.Checked = false;//only one can be checked
 
-        if (ChBCredit.Checked == true)
-        {
+        //if (ChBCredit.Checked == true)
+        //{
 
 
-            Label LBL1 = new Label();
-            LBL1.Text = "Number Of Payments:";
-            PH.Controls.Add(LBL1);
-            DropDownList DDL = new DropDownList();
-            DDL.EnableViewState = false;
+        //    Label LBL1 = new Label();
+        //    LBL1.Text = "Number Of Payments:";
+        //    PH.Controls.Add(LBL1);
+        //    DropDownList DDL = new DropDownList();
+        //    DDL.EnableViewState = false;
 
-            DDL.ID = "DDL";
-            for (int i = 1; i <= 12; i++)
-            {
-                ListItem li = new ListItem();
-                li.Value = i.ToString();
+        //    DDL.ID = "DDL";
+        //    for (int i = 1; i <= 12; i++)
+        //    {
+        //        ListItem li = new ListItem();
+        //        li.Value = i.ToString();
 
-                DDL.Items.Add(li);
-            }
+        //        DDL.Items.Add(li);
+        //    }
 
-            RequiredFieldValidator validator1 = new RequiredFieldValidator();
-            validator1.ControlToValidate = "DDL";
-            validator1.ForeColor = System.Drawing.Color.Red;
-            validator1.Text = "Must Choose Number Of Payments";
-            PH.Controls.Add(DDL);
-            PH.Controls.Add(validator1);
-
-
-
-            RequiredFieldValidator validator2 = new RequiredFieldValidator();
-
-            Label LBL = new Label();
-            LBL.Text = "Credit Card Number:";
-            PH.Controls.Add(LBL);
-            TextBox TB = new TextBox();
-            TB.ID = "CCTb";
-            TB.EnableViewState = false;
-            PH.Controls.Add(TB);
-            validator2.ControlToValidate = "CCTb";
-            validator2.ForeColor = System.Drawing.Color.Red;
-            validator2.Text = "Must Enter Credit Card Number";
-            PH.Controls.Add(validator2);
+        //    RequiredFieldValidator validator1 = new RequiredFieldValidator();
+        //    validator1.ControlToValidate = "DDL";
+        //    validator1.ForeColor = System.Drawing.Color.Red;
+        //    validator1.Text = "Must Choose Number Of Payments";
+        //    PH.Controls.Add(DDL);
+        //    PH.Controls.Add(validator1);
 
 
 
-            RequiredFieldValidator validator3 = new RequiredFieldValidator();
+        //    RequiredFieldValidator validator2 = new RequiredFieldValidator();
 
-            Label LBL2 = new Label();
-            LBL2.Text = "T.Z";
-            PH.Controls.Add(LBL2);
-            TB2.ID = "TZTB2";
-            TB2.EnableViewState = false;
-            PH.Controls.Add(TB2);
-            validator3.ControlToValidate = "TZTB2";
-            validator3.ForeColor = System.Drawing.Color.Red;
-            //Cvalidator.ClientValidationFunction = "TZvalidation";
-            validator3.ErrorMessage = "must enter 9 digits";
-            PH.Controls.Add(validator3);
-
-
+        //    Label LBL = new Label();
+        //    LBL.Text = "Credit Card Number:";
+        //    PH.Controls.Add(LBL);
+        //    TextBox TB = new TextBox();
+        //    TB.ID = "CCTb";
+        //    TB.EnableViewState = false;
+        //    PH.Controls.Add(TB);
+        //    validator2.ControlToValidate = "CCTb";
+        //    validator2.ForeColor = System.Drawing.Color.Red;
+        //    validator2.Text = "Must Enter Credit Card Number";
+        //    PH.Controls.Add(validator2);
 
 
 
-            RequiredFieldValidator validator4 = new RequiredFieldValidator();
-            Label LBL3 = new Label();
-            LBL3.Text = "Credit Type";
-            PH.Controls.Add(LBL3);
+        //    RequiredFieldValidator validator3 = new RequiredFieldValidator();
 
-            DropDownList DDL2 = new DropDownList();
-            DDL2.EnableViewState = false;
-            string[] names = new string[] { "master card", "visa", "american express" };
-            DDL2.ID = "DDL2";
-            for (int i = 0; i < names.Length; i++)
-            {
-                ListItem li = new ListItem();
-                li.Value = names[i].ToString();
-
-                DDL2.Items.Add(li);
-            }
-
-            PH.Controls.Add(DDL2);
-            validator4.ControlToValidate = "DDL2";
-            validator4.ForeColor = System.Drawing.Color.Red;
-            validator4.Text = "Must Enter Credit Type";
-
-            PH.Controls.Add(validator4);
+        //    Label LBL2 = new Label();
+        //    LBL2.Text = "T.Z";
+        //    PH.Controls.Add(LBL2);
+        //    TB2.ID = "TZTB2";
+        //    TB2.EnableViewState = false;
+        //    PH.Controls.Add(TB2);
+        //    validator3.ControlToValidate = "TZTB2";
+        //    validator3.ForeColor = System.Drawing.Color.Red;
+        //    //Cvalidator.ClientValidationFunction = "TZvalidation";
+        //    validator3.ErrorMessage = "must enter 9 digits";
+        //    PH.Controls.Add(validator3);
 
 
 
 
-        }
-        else
-        {
-            PH.Controls.Clear();
-        }
+
+        //    RequiredFieldValidator validator4 = new RequiredFieldValidator();
+        //    Label LBL3 = new Label();
+        //    LBL3.Text = "Credit Type";
+        //    PH.Controls.Add(LBL3);
+
+        //    DropDownList DDL2 = new DropDownList();
+        //    DDL2.EnableViewState = false;
+        //    string[] names = new string[] { "master card", "visa", "american express" };
+        //    DDL2.ID = "DDL2";
+        //    for (int i = 0; i < names.Length; i++)
+        //    {
+        //        ListItem li = new ListItem();
+        //        li.Value = names[i].ToString();
+
+        //        DDL2.Items.Add(li);
+        //    }
+
+        //    PH.Controls.Add(DDL2);
+        //    validator4.ControlToValidate = "DDL2";
+        //    validator4.ForeColor = System.Drawing.Color.Red;
+        //    validator4.Text = "Must Enter Credit Type";
+
+        //    PH.Controls.Add(validator4);
+
+
+
+
+        //}
+        //else
+        //{
+        //    PH.Controls.Clear();
+        //}
     }
 
    
