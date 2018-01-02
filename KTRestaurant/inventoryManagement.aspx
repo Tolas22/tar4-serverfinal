@@ -1,7 +1,15 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPageAdmin.master" CodeFile="inventoryManagement.aspx.cs" Inherits="inventoryManagement" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
+      <script type="text/javascript" >
+        function ConfirmOnDelete(item)
+        {
+          if (confirm("Are you sure to delete: " + item + "?")==true)
+            return true;
+          else
+            return false;
+        }
+    </script>
  </asp:Content>
 
 
@@ -25,28 +33,19 @@
              <asp:Parameter Name="inventory" Type="Int32" />
              <asp:Parameter Name="active" Type="Boolean" />
          </InsertParameters>
-         <UpdateParameters>
-          <%--   <asp:Parameter Name="category_id" Type="Int32" />
-             <asp:Parameter Name="title" Type="String" />
-             <asp:Parameter Name="img_url" Type="String" />
-             <asp:Parameter Name="price" Type="Double" />--%>
+         <UpdateParameters >        
              <asp:Parameter Name="inventory" Type="Int32" />
              <asp:Parameter Name="active" Type="Boolean" />
-           <%--  <asp:parameter name="original_product_id" type="int32" />
-             <asp:parameter name="original_category_id" type="int32" />
-             <asp:parameter name="original_title" type="string" />
-             <asp:parameter name="original_img_url" type="string" />
-             <asp:parameter name="original_price" type="double" />--%>
              <asp:Parameter Name="original_inventory" Type="Int32" />
              <asp:Parameter Name="original_active" Type="Boolean" />
          </UpdateParameters>
      </asp:SqlDataSource>
      <br />
-     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id">
+     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" >
          <Columns>
              
-             <asp:CommandField ShowEditButton="True" />
-             
+             <asp:CommandField ShowEditButton="True"   />
+
              <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" InsertVisible="False" />
              <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" ReadOnly="True" />
              <asp:TemplateField HeaderText="Category Name">
@@ -59,7 +58,7 @@
              <asp:ImageField DataImageUrlField="img_url" HeaderText="Image" ReadOnly="True">
              </asp:ImageField>
              <asp:BoundField DataField="inventory" HeaderText="inventory" SortExpression="inventory" />
-             <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
+              <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
          </Columns>
      </asp:GridView>
      <br />

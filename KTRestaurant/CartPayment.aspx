@@ -33,13 +33,7 @@
            <td>Email:</td>
            <td><asp:TextBox  TextMode="Email" ID="Email" runat="server" EnableViewState="False" ViewStateMode="Disabled"   required="required"></asp:TextBox></td>
        </tr>
-       <tr>
-           <td> Shipping Date:</td>
-           <td><asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"   ></asp:Calendar>
-               <asp:TextBox ID="TextBox1" VISIBLE="false" runat="server"></asp:TextBox>
-               <asp:RequiredFieldValidator ID="calendartxtVLD" runat="server" ErrorMessage="Please Choose a date" ControlToValidate="TextBox1" ></asp:RequiredFieldValidator>
-           </td>
-       </tr>
+       
         
       <tr>
           <td>
@@ -56,14 +50,7 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
           <td></td><td>     <asp:PlaceHolder ID="PH" runat="server"></asp:PlaceHolder>
 </td>
       </tr>
-   <tr>
-       <td>  Upload Signiture Picture </td>
-       <td>     <asp:FileUpload ID="FileUpload1"  runat="server"  AutoPostBack="true" EnableViewState="False"  ViewStateMode="Disabled" />
-</td>
-       <td> <asp:Label ID="UploadStatusLabel" runat="server" Text=""></asp:Label>
-     <asp:RequiredFieldValidator  id="rvfu1" runat="server" ForeColor="Red" ErrorMessage="This is a required field!"  
-        ControlToValidate="FileUpload1"></asp:RequiredFieldValidator></td>
-   </tr>
+   
     <tr>
         <td></td>
         <td> <asp:Button ID="pay" CssClass="btn" OnClick="pay_Click" CausesValidation="false" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>

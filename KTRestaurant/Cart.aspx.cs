@@ -123,11 +123,11 @@ public partial class Cart : System.Web.UI.Page
 
     private string CalculateTotalPrice()
     {
-        int updateTotal = 0;
+        double updateTotal = 0;
         
         foreach (Label item in lblList)
         {
-            updateTotal += Convert.ToInt32(item.Text);
+            updateTotal += Convert.ToDouble(item.Text);
         }
         return updateTotal.ToString();
     }

@@ -89,5 +89,10 @@ public partial class inventoryManagement : System.Web.UI.Page
                 e.Row.Cells[catIndex].Text = getCatName(cat_id);
             
         }
+
+        
     }
+
+  
+    
 }

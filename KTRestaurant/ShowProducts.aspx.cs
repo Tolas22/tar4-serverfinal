@@ -19,6 +19,7 @@ public partial class ShowProducts : System.Web.UI.Page
         Product dp = new Product();
         int j = 0;
         Double ChoosenDiscount;
+    Double dis;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,46 +28,11 @@ public partial class ShowProducts : System.Web.UI.Page
             ModalPopupExtender1.Show();
             CreateProductDiscount();
         }
-
         CreateProductList();
+        
     }
 
-     void cb_CheckedChanged(object sender, EventArgs e)
-    {
-        CheckBox Cbox = ((CheckBox)sender);
-        dbs.Name = "*";
-        dbs.Table = "productN";
-        DataTable dt = dbs.readproductNDataBase();
-        int cbid = Convert.ToInt32(Cbox.ID);
-        Product LP = new Product();
-
-        if (Cbox.Checked)
-        {
-            foreach (DataRow item in dt.Rows)
-            {
-                if (cbid == Convert.ToInt32(item["product_id"]))
-                {
-                    LP.ProductId = Convert.ToInt32(item["product_id"]);
-                    LP.CategoryId = Convert.ToInt32(item["category_id"]);
-                    LP.Title = item["title"].ToString();
-                    LP.ImagePath = item["img_url"].ToString();
-                if ((item["title"]).ToString() == "Sea Bass")
-                {
-                    LP.Price = ChoosenDiscount;
-                }
-                    else
-                    {
-
-                        LP.Price = Convert.ToInt32(item["price"].ToString());
-                    }
-                    LP.Inventory = Convert.ToInt32(item["inventory"]);
-                    newList.Add(LP);
-                }
-            }
-        }
-
-    }
-
+    
     public void CreateProductDiscount()
     {
         dbs.Name = "*";
@@ -91,7 +57,7 @@ public partial class ShowProducts : System.Web.UI.Page
                     {
                         realprice = Convert.ToInt32(row["price"]);
                         Product p1 = new Product(Convert.ToInt32(row["category_id"]),row["title"].ToString(), row["img_url"].ToString(), Convert.ToDouble( row["price"]));
-                       row["price"]= p1.getDiscount(row["title"].ToString(), 50);
+                        row["price"]= p1.getDiscount(row["title"].ToString(), 50);
                         ChoosenDiscount = Convert.ToDouble(row["price"]);
 
                     html.Append("<div class='product-card'>");
@@ -126,6 +92,7 @@ public partial class ShowProducts : System.Web.UI.Page
                         row["price"] = p1.getDiscount(row["title"].ToString(), 20);
                         ChoosenDiscount = Convert.ToDouble(row["price"]);
 
+
                         html.Append("<div class='product-card'>");
                         //Building the Header row.
                         html.Append("<div class='product-image'>" + "<img src='" + row["img_url"] + "'/></div>");
@@ -144,11 +111,13 @@ public partial class ShowProducts : System.Web.UI.Page
             discountlbl.Text = "Your first visit was on " + Request.Cookies["firstVisitDate"].Value + "</br> you can get just now 20% off on this product!!!";
 
     }
+            Session["discount"] = ChoosenDiscount;
 
         #endregion
-        html.Clear();
+       // html.Clear();
         
     }
+   
     public void CreateProductList() {
         #region showproduct
         dbs.Name = "*";
@@ -201,14 +170,46 @@ public partial class ShowProducts : System.Web.UI.Page
             productDiv.Controls.Add(infoDiv);
             productsPH.Controls.Add(productDiv);
         }
-
-
-
-        //Append the HTML string to Placeholder.
-        //  productsPH.Controls.AddAt()
         #endregion
 
     }
+    void cb_CheckedChanged(object sender, EventArgs e)
+    {
+        CheckBox Cbox = ((CheckBox)sender);
+        dbs.Name = "*";
+        dbs.Table = "productN";
+        DataTable dt = dbs.readproductNDataBase();
+        int cbid = Convert.ToInt32(Cbox.ID);
+        Product LP = new Product();
+
+        if (Cbox.Checked)
+        {
+                foreach (DataRow item in dt.Rows)
+            {
+              
+                if (cbid == Convert.ToInt32(item["product_id"]))
+                {
+                    LP.ProductId = Convert.ToInt32(item["product_id"]);
+                    LP.CategoryId = Convert.ToInt32(item["category_id"]);
+                    LP.Title = item["title"].ToString();
+                    LP.ImagePath = item["img_url"].ToString();
+                    if ((item["title"]).ToString() == "Sea Bass")
+                    {
+                        LP.Price = (double)Session["discount"];
+                    }
+                    else
+                    {
+
+                        LP.Price = Convert.ToInt32(item["price"].ToString());
+                    }
+                    LP.Inventory = Convert.ToInt32(item["inventory"]);
+                    newList.Add(LP);
+                }
+            }
+        }
+
+    }
+
     public string getCatName(int id)
     {
         dbs.Name = "*";
@@ -227,7 +228,7 @@ public partial class ShowProducts : System.Web.UI.Page
             return null;
     }
     protected void addCartBTN_Click(object sender, EventArgs e)
-    {
+    {   
         Session["MyCart"] = newList;
         Response.Redirect("Cart.aspx");
     }
