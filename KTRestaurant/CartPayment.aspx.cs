@@ -20,8 +20,10 @@ public partial class CartPayment : System.Web.UI.Page
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
-       
-        Page.Validate();
+        
+            CheckBoxRequired.Validate();
+
+        
         
     }
     private void UpdateInventory()
@@ -105,7 +107,7 @@ public partial class CartPayment : System.Web.UI.Page
         {
             e.IsValid = true;
 
-        }
+        }else
         CheckBoxRequired.ErrorMessage = "must choose payment method";
     }
 
