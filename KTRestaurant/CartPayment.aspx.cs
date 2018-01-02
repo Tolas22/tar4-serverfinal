@@ -20,6 +20,9 @@ public partial class CartPayment : System.Web.UI.Page
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
+       
+        Page.Validate();
+        
     }
     private void UpdateInventory()
     {
@@ -75,6 +78,7 @@ public partial class CartPayment : System.Web.UI.Page
     }
     protected void pay_Click(object sender, EventArgs e)
     {
+        
         string message = "קנייתך השולמה!";
 
         System.Text.StringBuilder sb = new System.Text.StringBuilder();

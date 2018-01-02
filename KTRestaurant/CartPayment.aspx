@@ -12,7 +12,20 @@
       </style>
 
         <script>
+           <%-- function CheckMyCheckBox(source, args)
+    {
+        var elem = document.getElementById('<%= ChBCredit.ClientID %>');
+        var elem1 = document.getElementById('<%= CHbPhone.ClientID %>');
 
+        if (elem.checked||elem1.ch)
+        {
+            args.IsValid = true;
+        }
+        else
+        {        
+            args.IsValid = false;
+        }
+    }--%>
   function CheckBoxRequired_ClientValidate(sender, e) {
         e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
     }
@@ -43,7 +56,6 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
 
  <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true"  OnServerValidate="CheckBoxRequired_ServerValidate" ForeColor="Red" ClientValidationFunction="CheckBoxRequired_ClientValidate"></asp:CustomValidator>
     
-
           </td>
       </tr>
       <tr>
@@ -53,7 +65,7 @@ Credit <asp:CheckBox ID="ChBCredit" runat="server" AutoPostBack="true" EnableVie
    
     <tr>
         <td></td>
-        <td> <asp:Button ID="pay" CssClass="btn" OnClick="pay_Click" CausesValidation="false" class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
+        <td> <asp:Button ID="pay" CssClass="btn" OnClick="pay_Click"  class="button bottun4" runat="server" Text="אישור לתשלום"  /></td>
     </tr>
     <tr>
         <td></td>
