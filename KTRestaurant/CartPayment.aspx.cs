@@ -204,50 +204,8 @@ public partial class CartPayment : System.Web.UI.Page
             PH.Controls.Clear();
         }
     }
-    protected void TZvalidation(object sender, ServerValidateEventArgs args)
-    {
 
-        //int[] tznum = new int[9];
-        //int sum = 0;
-        //int tz = Convert.ToInt32(args.Value);
-        //if (args.Value.Length == 9)
-        //{
-        //    args.IsValid = true;
-
-        //    //while (tz>1)
-        //    //{
-        //    //    int i = 0;
-        //    //    tznum[i] = (tz % 10);
-        //    //    tz = tz / 10;
-        //    //    i++;
-        //    //}
-        //    //for (int i = 0; i < tznum.Length ; i++)
-        //    //{
-        //    //    sum += tznum[i];    
-        //    //}
-        //    //if (sum % 7 == tznum[0])
-        //    //{
-        //    //    args.IsValid = true;
-
-        //    //}
-        //    //else
-        //    //{
-        //    //    args.IsValid = false;
-
-        //    //}
-        //}
-        //else
-        //{
-        //    args.IsValid = false;
-        //}    
-        //if (TB2.Text.Length!=9)
-        //{
-        //Cvalidator.ErrorMessage = "must enter 9 digits";
-        //    args.IsValid = false;
-        //}
-        //   args.IsValid = (args.Value.Length ==9);
-
-    }
+   
     protected void CHbPhone_CheckedChanged(object sender, EventArgs e)
     {
         ChBCredit.Checked = false;//only one can be checked
@@ -267,60 +225,5 @@ public partial class CartPayment : System.Web.UI.Page
             PH.Controls.Clear();
         }
     }
-    private void SaveFile(HttpPostedFile file)
-    {
-        // Specify the path to save the uploaded file to.
-        string savePath  = Server.MapPath(".") + "/images/";
 
-
-        // Get the name of the file to upload.
-        string fileName = FileUpload1.FileName;
-
-        // Create the path and file name to check for duplicates.
-        string pathToCheck = savePath + fileName;
-
-        // Create a temporary file name to use for checking duplicates.
-        string tempfileName = "";
-
-        // Check to see if a file already exists with the
-        // same name as the file to upload.        
-        if (System.IO.File.Exists(pathToCheck))
-        {
-            int counter = 2;
-            while (System.IO.File.Exists(pathToCheck))
-            {
-                // if a file with this name already exists,
-                // prefix the filename with a number.
-                tempfileName = counter.ToString() + fileName;
-                pathToCheck = savePath + tempfileName;
-                counter++;
-            }
-
-            fileName = tempfileName;
-
-            // Notify the user that the file name was changed.
-            UploadStatusLabel.Text = "A file with the same name already exists." +
-                "<br />Your file was saved as " + fileName;
-        }
-        else
-        {
-            // Notify the user that the file was saved successfully.
-            UploadStatusLabel.Text = "Your file was uploaded successfully.";
-        }
-
-        // Append the name of the file to upload to the path.
-        savePath += fileName;
-
-        // Call the SaveAs method to save the uploaded
-        // file to the specified directory.
-        FileUpload1.SaveAs(savePath);
-
-    }
-
-    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-    {
-
-            TextBox1.Text = Calendar1.SelectedDate.ToString();
-
-    }
 }

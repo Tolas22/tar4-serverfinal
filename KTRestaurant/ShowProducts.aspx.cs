@@ -228,8 +228,7 @@ public partial class ShowProducts : System.Web.UI.Page
             return null;
     }
     protected void addCartBTN_Click(object sender, EventArgs e)
-    {
-      
+    {   
         Session["MyCart"] = newList;
         Response.Redirect("Cart.aspx");
     }
