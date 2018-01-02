@@ -11,10 +11,10 @@
 		<div class="sort">
 			<div class="collection-sort">
 				<label>Filter by:</label>
-                <asp:DropDownList ID="fcategoryDDL"  runat="server" DataSourceID="SqlDataSource2" AutoPostBack="true" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
+                <asp:DropDownList ID="fcategoryDDL"  runat="server" ViewStateMode="Enabled" DataSourceID="SqlDataSource2" AutoPostBack="true" DataTextField="category_name" DataValueField="category_id" OnSelectedIndexChanged="fcategoryDDL_SelectedIndexChanged"></asp:DropDownList>
                 
 			    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
-                
+               
 			</div>
 			
 		</div>
@@ -60,6 +60,7 @@
                 <asp:BoundField DataField="amount" HeaderText="amount" SortExpression="amount" />
                 <asp:CheckBoxField DataField="p_method" HeaderText="p_method" SortExpression="p_method" />
                 <asp:BoundField DataField="cust_id" HeaderText="cust_id" SortExpression="cust_id" />
+                <asp:BoundField DataField="date" DataFormatString = "{0:dd/MM/yyyy}" HeaderText="purchase date" SortExpression="date" />
             </Columns>
         </asp:GridView>
  </asp:Content>

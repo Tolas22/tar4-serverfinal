@@ -85,14 +85,7 @@ public partial class Cart : System.Web.UI.Page
         }
 
 
-        //foreach (var item in newList)
-        //{
-        //    itemTtlP = item.Price * DDL.SelectedValue;
-        //    totalprice += ;
-        //}
-
-        //  < span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-o602-container"><span class="select2-selection__rendered" id="select2-o602-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role = "presentation" ></ b ></ span ></ span ></ span >
-
+        
         //cb = new CheckBox();
         //cb.Checked = true;
         //cb.AutoPostBack = true;
@@ -135,10 +128,6 @@ public partial class Cart : System.Web.UI.Page
     void CreateCart()
     {
         lblList = new List<Label>();
-        if (IsPostBack)
-        {
-
-        }
 
 
         foreach (var item in newList)
@@ -288,8 +277,8 @@ public partial class Cart : System.Web.UI.Page
                     sale.Amount = Convert.ToInt32(ddl.SelectedValue);
                 }
             }
-  
-            
+
+            sale.Date = DateTime.Now;
             SalesList.Add(sale);
         }
         

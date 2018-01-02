@@ -9,14 +9,25 @@ using System.Web.UI.WebControls;
 public partial class showSales : System.Web.UI.Page
 {
     DBservices dbs = new DBservices();
+    string li;
+    protected void RefreshPage(object o, EventArgs e)
+    {
+        Session["dd1"] = fcategoryDDL.SelectedValue;
+        fcategoryDDL.SelectedIndex = fcategoryDDL.Items.IndexOf(fcategoryDDL.Items.FindByValue(Convert.ToString(Session["dd1"])));
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["adminLogin"] == null)
         {
             Response.Redirect("Login.aspx");
         }
+        if (!Page.IsPostBack)
+        {
+
         fcategoryDDL.DataBind();
         fcategoryDDL.Items.Insert(0, new ListItem("Choose Category Name", "0"));
+        }
+        
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -37,7 +48,6 @@ public partial class showSales : System.Web.UI.Page
             }
             
         }
-  
     }
     public static int GetColumnIndexByName(GridView grid, string name)
     {
@@ -70,5 +80,12 @@ public partial class showSales : System.Web.UI.Page
             }
         }
         return null;
+    }
+
+    protected void fcategoryDDL_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+        Session["selected"]= fcategoryDDL.SelectedItem;
+
     }
 }

@@ -89,7 +89,7 @@ public class Sales
 
         set
         {
-            date = value;
+            date = DateTime.Now;
         }
     }
 
