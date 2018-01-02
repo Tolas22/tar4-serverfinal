@@ -97,7 +97,7 @@
      <br /><br /><br />--%>
    
      <nav class="product-filter ">
-		<h1>Jackets</h1>
+		<h1>Food</h1>
 		
 		<div class="sort">
 			<div class="collection-sort">

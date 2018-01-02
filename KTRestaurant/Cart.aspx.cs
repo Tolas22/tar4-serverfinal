@@ -278,7 +278,7 @@ public partial class Cart : System.Web.UI.Page
             {
                 if (sale.Productid == Convert.ToInt32(lbl.ID))
                 {
-                    sale.Totalprice = Convert.ToInt32(lbl.Text);
+                    sale.Totalprice = Convert.ToDouble(lbl.Text);
                 }
             }
             foreach (DropDownList ddl in DDLList)
@@ -288,6 +288,8 @@ public partial class Cart : System.Web.UI.Page
                     sale.Amount = Convert.ToInt32(ddl.SelectedValue);
                 }
             }
+  
+            
             SalesList.Add(sale);
         }
         

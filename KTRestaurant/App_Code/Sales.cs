@@ -13,6 +13,7 @@ public class Sales
     int amount;
     string p_method;
     int cus_id;
+    DateTime date;
 
     public int Productid
     {
@@ -76,6 +77,19 @@ public class Sales
         set
         {
             cus_id = value;
+        }
+    }
+
+    public DateTime Date
+    {
+        get
+        {
+            return date;
+        }
+
+        set
+        {
+            date = value;
         }
     }
 

@@ -50,7 +50,7 @@ public partial class CartPayment : System.Web.UI.Page
                 {
                     sale.P_method = "True";
                 }
-                sale.Totalprice = Convert.ToDouble( total);
+                    sale.Date = DateTime.Now;
                 s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id);
                 
                 }
