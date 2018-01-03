@@ -15,7 +15,16 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <asp:ContentPlaceHolder id="head" runat="server">
+        <script>
+            (function () {
 
+                $("#cart").on("click", function () {
+                    $(".shopping-cart").fadeToggle("fast");
+                });
+
+            })();
+        </script>
+        <link href="customermaster.css" rel="stylesheet" />
     </asp:ContentPlaceHolder>
     <title></title>
 </head>
@@ -34,7 +43,14 @@
                     <a class="navbar-brand" href="#">
                         <img src="assets/img/ktlogo.png" />
                     </a>
-                  
+                  <ul class="navbar-left">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+    </ul> <!--end navbar-left -->
+
+    <ul class="navbar-right">
+      <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
+    </ul> <!--end navbar-right -->
                 
                 </div>
               
