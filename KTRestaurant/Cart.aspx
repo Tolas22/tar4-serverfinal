@@ -26,9 +26,9 @@
 
 
    <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldercustomer" Runat="Server">
-               <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+               <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
        <asp:Label ID="Label2" runat="server" Text="Welcome"></asp:Label>
-               <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
+            
     <div>
         <asp:PlaceHolder ID="cartPH" runat="server"></asp:PlaceHolder>
         <asp:PlaceHolder ID="cartPH1" runat="server"></asp:PlaceHolder>
