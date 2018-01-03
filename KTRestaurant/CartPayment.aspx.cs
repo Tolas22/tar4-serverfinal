@@ -17,6 +17,10 @@ public partial class CartPayment : System.Web.UI.Page
     Sales s;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["userLogin"] == null || Session["adminLogin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
         total =  (string)(Session["totalPrice"]);
         saleslist = (List<Sales>)(Session["MyCartpayment"]);
         Label1.Text =  total;
@@ -29,6 +33,7 @@ public partial class CartPayment : System.Web.UI.Page
     }
     private void UpdateInventory()
     {
+
         dbs.Name = "*";
         dbs.Table = "productN";
         int productInv = 0;
