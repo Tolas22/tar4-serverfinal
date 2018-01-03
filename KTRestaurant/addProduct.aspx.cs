@@ -29,7 +29,7 @@ public partial class addProduct : System.Web.UI.Page
         int categoryId = Convert.ToInt32(DDlCat.SelectedValue);
         p.CategoryId = categoryId;
         string title = ProductTB.Text;
-        string imagePath = "/images/" + FileUpload1.FileName ;
+        string imagePath = "images/" + FileUpload1.FileName ;
         double price = Convert.ToDouble(PriceTB.Text);
         int inventory = Convert.ToInt32(inventoryTB.Text);
          string active;
@@ -72,7 +72,7 @@ public partial class addProduct : System.Web.UI.Page
     private void SaveFile(HttpPostedFile file)
     {
         // Specify the path to save the uploaded file to.
-        string savePath = Server.MapPath(".") + "/images/";
+        string savePath = Server.MapPath(".") + "images/";
 
         // Get the name of the file to upload.
         string fileName = FileUpload1.FileName;
