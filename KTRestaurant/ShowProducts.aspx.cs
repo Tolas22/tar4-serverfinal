@@ -23,6 +23,10 @@ public partial class ShowProducts : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["userLogin"] == null && Session["adminLogin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
         if (!IsPostBack)
         {
             ModalPopupExtender1.Show();

@@ -24,54 +24,58 @@ public partial class Cart : System.Web.UI.Page
     //    CheckBox cb;
 
 
-    //protected void Page_PreRender(object sender, EventArgs e)
-    //{ // PreRender is called when it still "sees" the previous controls
+    protected void Page_PreRender(object sender, EventArgs e)
+    { // PreRender is called when it still "sees" the previous controls
+        Session["selected"] = DDL.SelectedValue;
     //    if (IsPostBack)
     //    {
 
-    //   //     lblList = (List<Label>)Session["MyCartpayment"];
-    //        foreach (var item in newList)
-    //        {
+        //   //     lblList = (List<Label>)Session["MyCartpayment"];
+        //        foreach (var item in newList)
+        //        {
 
-    //            foreach (Label lbl in lblList)
-    //            {
-    //                if (item.ProductId == Convert.ToInt32(lbl.ID))
-    //                {
-    //                    foreach (DropDownList ddl in DDLList)
-    //                    {
-    //                        if (item.Title == ddl.ID)
-    //                        {
-    //                            lbl.Text = (Convert.ToInt32(lbl.Text) * Convert.ToInt32(ddl.SelectedValue)).ToString();
-    //                        }
-    //                    }
+        //            foreach (Label lbl in lblList)
+        //            {
+        //                if (item.ProductId == Convert.ToInt32(lbl.ID))
+        //                {
+        //                    foreach (DropDownList ddl in DDLList)
+        //                    {
+        //                        if (item.Title == ddl.ID)
+        //                        {
+        //                            lbl.Text = (Convert.ToInt32(lbl.Text) * Convert.ToInt32(ddl.SelectedValue)).ToString();
+        //                        }
+        //                    }
 
-    //                }
-    //            }
+        //                }
+        //            }
 
-    //        }
-    //        //CreateCart();
-    //        Session["MyCartpayment"] = lblList;
-    //    }
-    //    }
+        //        }
+        //        //CreateCart();
+        //        Session["MyCartpayment"] = lblList;
+        //    }
+         }
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Request.Cookies["firstCartVisitDate"] == null)//בודקים האם זהו הביקור הראשון באתר ע"י קוקיז
-        //{
+        if (Session["userLogin"] == null && Session["adminLogin"] == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
+        if (!IsPostBack)
+        {
 
-        //    Label1.Text = "הגעתם לדף העגלה בפעם הראשונה";
+            Label1.Text = "הגעתם לדף העגלה בפעם הראשונה";
 
-        //    Response.Cookies["firstCartVisitDate"].Value = DateTime.Now.ToString();
-        //    Response.Cookies["firstCartVisitDate"].Expires = DateTime.Now.AddSeconds(60);
+          
 
-        //}
-        //else
-        //{
-        //    Label1.Text = "Your Previous Visit was on: " + Request.Cookies["firstCartVisitDate"].Value;
-        //}
+        }
+        else
+        {
+            Label1.Text = "השינוי נשמר";
+            Label2.Text = "";
+        }
 
 
-        //ProductList p = new ProductList();
-     
+
         if (Session["MyCart"] != null)
         {
         newList = (List<Product>)(Session["MyCart"]);
@@ -85,16 +89,6 @@ public partial class Cart : System.Web.UI.Page
         }
 
 
-        
-        //cb = new CheckBox();
-        //cb.Checked = true;
-        //cb.AutoPostBack = true;
-        //cb.ID = item.Id.ToString();
-        //cb.CheckedChanged += new EventHandler(this.cb_CheckedChanged); //cb_CheckedChanged;
-        //if (item.Inventory == 0)
-        //{
-        //    cb.Enabled = false;
-        //}
 
 
 
@@ -103,12 +97,6 @@ public partial class Cart : System.Web.UI.Page
 
 
 
-
-        //foreach (var item in newList)
-        //{
-        //    totalprice += item.Price;
-        //}
-        //priceLBL.Text = "</br></br></br>Total Price:" + totalprice + "</br></br></br>";
 
 
 
@@ -180,11 +168,10 @@ public partial class Cart : System.Web.UI.Page
                 }
  
             }
-         //   lblList.Add(ipriceLBL);
+
             DDL.SelectedIndexChanged += new EventHandler(ddl_IndexChange);
             DDLList.Add(DDL);
             infoDiv.Controls.Add(DDL);
-       //    infoDiv.Controls.Add(ipriceLBL);
             productDiv.Controls.Add(infoDiv);
             cartPH.Controls.Add(productDiv);
         }
@@ -225,6 +212,7 @@ public partial class Cart : System.Web.UI.Page
                 if (Convert.ToInt32(ddl.SelectedValue) > Convert.ToInt32(row["inventory"]))
                 {
                     Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
+                    DDL.SelectedValue = (string)Session["selected"];
                     return;
                 }
                 lblList = (List<Label>)(Session["MyCartpayment"]);

@@ -17,7 +17,7 @@ public partial class CartPayment : System.Web.UI.Page
     Sales s;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["userLogin"] == null || Session["adminLogin"] == null)
+        if (Session["userLogin"] == null && Session["adminLogin"] == null)
         {
             Response.Redirect("Login.aspx");
         }
