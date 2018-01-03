@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/MasterPageAdmin.master" CodeFile="showSales.aspx.cs" Inherits="showSales" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-
+     <link href="gridviewstyles.css" rel="stylesheet" />
  </asp:Content>
 
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderAdmin" Runat="Server">
@@ -13,7 +13,7 @@
              </asp:DropDownList>
          </nav>
 	     <br />
-         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" OnRowDataBound="GridView1_DataBound" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4">
+         <asp:GridView CssClass="design" ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" OnRowDataBound="GridView1_DataBound" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4">
              <Columns>
                  <asp:BoundField DataField="category_name" HeaderText="category_name" SortExpression="category_name" />
                  <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" />
@@ -26,7 +26,7 @@
                  <asp:BoundField DataField="Date" HeaderText="Date" SortExpression="Date" />
              </Columns>
              <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
-             <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
+             <HeaderStyle BackColor="#003399"  Font-Bold="True" ForeColor="#CCCCFF"  />
              <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
              <RowStyle BackColor="White" ForeColor="#003399" />
              <SelectedRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />

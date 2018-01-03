@@ -10,6 +10,7 @@
             return false;
         }
     </script>
+     <link href="gridviewstyles.css" rel="stylesheet" />
  </asp:Content>
 
 
@@ -41,24 +42,33 @@
          </UpdateParameters>
      </asp:SqlDataSource>
      <br />
-     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" >
+     <asp:GridView class="design" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" >
          <Columns>
              
              <asp:CommandField ShowEditButton="True"   />
 
-             <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" InsertVisible="False" />
-             <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" ReadOnly="True" />
-             <asp:TemplateField HeaderText="Category Name">
+             <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" InsertVisible="False" >
+             <HeaderStyle CssClass="design" />
+             </asp:BoundField>
+             <asp:BoundField DataField="category_id" HeaderText="category_id" SortExpression="category_id" ReadOnly="True" >             <HeaderStyle CssClass="design" />
+             </asp:BoundField>
+             <asp:TemplateField HeaderText="Category Name"> <HeaderStyle CssClass="design" />
+
                  <ItemTemplate>
                      <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                  </ItemTemplate>
              </asp:TemplateField>
-             <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" ReadOnly="True" />
-             <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" ReadOnly="True" />
+             <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" ReadOnly="True" ><HeaderStyle CssClass="design" /> </asp:BoundField>
+             <asp:BoundField DataField="price" HeaderText="price" SortExpression="price" ReadOnly="True" ><HeaderStyle CssClass="design" /> </asp:BoundField>
              <asp:ImageField DataImageUrlField="img_url" HeaderText="Image" ReadOnly="True">
+                 <ItemStyle CssClass="imge" />
+                              <HeaderStyle CssClass="design" />
              </asp:ImageField>
-             <asp:BoundField DataField="inventory" HeaderText="inventory" SortExpression="inventory" />
-              <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" />
+             <asp:BoundField DataField="inventory" HeaderText="inventory" SortExpression="inventory" >  <HeaderStyle CssClass="design" />
+                              </asp:BoundField>
+
+              <asp:CheckBoxField DataField="active" HeaderText="active" SortExpression="active" >  <HeaderStyle CssClass="design" />
+                  </asp:CheckBoxField>
          </Columns>
          <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
          <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />

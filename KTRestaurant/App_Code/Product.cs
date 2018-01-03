@@ -34,8 +34,7 @@ public class Product
         Title = title;
         ImagePath = imagePath;
        Price = price;
-        //Inventory = inventory;
-        //Active = active;
+       
     }
 
     public int CategoryId
@@ -47,6 +46,7 @@ public class Product
 
         set
         {
+           
             categoryId = value;
         }
     }
@@ -86,7 +86,16 @@ public class Product
 
         set
         {
-            price = value;
+            try
+            {
+                price = Convert.ToDouble(value);
+            }
+            catch (FormatException e)
+            {
+                e.Message.ToString();
+               
+            }
+            
         }
     }
 
@@ -100,7 +109,16 @@ public class Product
 
         set
         {
-            inventory = value;
+            try
+            {
+                 inventory = Convert.ToInt32(value);
+            }
+            catch (FormatException e)
+            {
+                e.Message.ToString();
+
+            }
+           
         }
     }
 
