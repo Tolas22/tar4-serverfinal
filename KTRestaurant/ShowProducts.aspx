@@ -25,7 +25,7 @@
         <asp:Label ID="discountlbl" runat="server" Text="Label"></asp:Label>
           <asp:PlaceHolder ID="discountPH" runat="server"></asp:PlaceHolder>
         <br />
-        <asp:Button ID="btnHide"  runat="server" Text="Hide Modal Popup" />
+        <asp:Button ID="btnHide"  runat="server" Text="O.K." />
     </div>
 </asp:Panel>
         

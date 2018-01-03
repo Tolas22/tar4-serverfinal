@@ -40,10 +40,10 @@
                         <img src="assets/img/ktlogo.png" />
                     </a>
                  
-      <a href="Cart.aspx" class="btn btn-info btn-lg" style="float: left;" >
+      <%--<a href="Cart.aspx" class="btn btn-info btn-lg" style="float: left;" >
           <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
         </a>   
-                
+                --%>
                 </div>
               
                 <span class="logout-spn" >
@@ -56,14 +56,9 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse" style="float:left">
                 <ul class="nav" id="main-menu">
-                 
-
-
                     <li class="active-link">
                         <a href="ShowProducts.aspx" ><i class="fa fa-desktop "></i>Show Products </a>
-                    </li>
-
-                   
+                    </li>     
                 </ul>
                             </div>
 
