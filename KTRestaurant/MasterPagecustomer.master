@@ -55,14 +55,6 @@
                         <a href="ShowProducts.aspx" ><i class="fa fa-desktop "></i>Show Products </a>
                     </li>
 
-                    <li>
-                        <a href="Cart.aspx"><i class="fa fa-table "></i>Cart </a>
-                    </li>
-                    <li>
-                        <a href="payment.aspx"><i class="fa fa-edit "></i>Payment  </a>
-                    </li>
-
-                  
                    
                 </ul>
                             </div>
