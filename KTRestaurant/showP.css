@@ -218,5 +218,56 @@ label {
 	.sort {
 		align-self: flex-start;
 	}
-	
+ .modalBackground
+        {
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+        .modalPopup
+        {
+            background-color: #FFFFFF;
+            width: 900px;
+          
+            border: 3px solid #0DA9D0;
+            padding: 0;
+        }
+        .modalPopup .header
+        {
+            background-color: #2FBDF1;
+            height: 50px;
+            color: White;
+            line-height: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .modalPopup .body
+        {
+            min-height: 50px;
+            line-height: 30px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+            .myClass {
+                 display:inline-table;
+                 flex-wrap: wrap;
+                 margin: 0 0 3em 0;
+                 padding: 0;
+                 white-space:normal;
+                 width: 20%;  
+                 text-align: center;
+
+            }
+            .discountclass {
+                 text-align: center;
+                 background-color:darkblue;
+                 flex-wrap: wrap;
+                 margin: 0 0 3em 0;
+                 padding: 0;
+                 white-space:normal;
+                 width: 100%; 
+                 color:black; 
+            }
+           	
 }

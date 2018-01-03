@@ -41,26 +41,6 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-            .myClass {
-                 display:inline-table;
-                 flex-wrap: wrap;
-                 margin: 0 0 3em 0;
-                 padding: 0;
-                 white-space:normal;
-                 width: 20%;  
-                 text-align: center;
-
-            }
-            .discountclass {
-                 text-align: center;
-                 background-color:darkblue;
-                 flex-wrap: wrap;
-                 margin: 0 0 3em 0;
-                 padding: 0;
-                 white-space:normal;
-                 width: 100%; 
-                 color:black; 
-            }
            
         </style>
      
@@ -88,31 +68,14 @@
          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:productNDBConnectionString %>" SelectCommand="SELECT * FROM [category]"></asp:SqlDataSource>
         
      </div>
-     
-<%--     <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder>--%>
-     
-      <%--<asp:Button ID="Button1" class="button bottun4"  runat="server" Text="Create List" OnClick="Button1_Click" />
-     <%--   <asp:Label ID="Label1"  runat="server" Text=""></asp:Label>
-    
-     <br /><br /><br />--%>
    
      <nav class="product-filter ">
 		<h1>Food</h1>
-		
-		<div class="sort">
-			<div class="collection-sort">
-				<label>Filter by:</label>
-                <asp:DropDownList ID="fcategoryDDL"  runat="server" DataSourceID="SqlDataSource1" DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
-                
-			</div>
-			
-		</div>
 	</nav>
 	
 	<section class="products" >
-             <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder>
-
-         
+             <asp:PlaceHolder ID="productsPH" runat="server"></asp:PlaceHolder> 
+        <br />     
         <asp:Button ID="addCartBTN" runat="server" Text="Add To Cart" OnClick="addCartBTN_Click" />
 	</section>
 </asp:Content>

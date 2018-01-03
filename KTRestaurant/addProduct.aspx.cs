@@ -119,8 +119,6 @@ public partial class addProduct : System.Web.UI.Page
 
     }
 
-
-
     public string getCatName(int id)
     {
         dbs.Name = "*";
@@ -139,14 +137,28 @@ public partial class addProduct : System.Web.UI.Page
         return null;
     }
 
+    public static int GetColumnIndexByName(GridView grid, string name)
+    {
+        foreach (DataControlField col in grid.Columns)
+        {
+            if (col.HeaderText.ToLower().Trim() == name.ToLower().Trim())
+            {
+                return grid.Columns.IndexOf(col);
+            }
+        }
 
+        return -1; // in case there in no such field
+    }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            int cat_id = Convert.ToInt32(e.Row.Cells[1].Text);
-            e.Row.Cells[2].Text = getCatName(cat_id);
+            int catidIndex = GetColumnIndexByName(GridView1, "category_id");
+            string check = e.Row.Cells[catidIndex].Text;
+            int cat_id = Convert.ToInt32(e.Row.Cells[catidIndex].Text);
+            e.Row.Cells[catidIndex].Text = getCatName(cat_id);
+
         }
     }
 
