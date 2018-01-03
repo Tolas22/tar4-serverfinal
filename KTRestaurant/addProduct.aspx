@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPageAdmin.master" CodeFile="addProduct.aspx.cs" Inherits="addProduct" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     
+     <link href="gridviewstyles.css" rel="stylesheet" />
  </asp:Content>
 
 
@@ -116,7 +116,7 @@
      </asp:SqlDataSource>
      <br />
      <div data-role="grid">
-     <asp:GridView ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" >
+     <asp:GridView ID="GridView1" CssClass="design" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource2" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" >
          <Columns>
              
              <asp:CommandField ShowEditButton="True" ShowDeleteButton="True"  CausesValidation="False" />
