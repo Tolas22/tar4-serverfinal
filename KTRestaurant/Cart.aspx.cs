@@ -211,7 +211,7 @@ public partial class Cart : System.Web.UI.Page
         {
                 if (Convert.ToInt32(ddl.SelectedValue) > Convert.ToInt32(row["inventory"]))
                 {
-                    Response.Write("Someone has purchased this item already there are only " + row["inventory"] + " items left");
+                    Label3.Text = "Someone has purchased this item already there are only " + row["inventory"] + " items left";
                     DDL.SelectedValue = (string)Session["selected"];
                     return;
                 }
