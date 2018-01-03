@@ -4,47 +4,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
         <link href="showP.css" rel="stylesheet" />
-           <%--<link href="StyleSheet2.css" rel="stylesheet"
-                />
-
-        <link href="StyleSheet.css" rel="stylesheet" />--%>
- 
-        <style>
-        .modalBackground
-        {
-            background-color: Black;
-            filter: alpha(opacity=60);
-            opacity: 0.6;
-        }
-        .modalPopup
-        {
-            background-color: #FFFFFF;
-            width: 900px;
-          
-            border: 3px solid #0DA9D0;
-            padding: 0;
-        }
-        .modalPopup .header
-        {
-            background-color: #2FBDF1;
-            height: 50px;
-            color: White;
-            line-height: 30px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .modalPopup .body
-        {
-            min-height: 50px;
-            line-height: 30px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-           
-        </style>
-     
+    <link href="popup.css" rel="stylesheet" />
   </asp:Content>
+
+
+
  <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHoldercustomer" Runat="Server">
      <div class="" >
          <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
