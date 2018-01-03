@@ -93,6 +93,38 @@ public partial class inventoryManagement : System.Web.UI.Page
         
     }
 
-  
-    
+
+
+
+   public void CustomersGridView_RowUpdated(Object sender, GridViewUpdatedEventArgs e)
+    {
+
+        // Indicate whether the update operation succeeded.
+        if (e.Exception == null)
+        {
+                ClientScriptManager CSM = Page.ClientScript;       
+                string strconfirm = "<script>if(!window.confirm('Are you sure you want to save the changes?')){'return false;' }</script>";
+                CSM.RegisterClientScriptBlock(this.GetType(), "Confirm", strconfirm, false);
+        }
+        else
+        {
+            e.ExceptionHandled = true;
+            Message.Text = "An error occurred while attempting to update the row.";
+        }
+    }
+
+    public void CustomersGridView_RowCancelingEdit(Object sender, GridViewCancelEditEventArgs e)
+    {
+
+        // The update operation was canceled. Clear the message label.
+        Message.Text = "";
+
+    }
+
+    public void CustomersGridView_RowEditing(Object sender, GridViewEditEventArgs e)
+    {
+        // The GridView control is entering edit mode. Clear the message label.
+        Message.Text = "";
+    }
+
 }

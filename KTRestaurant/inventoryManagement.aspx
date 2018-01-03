@@ -2,13 +2,7 @@
 
  <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
       <script type="text/javascript" >
-        function ConfirmOnDelete(item)
-        {
-          if (confirm("Are you sure to delete: " + item + "?")==true)
-            return true;
-          else
-            return false;
-        }
+        
     </script>
      <link href="gridviewstyles.css" rel="stylesheet" />
  </asp:Content>
@@ -42,7 +36,11 @@
          </UpdateParameters>
      </asp:SqlDataSource>
      <br />
-     <asp:GridView class="design" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" >
+     <asp:label id="Message"
+        forecolor="Red"          
+        runat="server"/>
+
+     <asp:GridView class="design" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4"  onrowupdated="CustomersGridView_RowUpdated" OnRowCancelingEdit="CustomersGridView_RowCancelingEdit" onrowediting="CustomersGridView_RowEditing"  >
          <Columns>
              
              <asp:CommandField ShowEditButton="True"   />
