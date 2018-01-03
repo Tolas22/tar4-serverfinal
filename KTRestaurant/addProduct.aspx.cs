@@ -16,9 +16,11 @@ public partial class addProduct : System.Web.UI.Page
         {
             Response.Redirect("Login.aspx");
         }
+        if (!IsPostBack)
+        {
         DDlCat.DataBind();
         DDlCat.Items.Insert(0, new ListItem("Choose Category Name", "0"));
-
+        }
     }
  
     protected void addBTN_Click(object sender, EventArgs e)
