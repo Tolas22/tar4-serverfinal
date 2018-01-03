@@ -45,12 +45,12 @@ public partial class showSales : System.Web.UI.Page
             DataRow dr = ((DataRowView)e.Row.DataItem).Row;
             if (Convert.ToBoolean(dr["p_method"]))
             {
-            e.Row.Cells[4].Text = "Credit Card";
+            e.Row.Cells[5].Text = "Credit Card";
 
             }
             else
             {
-                e.Row.Cells[4].Text = "Cash";
+                e.Row.Cells[5].Text = "Cash";
             }
         
 
