@@ -14,8 +14,8 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <asp:ContentPlaceHolder id="head" runat="server">
-        <script>
+    <link href="customermaster.css" rel="stylesheet" />
+    <script>
             (function () {
 
                 $("#cart").on("click", function () {
@@ -24,9 +24,11 @@
 
             })();
         </script>
-        <link href="customermaster.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+       
+        
     </asp:ContentPlaceHolder>
-    <title></title>
+    <title></title> 
 </head>
 <body>
     <form id="form1" runat="server">
@@ -43,19 +45,16 @@
                     <a class="navbar-brand" href="#">
                         <img src="assets/img/ktlogo.png" />
                     </a>
-                  <ul class="navbar-left">
-      <li><a href="#">Home</a></li>
-      <li><a href="#about">About</a></li>
-    </ul> <!--end navbar-left -->
-
-    <ul class="navbar-right">
-      <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
-    </ul> <!--end navbar-right -->
+                  
+  
+<a href="#" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+        </a>   
                 
                 </div>
               
                 <span class="logout-spn" >
-                  <a href="#" style="color:#fff;">LOGOUT</a>  
+                  <a href="Login.aspx" style="color:#fff;">LOGOUT</a>  
 
                 </span>
             </div>
