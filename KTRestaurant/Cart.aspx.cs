@@ -278,7 +278,7 @@ public partial class Cart : System.Web.UI.Page
                 }
             }
 
-            sale.Date = DateTime.Now;
+            
             SalesList.Add(sale);
         }
         

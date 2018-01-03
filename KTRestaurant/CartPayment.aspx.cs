@@ -56,8 +56,8 @@ public partial class CartPayment : System.Web.UI.Page
                 {
                     sale.P_method = "True";
                 }
-                    sale.Date = DateTime.Now;
-                s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id);
+                 sale.Date = DateTime.Today;
+                s = new Sales(sale.Productid,sale.Totalprice,sale.Amount,sale.P_method,sale.Cus_id,sale.Date);
                 
                 }
                 dbs.update(p);
@@ -82,9 +82,7 @@ public partial class CartPayment : System.Web.UI.Page
     protected void pay_Click(object sender, EventArgs e)
     {
         if (Page.IsValid)
-        {
-
-       
+        {     
         string message = "קנייתך השולמה!";
 
         System.Text.StringBuilder sb = new System.Text.StringBuilder();

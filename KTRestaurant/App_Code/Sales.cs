@@ -100,12 +100,13 @@ public class Sales
         //
     }
 
-    public Sales(int productid, double totalprice, int amount, string p_method, int cus_id)
+    public Sales(int productid, double totalprice, int amount, string p_method, int cus_id,DateTime date)
     {
         Productid = productid;
         Totalprice = totalprice;
         Amount = amount;
         P_method = p_method;
         Cus_id = cus_id;
+        Date = date;
     }
 }
