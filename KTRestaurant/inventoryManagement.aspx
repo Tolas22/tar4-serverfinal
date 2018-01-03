@@ -40,7 +40,7 @@
         forecolor="Red"          
         runat="server"/>
 
-     <asp:GridView class="design" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4"  onrowupdated="CustomersGridView_RowUpdated" OnRowCancelingEdit="CustomersGridView_RowCancelingEdit" onrowediting="CustomersGridView_RowEditing"  >
+     <asp:GridView class="design" ID="GridView1" runat="server" OnRowDataBound="GridView1_RowDataBound" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="product_id" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4"  onrowupdated="GridView1_RowUpdated" OnRowCancelingEdit="GridView1_RowCancelingEdit" onrowediting="GridView1_RowEditing"  >
          <Columns>
              
              <asp:CommandField ShowEditButton="True"   />

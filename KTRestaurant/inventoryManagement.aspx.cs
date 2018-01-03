@@ -17,6 +17,7 @@ public partial class inventoryManagement : System.Web.UI.Page
         {
             Response.Redirect("Login.aspx");
         }
+        Session["grid"] = GridView1;
     }
     protected void editFun(object sender, GridViewUpdatedEventArgs e)
     {
@@ -57,6 +58,11 @@ public partial class inventoryManagement : System.Web.UI.Page
     {
 
     }
+    private void BindData()
+    {
+        GridView1.DataSource = Session["grid"];
+        GridView1.DataBind();
+    }
     public string getCatName(int id)
     {
         dbs.Name = "*";
@@ -96,14 +102,14 @@ public partial class inventoryManagement : System.Web.UI.Page
 
 
 
-   public void CustomersGridView_RowUpdated(Object sender, GridViewUpdatedEventArgs e)
+   public void GridView1_RowUpdated(Object sender, GridViewUpdatedEventArgs e)
     {
 
         // Indicate whether the update operation succeeded.
         if (e.Exception == null)
         {
                 ClientScriptManager CSM = Page.ClientScript;       
-                string strconfirm = "<script>if(!window.confirm('Are you sure you want to save the changes?')){'return false;' }</script>";
+                string strconfirm = "<script>if(!window.confirm('Are you sure you want to save the changes?')){' GridView1.EditIndex = -1;  BindData(); return false;' }</script>";
                 CSM.RegisterClientScriptBlock(this.GetType(), "Confirm", strconfirm, false);
         }
         else
@@ -113,7 +119,7 @@ public partial class inventoryManagement : System.Web.UI.Page
         }
     }
 
-    public void CustomersGridView_RowCancelingEdit(Object sender, GridViewCancelEditEventArgs e)
+    public void GridView1_RowCancelingEdit(Object sender, GridViewCancelEditEventArgs e)
     {
 
         // The update operation was canceled. Clear the message label.
@@ -121,7 +127,7 @@ public partial class inventoryManagement : System.Web.UI.Page
 
     }
 
-    public void CustomersGridView_RowEditing(Object sender, GridViewEditEventArgs e)
+    public void GridView1_RowEditing(Object sender, GridViewEditEventArgs e)
     {
         // The GridView control is entering edit mode. Clear the message label.
         Message.Text = "";
