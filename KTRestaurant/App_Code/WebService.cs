@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
+using System.Xml.XPath;
 
 /// <summary>
 /// Summary description for WebService
@@ -26,14 +27,27 @@ public class WebService : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
-    public string getProduct ()
+    public string getProducts()
     {
+        XPathNavigator nav;
+        XPathDocument docNav;
+
+        // Open the XML.
+        string fname = Server.MapPath(".") + "/xml/WS.xml";
+        docNav = new XPathDocument(fname);
+
+        // Create a navigator to query with XPath.
+        nav = docNav.CreateNavigator();
+
+ 
+
+        
         List<Product> prods = new List <Product>();
-        DBservices dbs = new DBservices();
-        prods= dbs.readproducts();
+        XMLServices XMS = new XMLServices();
+        prods =  XMS.readProducts(nav);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize(prods);    
+        string jsonString = js.Serialize(prods);
         return jsonString;
     }
 
