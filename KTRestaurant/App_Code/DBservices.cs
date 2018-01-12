@@ -63,7 +63,55 @@ public class DBservices
         // TODO: Add constructor logic here
         //
     }
+    //
+    public List<Product> getproducts()
+    {
 
+        SqlConnection con=null;
+
+        try
+        {
+
+
+            con = connect("productNDBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+            string selectSTR = "SELECT*FROM productN";
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+            List<Product> products = new List<Product>();
+            while (dr.Read())
+            {   // Read till the end of the data into a row
+                Product p = new Product();
+                p.Title = (dr["title"]).ToString();
+                p.ImagePath =( dr["img_url"]).ToString();
+                p.Price =Convert.ToDouble (dr["price"]);
+                p.Inventory =Convert.ToInt32 (dr["inventory"]) ;
+                p.Active = (dr["active"]).ToString();
+
+                products.Add(p);
+            }
+
+            return products;
+        }
+
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+
+        }
+
+
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+
+        }
+
+       
+    }
     //--------------------------------------------------------------------------------------------------
     // This method creates a connection to the database according to the connectionString name in the web.config 
     //--------------------------------------------------------------------------------------------------
