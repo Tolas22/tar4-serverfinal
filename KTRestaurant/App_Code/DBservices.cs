@@ -64,7 +64,7 @@ public class DBservices
         //
     }
     //
-    public List<Product> getproducts()
+    public List<Product> readproducts()
     {
 
         SqlConnection con=null;
