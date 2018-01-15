@@ -38,13 +38,13 @@ public class WebService : System.Web.Services.WebService
 
         // Create a navigator to query with XPath.
         nav = docNav.CreateNavigator();
+        Product p = new Product();
+        List<Product> prods = new List<Product>();
+        prods = p.Read(nav);
 
- 
 
-        
-        List<Product> prods = new List <Product>();
-        XMLServices XMS = new XMLServices();
-        prods =  XMS.readProducts(nav);
+
+
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(prods);

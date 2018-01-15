@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Xml.XPath;
 
 /// <summary>
 /// Summary description for Product
@@ -154,6 +155,14 @@ public class Product
         int numAffected = 0; /*dbs.insert(this);*/
         return numAffected;
 
+    }
+
+    public List<Product> Read(XPathNavigator nav)
+    {
+        List<Product> prods = new List<Product>();
+        XMLServices XMS = new XMLServices();
+        prods = XMS.readProducts(nav);
+        return prods;
     }
     public Double getDiscount(string productname, int dis)
     {
