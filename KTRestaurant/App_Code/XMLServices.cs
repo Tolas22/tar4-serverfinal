@@ -25,11 +25,11 @@ public class XMLServices
         while (NodeIter.MoveNext())
         {
             Product p = new Product();
-            p.Title = NodeIter.Current.SelectSingleNode("title").Value;
-            p.ImagePath = NodeIter.Current.SelectSingleNode("img_url").Value;
-            p.Inventory = Convert.ToInt32( NodeIter.Current.SelectSingleNode("inventory").Value);
-            p.CategoryId = Convert.ToInt32(NodeIter.Current.SelectSingleNode("category_id").Value);
-            p.Active = NodeIter.Current.SelectSingleNode("active").Value;
+            p.Title = NodeIter.Current.GetAttribute("title","");
+            p.ImagePath = NodeIter.Current.GetAttribute("img_url","");
+            p.Inventory = Convert.ToInt32( NodeIter.Current.GetAttribute("inventory",""));
+            p.CategoryId = Convert.ToInt32(NodeIter.Current.GetAttribute("category_id",""));
+            p.Active = NodeIter.Current.GetAttribute("active","");
             list.Add(p);
         }
         return list;

@@ -33,7 +33,7 @@ public class WebService : System.Web.Services.WebService
         XPathDocument docNav;
 
         // Open the XML.
-        string fname = Server.MapPath(".") + "/xml/WS.xml";
+        string fname = Server.MapPath(".") + "/xml\\WS.xml";
         docNav = new XPathDocument(fname);
 
         // Create a navigator to query with XPath.
