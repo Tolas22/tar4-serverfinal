@@ -25,6 +25,7 @@ public class XMLServices
         while (NodeIter.MoveNext())
         {
             Product p = new Product();
+            p.ProductId = Convert.ToInt32( NodeIter.Current.GetAttribute("product_id", ""));
             p.Title = NodeIter.Current.GetAttribute("title","");
             p.ImagePath = NodeIter.Current.GetAttribute("img_url","");
             p.Inventory = Convert.ToInt32( NodeIter.Current.GetAttribute("inventory",""));

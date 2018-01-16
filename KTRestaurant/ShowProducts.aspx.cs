@@ -23,10 +23,10 @@ public partial class ShowProducts : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["userLogin"] == null && Session["adminLogin"] == null)
-        {
-            Response.Redirect("Login.aspx");
-        }
+        //if (Session["userLogin"] == null && Session["adminLogin"] == null)
+        //{
+        //    Response.Redirect("Login.aspx");
+        //}
         if (!IsPostBack)
         {
             ModalPopupExtender1.Show();
@@ -126,15 +126,17 @@ public partial class ShowProducts : System.Web.UI.Page
         #region showproduct
         dbs.Name = "*";
         dbs.Table = "productN";
-       // int realprice = 0;
+        // int realprice = 0;
         //Populating a DataTable from database.
-        DataTable dt = dbs.readproductNDataBase();
-        foreach (DataRow row in dt.Rows)
+        //DataTable dt = dbs.readproductNDataBase();
+        List<Product> LP = new List<Product>();
+    
+        foreach (Product p in LP)
         {
             HtmlGenericControl productDiv = new HtmlGenericControl("div");
             HtmlGenericControl infoDiv = new HtmlGenericControl("div");
             HtmlGenericControl imgDiv = new HtmlGenericControl("div");
-            if (row["active"].ToString() == "True")
+            if (p.Active == "True")
             {
                 productDiv.Attributes["class"] = "product-card";
 
@@ -144,27 +146,27 @@ public partial class ShowProducts : System.Web.UI.Page
                 infoDiv.Attributes["class"] = "product-info";
                 imgDiv.Attributes["class"] = "product-image";
                 Image img = new Image();
-                img.ImageUrl = row["img_url"].ToString().Substring(0);
-                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " + row["title"].ToString() + "</h5><h5>Category: " + getCatName(Convert.ToInt32(row["category_id"])) + "</h5>";
+                img.ImageUrl = p.ImagePath.Substring(0);
+                infoDiv.InnerHtml = "<img src='" + img.ImageUrl + "'/><h5>Product Name: " +p.Title + "</h5><h5>Category: " + getCatName(p.CategoryId) + "</h5>";
 
-                if (row["title"].ToString() == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
+                if (p.Title == "Sea Bass")//בחרנו בסיבס להיות מוצר ההנחה שלנו
                 {
-                    row["price"] = ChoosenDiscount;
+                    p.Price = ChoosenDiscount;
 
-                    infoDiv.InnerHtml += "<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice + " </h5>" + row["price"] + "</h5>";
+                    infoDiv.InnerHtml += "<h5 class='line'>Product Price:<h5 class='realprice line '>was : " + realprice + " </h5>" + p.Price + "</h5>";
                 }
                 else
                 {
-                    infoDiv.InnerHtml += "<h5>Product Price:" + row["price"] + "</h5>";
+                    infoDiv.InnerHtml += "<h5>Product Price:" + p.Price + "</h5>";
 
                 }
-                infoDiv.InnerHtml += "<h5>Product Inventory: " + row["inventory"] + "</h5>";
+                infoDiv.InnerHtml += "<h5>Product Inventory: " + p.Inventory + "</h5>";
 
                 cb = new CheckBox();
-                cb.ID = row["product_id"].ToString();
+                cb.ID = p.ProductId.ToString();
                 //cb.AutoPostBack = true;
                 cb.CheckedChanged += new EventHandler(cb_CheckedChanged);//cb_CheckedChanged;
-                if (Convert.ToInt32(row["inventory"]) <= 0)
+                if (p.Inventory <= 0)
                 {
                     cb.Enabled = false;
                 }

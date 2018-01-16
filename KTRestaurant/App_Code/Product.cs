@@ -195,5 +195,11 @@ public class Product
         return dp.price;
     }
 
+    public List<Product> getProducts(){
+        DBservices dbs = new DBservices();
+        List < Product >LP = dbs.readproducts();
+        //KTRestaurant.
 
+        return LP;
+    }
 }

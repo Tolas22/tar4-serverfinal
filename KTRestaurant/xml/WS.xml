@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Products>
-  <Product img_url="/images/ribeye.jpg" title="Rib Eye ES" category_id="8" price="120" inventory="7" active="True"/>
-  <Product img_url="/images/padthai.jpeg" title="Pad Thai ES" category_id="12" price="55" inventory="15" active="True"/>
-  <Product img_url="/images/schnitzel.jpg" title="Schnitzel ES" category_id="8" price="60" inventory="12" active="True"/>
+  <Product product_id="999" img_url="/images/ribeye.jpg" title="Rib Eye ES" category_id="8" price="120" inventory="7" active="True"/>
+  <Product product_id="998" img_url="/images/padthai.jpeg" title="Pad Thai ES" category_id="12" price="55" inventory="15" active="True"/>
+  <Product product_id="997" img_url="/images/schnitzel.jpg" title="Schnitzel ES" category_id="8" price="60" inventory="12" active="True"/>
   </Products>
 
