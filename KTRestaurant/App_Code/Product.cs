@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Web;
 using System.Xml.XPath;
+using System.Web.Script.Serialization;
+
 
 /// <summary>
 /// Summary description for Product
@@ -200,9 +205,11 @@ public class Product
         il.ac.ruppin.proj.WebService pro = new il.ac.ruppin.proj.WebService();
         List < Product > LP = dbs.readproducts();
         string LP2 =pro.getProducts();
+        JavaScriptSerializer JsonConvert = new JavaScriptSerializer();
+        List<Product> LLp = JsonConvert.Deserialize<List<Product>>(LP2);
+        List<Product> mergedList = LP.Union(LLp).ToList();
 
-
-
-        return LP;
+        return mergedList;
+        //
     }
 }
