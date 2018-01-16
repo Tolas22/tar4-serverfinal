@@ -29,8 +29,9 @@ public class XMLServices
             p.Title = NodeIter.Current.GetAttribute("title","");
             p.ImagePath = NodeIter.Current.GetAttribute("img_url","");
             p.Inventory = Convert.ToInt32( NodeIter.Current.GetAttribute("inventory",""));
-            p.CategoryId = Convert.ToInt32(NodeIter.Current.GetAttribute("category_id",""));
+            p.CategoryId = Convert.ToInt32(NodeIter.Current.GetAttribute("category_id", ""));
             p.Active = NodeIter.Current.GetAttribute("active","");
+            p.Price = Convert.ToInt32(NodeIter.Current.GetAttribute("price", ""));
             list.Add(p);
         }
         return list;

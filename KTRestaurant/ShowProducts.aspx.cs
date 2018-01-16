@@ -129,9 +129,10 @@ public partial class ShowProducts : System.Web.UI.Page
         // int realprice = 0;
         //Populating a DataTable from database.
         //DataTable dt = dbs.readproductNDataBase();
-        List<Product> LP = new List<Product>();
+        Product P = new Product();
+        List<Product> LP = P.getProducts();
 //        il.ac.ruppin.proj.WebService pro = new il.ac.ruppin.proj.WebService();
-        List<Product> LP2 = new List<Product>();
+    
         
 
         foreach (Product p in LP)

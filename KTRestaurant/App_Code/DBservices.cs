@@ -81,6 +81,8 @@ public class DBservices
             while (dr.Read())
             {   // Read till the end of the data into a row
                 Product p = new Product();
+                p.ProductId = Convert.ToInt32(dr["product_id"]);
+                p.CategoryId = Convert.ToInt32(dr["category_id"]);
                 p.Title = (dr["title"]).ToString();
                 p.ImagePath =( dr["img_url"]).ToString();
                 p.Price =Convert.ToDouble (dr["price"]);

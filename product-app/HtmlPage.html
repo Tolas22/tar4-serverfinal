@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>mywebsite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="AjaxCalls.js"></script>
+    <script src="Products.js"></script>
+    <link href="StyleSheet.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div data-role="page" data-position="fixed" id="home" >
+        <div data-role="header" >  <h1 > Welcome      </h1> </div> <!-- /header -->
+        <div data-role="content"> 
+            <ul data-role="listview" data-count-theme="a" data-filter="true" data-filter-placeholder="search for category..." data-filter-reveal="true" data-inset="true" id="DynamicList" > 
+              
+            </ul>
+           </div> <!-- /content -->
+        <div data-role="footer" id="footer"> <img  src="images/logo.png" style="height:inherit"/> </div> <!-- /footer -->
+    </div><!-- /page -->
+    <div data-role="page" data-position="fixed" id="category">
+        <header data-role="header">
+         <h1> Product List      </h1> 
+         <a href="#home" data-transition="slide" data-direction="reverse" data-icon="back" data-role="button" role="button" > </a>
+        </header> <!-- /header -->
+        <article data-role="content">
+            <ul data-role="listview" data-count-theme="a" data-filter="true" data-filter-placeholder="Enter A Product..." data-inset="true" id="DynamicListproducts"></ul>
+        </article> <!-- /content -->
+        <footer data-role="footer" id="footer"> <img src="images/logo.png" style="height:inherit" /> </footer> <!-- /footer -->
+    </div><!-- /page -->
+    
+
+    <div data-role="page" data-position="fixed" id="product">
+        <header data-role="header">
+            <h1> Product view     </h1>
+            <a href="#category" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext" data-transition="slide" data-direction="reverse" data-icon="back"> </a>
+        </header> <!-- /header -->
+        <article data-role="content" id="productPage">
+            
+        </article> <!-- /content -->
+        <footer data-role="footer" id="footer"> <img src="images/logo.png" style="height:inherit" /> </footer> <!-- /footer -->
+    </div><!-- /page -->
+
+</body>
+</html>
