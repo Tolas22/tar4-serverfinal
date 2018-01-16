@@ -197,8 +197,11 @@ public class Product
 
     public List<Product> getProducts(){
         DBservices dbs = new DBservices();
-        List < Product >LP = dbs.readproducts();
-        //KTRestaurant.
+        il.ac.ruppin.proj.WebService pro = new il.ac.ruppin.proj.WebService();
+        List < Product > LP = dbs.readproducts();
+        string LP2 =pro.getProducts();
+
+
 
         return LP;
     }

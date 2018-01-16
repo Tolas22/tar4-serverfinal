@@ -130,7 +130,10 @@ public partial class ShowProducts : System.Web.UI.Page
         //Populating a DataTable from database.
         //DataTable dt = dbs.readproductNDataBase();
         List<Product> LP = new List<Product>();
-    
+//        il.ac.ruppin.proj.WebService pro = new il.ac.ruppin.proj.WebService();
+        List<Product> LP2 = new List<Product>();
+        
+
         foreach (Product p in LP)
         {
             HtmlGenericControl productDiv = new HtmlGenericControl("div");
