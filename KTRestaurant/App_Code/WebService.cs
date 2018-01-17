@@ -27,7 +27,7 @@ public class WebService : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
-    public List<Product> getProducts()
+    public string getProducts()
     {
         XPathNavigator nav;
         XPathDocument docNav;
@@ -41,9 +41,9 @@ public class WebService : System.Web.Services.WebService
         Product p = new Product();
         List<Product> prods = new List<Product>();
         prods = p.Read(nav);
-        //JavaScriptSerializer js = new JavaScriptSerializer();
-        //string jsonString = js.Serialize(prods);
-        return prods;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(prods);
+        return jsonString;
     }
 
 }
