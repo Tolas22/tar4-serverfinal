@@ -114,10 +114,53 @@ public class DBservices
 
        
     }
-    //--------------------------------------------------------------------------------------------------
-    // This method creates a connection to the database according to the connectionString name in the web.config 
-    //--------------------------------------------------------------------------------------------------
-    public SqlConnection connect(String conString)
+    public List<Category> readcategory()
+    {
+
+        SqlConnection con = null;
+
+        try
+        {
+
+
+            con = connect("productNDBConnectionString"); // create a connection to the database using the connection String defined in the web config file
+            string selectSTR = "SELECT*FROM category";
+            SqlCommand cmd = new SqlCommand(selectSTR, con);
+            SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection); // CommandBehavior.CloseConnection: the connection will be closed after reading has reached the end
+            List<Category> categories = new List<Category>();
+            while (dr.Read())
+            {   // Read till the end of the data into a row
+                Category c = new Category();
+               c.CategoryName= dr["category_name"].ToString();
+
+                categories.Add(c);
+            }
+
+            return categories;
+        }
+
+        catch (Exception ex)
+        {
+            // write to log
+            throw (ex);
+
+        }
+
+
+        finally
+        {
+            if (con != null)
+            {
+                con.Close();
+            }
+
+        }
+
+    }
+        //--------------------------------------------------------------------------------------------------
+        // This method creates a connection to the database according to the connectionString name in the web.config 
+        //--------------------------------------------------------------------------------------------------
+        public SqlConnection connect(String conString)
     {
 
         // read the connection string from the configuration file

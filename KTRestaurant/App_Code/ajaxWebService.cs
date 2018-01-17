@@ -31,14 +31,39 @@ public class ajaxWebService : System.Web.Services.WebService
 
     public string getCategory()
     {
+        Product P = new Product();
+        //Category c = new Category();
+        List<Product> LP = P.getProducts();
+        List<Category> ls=new List<Category>() ;
+        foreach (Product p in LP)
+        {
+            Category c = new Category();
+            c.CategoryName = getCatName(p.CategoryId);
+            ls.Add(c);
 
-        Category c = new Category();
-        List<Category> ls = c.getCategory();
+        }
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         // serialize to string
         string jsonStringCategory = js.Serialize(ls);
         return jsonStringCategory;
+    }
+    public string getCatName(int id)
+    {
+        Product P = new Product();
+        //dbs.Name = "*";
+        //dbs.Table = "category";
+        //Populating a DataTable from database.
+        List<Product> LP = P.getProducts();
+
+        foreach (Product row in LP)
+        {
+            if (id == (Convert.ToInt32(row.CategoryId)))
+            {
+                return row.CategoryId.ToString();
+            }
+        }
+        return null;
     }
 
 
@@ -51,8 +76,18 @@ public class ajaxWebService : System.Web.Services.WebService
 
         int categoryId = Convert.ToInt32(id);
         Category c = new Category();
-        List<Product> ls = c.getProductsByCat(categoryId);
+        //   List<Product> ls = c.getProductsByCat(categoryId);
+        List<Product> ls = new List<Product>();
+        Product P = new Product();
+        List<Product> LP = P.getProducts();
+        foreach (Product p in LP)
+        {
+            if (p.CategoryId==categoryId)
+            {
+                ls.Add(p);
 
+            }
+        }
         JavaScriptSerializer js = new JavaScriptSerializer();
         // serialize to string
         string jsonStringCategory = js.Serialize(ls);
@@ -68,11 +103,12 @@ public class ajaxWebService : System.Web.Services.WebService
 
         int productId = Convert.ToInt32(id);
         Product p = new Product();
-        Product p1 = p.getProduct(productId);
+        //        Product p1 = p.getProduct(productId);
+         p.ProductId = (productId);
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         // serialize to string
-        string jsonStringCategory = js.Serialize(p1);
+        string jsonStringCategory = js.Serialize(p);
         return jsonStringCategory;
     }
 
